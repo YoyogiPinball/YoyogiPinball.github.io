@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glance - Personal Dashboard Extension</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 antialiased selection:bg-blue-500 selection:text-white">
+
+    <nav class="absolute top-0 left-0 w-full p-6 flex justify-between items-center z-50">
+        <a href="index.html" class="text-gray-400 hover:text-white transition flex items-center gap-2">
+            &larr; Back to Portfolio
+        </a>
+        <a href="https://github.com/YoyogiPinball/Glance" class="text-white font-bold text-lg">GitHub</a>
+    </nav>
+
+    <header class="relative min-h-screen flex flex-col items-center justify-center text-center px-4 pt-20 overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-6xl opacity-20 pointer-events-none">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600 rounded-full blur-[128px]"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600 rounded-full blur-[128px]"></div>
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <span class="inline-block py-1 px-3 rounded-full bg-blue-900/50 border border-blue-500/30 text-blue-300 text-sm mb-6">
+                Chrome Extension (In Development)
+            </span>
+            <h1 class="text-5xl md:text-7xl font-black tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
+                Glance
+            </h1>
+            <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+                新規タブを、あなた専用のコックピットへ。<br>
+                スケジュール、天気、ToDo、そして「推し」の予定を、<br>
+                ブラウザを開いた瞬間に把握する。
+            </p>
+
+            <div class="relative rounded-xl overflow-hidden shadow-2xl border border-gray-700 group">
+                <img src="images/glance_dashboard.png" alt="Glance Dashboard Screenshot" class="w-full h-auto">
+                <div class="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end justify-center pb-10">
+                    <span class="text-white font-medium">Dashboard View</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-24 bg-gray-800/50">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6 text-white">
+                        <span class="text-blue-400">oshi-sche</span>との強力なシナジー
+                    </h2>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        自作ツールの <a href="https://github.com/YoyogiPinball/oshi-sche" class="text-blue-400 hover:underline">oshi-sche</a> で取得したVTuberの配信スケジュールをGoogleカレンダーに同期させれば、Glanceがそれを自動的に表示します。
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-green-400 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span class="text-gray-300">新規タブを開くだけで、推しの配信時間を即確認</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-green-400 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span class="text-gray-300">Discordを開かなくても、ブラウザが最速の通知ツールに</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 text-green-400 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span class="text-gray-300">今日の予定と配信スケジュールを一元管理</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-gray-900 p-8 rounded-2xl border border-gray-700 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl"></div>
+                    <h3 class="text-xl font-bold mb-4 text-white">Workflow</h3>
+                    <div class="space-y-6 relative z-10">
+                        <div class="flex items-center p-4 bg-gray-800 rounded-lg border border-gray-700">
+                            <div class="w-10 h-10 bg-indigo-600 rounded flex items-center justify-center mr-4">🤖</div>
+                            <div>
+                                <div class="text-sm text-gray-400">Step 1</div>
+                                <div class="font-bold">oshi-sche (Discord Bot)</div>
+                            </div>
+                        </div>
+                        <div class="flex justify-center text-gray-500">⬇️ Sync via Google Calendar API</div>
+                        <div class="flex items-center p-4 bg-gray-800 rounded-lg border border-gray-700 ring-2 ring-blue-500">
+                            <div class="w-10 h-10 bg-blue-600 rounded flex items-center justify-center mr-4">🖥️</div>
+                            <div>
+                                <div class="text-sm text-blue-300">Step 2</div>
+                                <div class="font-bold text-white">Glance (New Tab)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-16">All-in-One Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass p-8 rounded-2xl hover:bg-gray-800/50 transition">
+                    <div class="w-12 h-12 bg-yellow-500/20 text-yellow-400 rounded-lg flex items-center justify-center text-2xl mb-6">📅</div>
+                    <h3 class="text-xl font-bold mb-3">Smart Calendar</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Googleカレンダーと完全同期。月間ビューと日間タイムラインを切り替え、次の予定までの時間を直感的に把握できます。
+                    </p>
+                </div>
+                <div class="glass p-8 rounded-2xl hover:bg-gray-800/50 transition">
+                    <div class="w-12 h-12 bg-blue-500/20 text-blue-400 rounded-lg flex items-center justify-center text-2xl mb-6">✅</div>
+                    <h3 class="text-xl font-bold mb-3">Task Management</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Google Tasks連携。思いついたタスクをその場で追加。完了したタスクは心地よいアニメーションで消去。
+                    </p>
+                </div>
+                <div class="glass p-8 rounded-2xl hover:bg-gray-800/50 transition">
+                    <div class="w-12 h-12 bg-purple-500/20 text-purple-400 rounded-lg flex items-center justify-center text-2xl mb-6">🌤️</div>
+                    <h3 class="text-xl font-bold mb-3">Weather & Time</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        OpenWeatherMapによる正確な天気予報。時計はデジタル・アナログ、ドット絵フォントなど好みのデザインに着せ替え可能。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 text-center text-gray-600 border-t border-gray-800">
+        <p>&copy; 2026 YoyogiPinball. Built for Chrome.</p>
+        <div class="mt-4 space-x-4">
+            <a href="https://github.com/YoyogiPinball/Glance" class="hover:text-white transition">Repository</a>
+            <a href="index.html" class="hover:text-white transition">Portfolio Home</a>
+        </div>
+    </footer>
+
+</body>
+</html>
