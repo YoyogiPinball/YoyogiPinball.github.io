@@ -5,6 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YoyogiPinball Portfolio</title>
+    <!-- OGP Settings -->
+    <meta property="og:title" content="YoyogiPinball Portfolio">
+    <meta property="og:description" content="日々の「面倒」を解決する自動化ツールを作っています。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yoyogipinball.github.io/">
+    <meta property="og:image" content="https://yoyogipinball.github.io/images/glance_dashboard_v2.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-75QL11ZYT2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-75QL11ZYT2');
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* カスタムフォントなどを入れたい場合はここに */
@@ -156,6 +173,80 @@
 
         </div>
     </section>
+
+    <!-- Technical Skills Section -->
+    <section class="max-w-4xl mx-auto px-4 pb-20">
+        <h3 class="text-2xl font-bold mb-8 border-b-4 border-[#E95420] pb-2 text-white">Technical Skills</h3>
+        <div class="bg-gray-800 rounded-lg p-6 shadow-lg border border-gray-700">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h4 class="text-[#E95420] font-bold mb-3 border-l-4 border-[#E95420] pl-3">Languages</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-[#5E2750] text-gray-200 text-sm rounded">Python</span>
+                        <span class="px-3 py-1 bg-[#5E2750] text-gray-200 text-sm rounded">Google Apps Script</span>
+                        <span class="px-3 py-1 bg-[#5E2750] text-gray-200 text-sm rounded">VBA</span>
+                        <span class="px-3 py-1 bg-[#5E2750] text-gray-200 text-sm rounded">VB.NET</span>
+                        <span class="px-3 py-1 bg-[#5E2750] text-gray-200 text-sm rounded">Access</span>
+                        <span class="px-3 py-1 bg-[#5E2750] text-gray-200 text-sm rounded">Java</span>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-[#E95420] font-bold mb-3 border-l-4 border-[#E95420] pl-3">Tools</h4>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-gray-700 text-gray-200 text-sm rounded">Claude Code</span>
+                        <span class="px-3 py-1 bg-gray-700 text-gray-200 text-sm rounded">AntiGravity</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me & Contact Section -->
+    <section class="max-w-4xl mx-auto px-4 pb-20">
+        <h3 class="text-2xl font-bold mb-8 border-b-4 border-[#E95420] pb-2 text-white">About Me & Contact</h3>
+        <div class="bg-gray-800 rounded-lg p-8 shadow-lg border border-gray-700">
+            <p class="text-gray-300 leading-relaxed mb-6">
+                日々の単純作業を自動化し、<br class="hidden md:inline">
+                クリエイティブな時間を生み出すことに情熱を注いでいます。<br><br>
+                「必要」は開発の母。<br class="hidden md:inline">
+                ツール開発を通じて、効率化と快適さを追求し続けます。
+            </p>
+
+            <div class="flex flex-col md:flex-row gap-4 items-center justify-center mt-8">
+                <button onclick="revealEmail(this)"
+                    class="bg-[#E95420] hover:bg-[#dd4814] text-white font-bold py-3 px-6 rounded-full transition flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                    </svg>
+                    <span>Show Email Address</span>
+                </button>
+                <div id="emailContainer"
+                    class="hidden bg-white text-gray-900 font-mono py-3 px-6 rounded-full select-all">
+                    k1kurosawa@gmail.com
+                </div>
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSc5_w_dLCIEvyE7xUxhwADu7VvCNUVRgpdDb4W5DjD-qGGImw/viewform"
+                    target="_blank"
+                    class="bg-[#5E2750] hover:bg-[#4a1f3f] text-white font-bold py-3 px-6 rounded-full transition flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <span>お問い合わせフォーム</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function revealEmail(btn) {
+            const emailContainer = document.getElementById('emailContainer');
+            btn.classList.add('hidden');
+            emailContainer.classList.remove('hidden');
+        }
+    </script>
 
     <footer class="text-center py-6 text-gray-600 text-sm">
         &copy; 2026 YoyogiPinball. All rights reserved.
