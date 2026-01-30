@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,35 +8,43 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* カスタムフォントなどを入れたい場合はここに */
-        body { font-family: 'Helvetica Neue', Arial, sans-serif; }
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
     </style>
 </head>
-<body class="bg-gray-900 text-gray-100 antialiased">
 
-    <header class="w-full py-6 bg-gray-800 shadow-md">
+<body class="bg-[#2c001e] text-gray-100 antialiased selection:bg-[#E95420] selection:text-white">
+
+    <header class="w-full py-6 bg-[#3E3E3E] shadow-md border-b-4 border-[#E95420]">
         <div class="max-w-4xl mx-auto px-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-blue-400">YoyogiPinball</h1>
+            <h1 class="text-2xl font-bold text-[#E95420]">YoyogiPinball</h1>
             <nav>
-                <a href="https://github.com/YoyogiPinball" class="text-gray-300 hover:text-white transition">GitHub Profile</a>
+                <a href="https://github.com/YoyogiPinball" class="text-gray-300 hover:text-white transition">GitHub
+                    Profile</a>
             </nav>
         </div>
     </header>
 
     <section class="max-w-4xl mx-auto px-4 py-20 text-center">
-        <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Code, Create, Optimize.</h2>
-        <p class="text-xl text-gray-400 mb-8">
-            個人開発ツール・拡張機能・自動化スクリプト置き場
+        <h2 class="text-4xl md:text-5xl font-extrabold mb-4 text-[#E95420]">YoyogiPinball</h2>
+        日々の「面倒」を解決する自動化ツールを作っています。<br class="hidden md:inline">
+        Python、Google Apps Script、Chrome拡張機能を中心に、<br class="hidden md:inline">
+        AI連携やファイル管理の効率化に取り組んでいます。
         </p>
     </section>
 
     <section class="max-w-4xl mx-auto px-4 pb-20">
         <h3 class="text-2xl font-bold mb-8 border-b border-gray-700 pb-2">Projects</h3>
-        
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            
-            <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-gray-700">
-                <div class="h-48 bg-gray-700 flex items-center justify-center text-gray-500">
-                    <span>ScreenShot Placeholder</span>
+
+            <div
+                class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-gray-700">
+                <div class="h-40 bg-gray-700 flex items-center justify-center overflow-hidden cursor-pointer group"
+                    onclick="openModal('images/oshi-sche.png')">
+                    <img src="images/oshi-sche.png" alt="oshi-sche"
+                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                 </div>
                 <div class="p-6">
                     <h4 class="text-xl font-bold mb-2 text-white">oshi-sche</h4>
@@ -43,57 +52,105 @@
                         推し活特化のスケジュール管理ツール。Discordの通知やカレンダー連携を統合。
                     </p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="px-2 py-1 bg-blue-900 text-blue-200 text-xs rounded">Discord Bot</span>
-                        <span class="px-2 py-1 bg-blue-900 text-blue-200 text-xs rounded">Python</span>
+                        <span class="px-2 py-1 bg-[#5E2750] text-gray-200 text-xs rounded">Python</span>
+                        <span class="px-2 py-1 bg-[#5E2750] text-gray-200 text-xs rounded">GoogleAppScript</span>
                     </div>
-                    <a href="https://github.com/YoyogiPinball/oshi-sche" class="inline-block bg-blue-600 hover:bg-blue-500 text-white font-medium py-2 px-4 rounded transition">
+                    <a href="https://github.com/YoyogiPinball/oshi-sche"
+                        class="inline-block bg-[#E95420] hover:bg-[#dd4814] text-white font-medium py-2 px-4 rounded transition">
                         View on GitHub
                     </a>
                 </div>
             </div>
 
-    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-gray-700 flex flex-col">
-        <div class="h-48 bg-gray-700 relative group overflow-hidden">
-            <img src="images/glance_dashboard.png" alt="Glance Dashboard" class="object-cover w-full h-full group-hover:scale-105 transition duration-500">
-            <div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300">
-                <span class="text-white font-bold border border-white px-4 py-2 rounded-full">View Details</span>
-            </div>
-        </div>
-        <div class="p-6 flex-1 flex flex-col">
-            <h4 class="text-xl font-bold mb-2 text-white">Glance</h4>
-            <p class="text-gray-400 mb-4 text-sm flex-1">
-                新しいタブをiGoogle風のダッシュボードに。天気・カレンダー・ToDoを一画面に集約。推し活スケジュール管理にも最適。
-            </p>
-            <div class="flex flex-wrap gap-2 mb-4">
-                <span class="px-2 py-1 bg-yellow-900 text-yellow-200 text-xs rounded">Chrome Extension</span>
-                <span class="px-2 py-1 bg-green-900 text-green-200 text-xs rounded">oshi-sche連携</span>
-            </div>
-            
-            <div class="flex justify-between items-center mt-auto">
-                <span class="text-yellow-500 text-xs font-mono border border-yellow-500/30 px-2 py-1 rounded">⚠️ Dev Preview</span>
-                <a href="glance.html" class="text-blue-400 hover:text-blue-300 text-sm font-bold flex items-center">
-                    詳細を見る &rarr;
-                </a>
-            </div>
-        </div>
-    </div>
-            <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-gray-700">
-                <div class="p-6">
-                    <h4 class="text-xl font-bold mb-2 text-white">Loot_Organizer</h4>
-                    <p class="text-gray-400 mb-4 text-sm">
-                        ダウンロードフォルダ等のファイル整理自動化ツール。
+            <div
+                class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-gray-700 flex flex-col">
+                <div class="h-40 bg-gray-700 relative group overflow-hidden cursor-pointer"
+                    onclick="openModal('images/glance_dashboard_v2.png')">
+                    <img src="images/glance_dashboard_v2.png" alt="Glance Dashboard"
+                        class="object-cover w-full h-full group-hover:scale-105 transition duration-500">
+                    <div
+                        class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none">
+                        <span class="text-white font-bold border border-white px-4 py-2 rounded-full">Expand</span>
+                    </div>
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h4 class="text-xl font-bold mb-2 text-white">Glance</h4>
+                    <p class="text-gray-400 mb-4 text-sm flex-1">
+                        新しいタブをiGoogle風のダッシュボードに。天気・カレンダー・ToDoを一画面に集約。推し活スケジュール管理にも最適。
                     </p>
-                    <a href="https://github.com/YoyogiPinball/Loot_Organizer" class="text-blue-400 hover:text-blue-300 text-sm">View Repository &rarr;</a>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-yellow-900 text-yellow-200 text-xs rounded">Chrome Extension</span>
+                        <span class="px-2 py-1 bg-green-900 text-green-200 text-xs rounded">oshi-sche連携</span>
+                        <span class="px-2 py-1 bg-[#5E2750] text-gray-200 text-xs rounded">JavaScript</span>
+                    </div>
+
+                    <div class="flex justify-between items-center mt-auto">
+                        <span class="text-[#E95420] text-xs font-mono border border-[#E95420]/30 px-2 py-1 rounded">⚠️
+                            Dev Preview</span>
+                        <a href="glance.html"
+                            class="text-[#E95420] hover:text-[#dd4814] text-sm font-bold flex items-center">
+                            詳細を見る &rarr;
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-gray-700">
+            <div
+                class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-gray-700">
+                <div class="h-40 bg-gray-700 flex items-center justify-center overflow-hidden cursor-pointer group"
+                    onclick="openModal('images/pokeanalyzer.png')">
+                    <img src="images/pokeanalyzer.png" alt="PokeAnalyzer-gen6"
+                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="p-6">
+                    <h4 class="text-xl font-bold mb-2 text-white">PokeAnalyzer-gen6</h4>
+                    <p class="text-gray-400 mb-4 text-sm">
+                        ポケモン対戦データビューア。タイプ相性・種族値・素早さ実数値を即座に表示するGUIアプリ (第6世代 XY, ORAS対応)。
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-[#5E2750] text-gray-200 text-xs rounded">Python</span>
+                    </div>
+                    <a href="https://github.com/YoyogiPinball/pokeanalyzer-gen6"
+                        class="text-[#E95420] hover:text-[#dd4814] text-sm">View Repository &rarr;</a>
+                </div>
+            </div>
+            <div
+                class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-gray-700">
+                <div class="h-40 bg-gray-700 flex items-center justify-center overflow-hidden cursor-pointer group"
+                    onclick="openModal('images/loot_organizer.png')">
+                    <img src="images/loot_organizer.png" alt="Loot_Organizer"
+                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="p-6">
+                    <h4 class="text-xl font-bold mb-2 text-white">Loot_Organizer</h4>
+                    <p class="text-gray-400 mb-4 text-sm">
+                        ルールベースのファイル整理自動化ツール。ルールを記述したyamlで頻繁に行うファイル整理を自動化。
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-[#5E2750] text-gray-200 text-xs rounded">Python</span>
+                    </div>
+                    <a href="https://github.com/YoyogiPinball/Loot_Organizer"
+                        class="text-[#E95420] hover:text-[#dd4814] text-sm">View Repository &rarr;</a>
+                </div>
+            </div>
+
+            <div
+                class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-gray-700">
+                <div class="h-40 bg-gray-700 flex items-center justify-center overflow-hidden cursor-pointer group"
+                    onclick="openModal('images/nsfw_gatekeeper.png')">
+                    <img src="images/nsfw_gatekeeper.png" alt="NSFW-Gatekeeper"
+                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
                 <div class="p-6">
                     <h4 class="text-xl font-bold mb-2 text-white">NSFW-Gatekeeper</h4>
                     <p class="text-gray-400 mb-4 text-sm">
                         画像フォルダの健全性を保つための自動判定・振り分けスクリプト。
                     </p>
-                    <a href="https://github.com/YoyogiPinball/NSFW-Gatekeeper" class="text-blue-400 hover:text-blue-300 text-sm">View Repository &rarr;</a>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-[#5E2750] text-gray-200 text-xs rounded">Python</span>
+                    </div>
+                    <a href="https://github.com/YoyogiPinball/NSFW-Gatekeeper"
+                        class="text-[#E95420] hover:text-[#dd4814] text-sm">View Repository &rarr;</a>
                 </div>
             </div>
 
@@ -104,5 +161,58 @@
         &copy; 2026 YoyogiPinball. All rights reserved.
     </footer>
 
+
+    <!-- Image Modal -->
+    <div id="imageModal"
+        class="fixed inset-0 z-50 bg-black/90 hidden flex items-center justify-center p-4 backdrop-blur-sm transition-opacity duration-300 opacity-0"
+        onclick="closeModal()">
+        <div class="relative max-w-7xl max-h-screen w-full h-full flex items-center justify-center">
+            <img id="modalImage" src="" alt="Full view"
+                class="max-w-full max-h-full object-contain rounded shadow-2xl transform scale-95 transition-transform duration-300">
+            <button
+                class="absolute top-4 right-4 text-white hover:text-gray-300 z-50 bg-black/50 rounded-full p-2 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+
+        function openModal(src) {
+            modal.classList.remove('hidden');
+            // Small delay to allow display:flex to apply before opacity transition
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalImg.classList.remove('scale-95');
+                modalImg.classList.add('scale-100');
+            }, 10);
+            modalImg.src = src;
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            modalImg.classList.remove('scale-100');
+            modalImg.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modalImg.src = '';
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        // Close on escape key
+        document.addEventListener('keydown', function (event) {
+            if (event.key === "Escape") {
+                closeModal();
+            }
+        });
+    </script>
 </body>
+
 </html>
