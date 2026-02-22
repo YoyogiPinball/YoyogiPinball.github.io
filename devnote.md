@@ -16,3 +16,11 @@
   - タグ: Python
   - リンク先: https://github.com/YoyogiPinball/La_Byle
 - **ステータス**: 完了 (commit & push済み)
+
+## 2026-02-22 Buy Me a Coffeeリンクの追加
+- **概要**: ポートフォリオサイト（`index.html`）のContactセクションに「Buy Me a Coffee」のリンクを追加する。
+- **実装プラン**:
+  - `Buy Me a Coffee` の公式サイトのブランドカラー（黄色: `#FFDD00`）とアイコン（SVG）を使用。
+  - お問い合わせフォームボタンの横に並べる。
+  - リンク先: https://buymeacoffee.com/yoyogipinball
+- **ステータス**: 完了 (commit & push済み)
