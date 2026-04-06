@@ -56,8 +56,8 @@
 
         <div class="max-w-4xl mx-auto">
             <span class="inline-block py-1 px-3 rounded-full text-xs font-medium mb-6"
-                style="background: rgba(233,84,32,0.08); border: 1px solid rgba(233,84,32,0.25); color: #E95420;">
-                開発中
+                style="background: rgba(233,84,32,0.12); border: 1px solid rgba(233,84,32,0.4); color: #E95420;">
+                ✓ 公開中
             </span>
             <h1 class="text-5xl md:text-7xl font-black tracking-tight mb-6 text-[#2D1B0E]">
                 推しスケ
@@ -70,6 +70,19 @@
                 日・週・月ビューで、複数の推しの予定をまとめて確認できるWebアプリ
             </p>
 
+
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <a href="https://oshi-sche-webapp.vercel.app/" target="_blank"
+                    class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-white text-sm transition hover:opacity-90"
+                    style="background: #E95420;">
+                    今すぐ使う（無料）
+                </a>
+                <a href="https://oshi-sche-webapp.vercel.app/demo" target="_blank"
+                    class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm transition hover:opacity-80"
+                    style="background: rgba(233,84,32,0.08); border: 1px solid rgba(233,84,32,0.3); color: #E95420;">
+                    デモを見る
+                </a>
+            </div>
 
             <div class="flex justify-center">
                 <div class="phone-frame w-64 md:w-72 cursor-pointer group"
@@ -89,7 +102,8 @@
         <div class="max-w-5xl mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-4 text-[#2D1B0E]">なぜ作ったか</h2>
             <p class="text-[#6B4C35] text-center mb-16 max-w-2xl mx-auto">
-                推しのスケジュールを確認する煩雑な手間が発生していました
+                VTuberの配信を1日中追いかけているようなオタクが、自分の悩みを解決するために作りました。<br>
+                推しが複数いると、各自のスケジュールを毎週確認して回るのが地味に手間で——そこを解決するのが推しスケです。
             </p>
 
             <!-- Before -->
@@ -254,11 +268,19 @@
                             </p>
                         </div>
 
-                        <div class="card p-6">
-                            <h3 class="text-base font-bold mb-2 text-[#2D1B0E]">無料 / Googleアカウントでログイン</h3>
+                        <div class="card p-6" style="border-color: rgba(233,84,32,0.35); background: rgba(233,84,32,0.04);">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="text-xs font-bold px-2 py-0.5 rounded text-white" style="background:#E95420;">無料</span>
+                                <h3 class="text-base font-bold text-[#2D1B0E]">Googleアカウントでログイン</h3>
+                            </div>
                             <p class="text-[#6B4C35] text-sm leading-relaxed">
-                                利用は無料。ログインにはGoogleアカウントが必要になります。複数デバイス間で推しデータを同期するために使用します。
+                                利用は無料です。ログインにはGoogleアカウントが必要になります。複数デバイス間で推しデータを同期するために使用します。
                             </p>
+                            <a href="https://oshi-sche-webapp.vercel.app/" target="_blank"
+                                class="inline-block mt-4 text-xs font-bold px-4 py-2 rounded-full transition hover:opacity-80"
+                                style="background: rgba(233,84,32,0.1); border: 1px solid rgba(233,84,32,0.3); color: #E95420;">
+                                今すぐ使う →
+                            </a>
                         </div>
                     </div>
                 </div>
