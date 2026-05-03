@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slack 家計簿 - YoyogiPinball</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-[#2c001e] text-gray-100 antialiased selection:bg-[#E95420] selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="w-full py-4 bg-[#3E3E3E] border-b border-[#E95420]/40 shadow-md">
+        <div class="max-w-5xl mx-auto px-4">
+            <a href="index.html" class="text-gray-400 hover:text-white transition text-sm flex items-center gap-2">
+                &larr; Back to Portfolio
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="max-w-5xl mx-auto px-4 pt-20 pb-16 text-center">
+        <span class="inline-block text-xs font-mono px-3 py-1 rounded border border-gray-600 text-gray-500 mb-6">Private Repository</span>
+        <h1 class="text-5xl md:text-6xl font-extrabold text-[#E95420] mb-4">Slack 家計簿</h1>
+        <p class="text-gray-200 text-xl font-medium mb-8">SlackからGoogleスプレッドシートへ記入できる個人用家計簿システム</p>
+        <div class="flex flex-wrap justify-center gap-2">
+            <span class="px-3 py-1 bg-[#5E2750] text-gray-200 text-xs rounded">Google Apps Script</span>
+            <span class="px-3 py-1 bg-[#5E2750] text-gray-200 text-xs rounded">Slack API</span>
+            <span class="px-3 py-1 bg-[#5E2750] text-gray-200 text-gray-200 text-xs rounded">Google Spreadsheet</span>
+        </div>
+    </header>
+
+    <!-- Why section -->
+    <section class="py-16 bg-[#1a0014]">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-2xl font-bold text-center mb-10 text-white">なぜ作ったか</h2>
+
+            <!-- Before -->
+            <div class="bg-gray-800 border border-gray-700 rounded-lg p-6 mb-5">
+                <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-5">今まで</h3>
+                <div class="flex flex-wrap items-center gap-2 text-sm mb-6">
+                    <span class="bg-gray-700 text-gray-300 px-3 py-1.5 rounded-full">スプシを開く</span>
+                    <span class="text-gray-600">→</span>
+                    <span class="bg-gray-700 text-gray-300 px-3 py-1.5 rounded-full">レシートや決済アプリと見比べながら入力</span>
+                    <span class="text-gray-600">→</span>
+                    <span class="bg-gray-700 text-gray-300 px-3 py-1.5 rounded-full">週末にまとめて処理</span>
+                </div>
+                <div class="border-l-2 border-gray-700 pl-4 space-y-2">
+                    <p class="text-gray-500 text-sm">ためるほどズレが出て、修正が面倒になる</p>
+                    <p class="text-gray-500 text-sm">スマホからの入力が手間で後回しになりがち</p>
+                    <p class="text-gray-500 text-sm">月ごとにシートが分かれていて、過去データを探しにくい</p>
+                </div>
+            </div>
+
+            <div class="flex justify-center mb-5">
+                <span class="text-[#E95420] text-2xl font-bold">↓</span>
+            </div>
+
+            <!-- After -->
+            <div class="bg-gray-800 border border-[#E95420]/40 rounded-lg p-6">
+                <h3 class="text-xs font-bold text-[#E95420] uppercase tracking-widest mb-5">Slack 家計簿なら</h3>
+                <div class="flex flex-wrap items-center gap-2 text-sm mb-6">
+                    <span class="bg-[#E95420] text-white px-3 py-1.5 rounded-full font-medium">/k を叩く</span>
+                    <span class="text-[#E95420]">→</span>
+                    <span class="bg-[#E95420] text-white px-3 py-1.5 rounded-full font-medium">モーダルに入力</span>
+                    <span class="text-[#E95420]">→</span>
+                    <span class="bg-[#E95420] text-white px-3 py-1.5 rounded-full font-medium">即記録・即確認</span>
+                </div>
+                <div class="border-l-2 border-[#E95420]/50 pl-4 space-y-2">
+                    <p class="text-gray-400 text-sm">買ったその瞬間に記録できる。ためない、ズレない</p>
+                    <p class="text-gray-400 text-sm">シートは全期間1枚。過去データも一発で探せる</p>
+                    <p class="text-gray-400 text-sm">カード利用なら引き落とし月を自動計算して管理</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slack UI section -->
+    <section class="py-16 bg-[#2c001e]">
+        <div class="max-w-5xl mx-auto px-4">
+            <h2 class="text-2xl font-bold text-center mb-10 text-white">Slack から入力する</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <div class="flex flex-col items-center gap-3">
+                    <div class="bg-gray-800 border border-gray-700 rounded-lg overflow-hidden cursor-pointer group w-full"
+                        onclick="openModal('images/kakeibo/slack-form.png')">
+                        <img src="images/kakeibo/slack-form.png" alt="入力フォーム"
+                            class="w-full h-56 object-cover object-top group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center pointer-events-none"
+                            style="background: rgba(0,0,0,0.3);">
+                            <span class="text-white text-sm bg-black/60 px-3 py-1 rounded-full">Expand</span>
+                        </div>
+                    </div>
+                    <p class="text-white text-sm font-medium">入力モーダル</p>
+                    <p class="text-gray-500 text-xs text-center">日付・品目・金額・支払い方法</p>
+                </div>
+
+                <div class="flex flex-col items-center gap-3">
+                    <div class="bg-gray-800 border border-gray-700 rounded-lg overflow-hidden cursor-pointer group w-full"
+                        onclick="openModal('images/kakeibo/slack-ic-response.png')">
+                        <img src="images/kakeibo/slack-ic-response.png" alt="ICカード返答"
+                            class="w-full h-56 object-cover object-top group-hover:scale-105 transition duration-500">
+                    </div>
+                    <p class="text-white text-sm font-medium">即時払いの返答</p>
+                    <p class="text-gray-500 text-xs text-center">交通系ICなど即時払いの場合</p>
+                </div>
+
+                <div class="flex flex-col items-center gap-3">
+                    <div class="bg-gray-800 border border-gray-700 rounded-lg overflow-hidden cursor-pointer group w-full"
+                        onclick="openModal('images/kakeibo/slack-card-message.png')">
+                        <img src="images/kakeibo/slack-card-message.png" alt="カード払いメッセージ"
+                            class="w-full h-56 object-cover object-top group-hover:scale-105 transition duration-500">
+                    </div>
+                    <p class="text-white text-sm font-medium">カード払いの通知</p>
+                    <p class="text-gray-500 text-xs text-center">カード払い時のみ表示。引き落とし月を自動計算</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Spreadsheet section -->
+    <section class="py-16 bg-[#1a0014]">
+        <div class="max-w-5xl mx-auto px-4">
+            <h2 class="text-2xl font-bold text-center mb-10 text-white">スプレッドシートに反映</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                <div class="flex flex-col gap-3">
+                    <div class="bg-gray-800 border border-gray-700 rounded-lg overflow-hidden cursor-pointer group"
+                        onclick="openModal('images/kakeibo/spreadsheet-entry.png')">
+                        <img src="images/kakeibo/spreadsheet-entry.png" alt="シート反映"
+                            class="w-full h-48 object-cover object-top group-hover:scale-105 transition duration-500">
+                    </div>
+                    <p class="text-white text-sm font-medium">入力内容の反映</p>
+                    <p class="text-gray-500 text-xs">送信すると即追記</p>
+                </div>
+
+                <div class="flex flex-col gap-3">
+                    <div class="bg-gray-800 border border-gray-700 rounded-lg overflow-hidden cursor-pointer group"
+                        onclick="openModal('images/kakeibo/spreadsheet-log.png')">
+                        <img src="images/kakeibo/spreadsheet-log.png" alt="支払見込シート"
+                            class="w-full h-48 object-cover object-top group-hover:scale-105 transition duration-500">
+                    </div>
+                    <p class="text-white text-sm font-medium">支払見込・フリー資金</p>
+                    <p class="text-gray-500 text-xs">今月の引き落とし合計と使える余裕をリアルタイム表示</p>
+                </div>
+
+                <div class="flex flex-col gap-3">
+                    <div class="bg-gray-800 border border-gray-700 rounded-lg overflow-hidden cursor-pointer group"
+                        onclick="openModal('images/kakeibo/spreadsheet-monthly.png')">
+                        <img src="images/kakeibo/spreadsheet-monthly.png" alt="マンスリーレポート"
+                            class="w-full h-48 object-cover object-top group-hover:scale-105 transition duration-500">
+                    </div>
+                    <p class="text-white text-sm font-medium">マンスリーレポート</p>
+                    <p class="text-gray-500 text-xs">カテゴリ別グラフと支出一覧を自動生成</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="py-16 bg-[#1a0014]">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-2xl font-bold text-center mb-10 text-white">Tech Stack</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div class="bg-gray-800 border border-gray-700 rounded-lg p-4 text-center">
+                    <div class="text-white font-bold text-sm">Google Apps Script</div>
+                    <div class="text-gray-500 text-xs mt-1">メインロジック</div>
+                </div>
+                <div class="bg-gray-800 border border-gray-700 rounded-lg p-4 text-center">
+                    <div class="text-white font-bold text-sm">Slack API</div>
+                    <div class="text-gray-500 text-xs mt-1">Slash Commands / Modals</div>
+                </div>
+                <div class="bg-gray-800 border border-gray-700 rounded-lg p-4 text-center">
+                    <div class="text-white font-bold text-sm">Google Sheets</div>
+                    <div class="text-gray-500 text-xs mt-1">データ管理・レポート</div>
+                </div>
+                <div class="bg-gray-800 border border-gray-700 rounded-lg p-4 text-center">
+                    <div class="text-white font-bold text-sm">GAS Web App</div>
+                    <div class="text-gray-500 text-xs mt-1">Webhook エンドポイント</div>
+                </div>
+            </div>
+            <p class="text-center text-gray-600 text-xs mt-2">制作期間：半日</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10 text-center border-t border-gray-800">
+        <p class="text-gray-600 text-sm">&copy; 2026 YoyogiPinball.</p>
+        <div class="mt-3">
+            <a href="index.html" class="text-gray-600 hover:text-white transition text-sm">Portfolio Home</a>
+        </div>
+    </footer>
+
+    <!-- Image Modal -->
+    <div id="imageModal"
+        class="fixed inset-0 z-50 bg-black/90 hidden flex items-center justify-center p-4 backdrop-blur-sm transition-opacity duration-300 opacity-0"
+        onclick="closeModal()">
+        <div class="relative max-w-7xl max-h-screen w-full h-full flex items-center justify-center">
+            <img id="modalImage" src="" alt="Full view"
+                class="max-w-full max-h-full object-contain rounded shadow-2xl transform scale-95 transition-transform duration-300">
+            <button
+                class="absolute top-4 right-4 text-white hover:text-gray-300 z-50 bg-black/50 rounded-full p-2 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+
+        function openModal(src) {
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalImg.classList.remove('scale-95');
+                modalImg.classList.add('scale-100');
+            }, 10);
+            modalImg.src = src;
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            modalImg.classList.remove('scale-100');
+            modalImg.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modalImg.src = '';
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') closeModal();
+        });
+    </script>
+</body>
+
+</html>
