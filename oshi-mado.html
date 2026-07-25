@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>推し窓 (oshi-mado) - 推しのYouTube新着を1画面に集約するChrome拡張</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFFBF5;
+            color: #2D1B0E;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #E8D4BC;
+            border-radius: 1rem;
+        }
+
+        .card-warm {
+            background: #FAF3EA;
+            border: 1px solid #E8D4BC;
+            border-radius: 1rem;
+        }
+
+        /* ブラウザ風フレーム（Chrome拡張のスクショ表示用） */
+        .browser-frame {
+            position: relative;
+            border-radius: 0.9rem;
+            border: 1px solid #D4B896;
+            box-shadow: 0 8px 32px rgba(80, 40, 10, 0.12), 0 2px 8px rgba(80, 40, 10, 0.08);
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .browser-bar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            background: #F5EDE0;
+            border-bottom: 1px solid #E8D4BC;
+        }
+
+        .browser-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 9999px;
+            display: inline-block;
+        }
+
+        ::selection {
+            background-color: #E95420;
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="absolute top-0 left-0 w-full p-6 flex justify-between items-center z-50">
+        <a href="index.html" class="text-[#6B4C35] hover:text-[#2D1B0E] transition flex items-center gap-2 text-sm">
+            &larr; Back to Portfolio
+        </a>
+    </nav>
+
+    <!-- Hero -->
+    <header class="relative flex flex-col items-center justify-center text-center px-4 pt-32 pb-20 overflow-hidden"
+        style="background: linear-gradient(180deg, #FFF8EE 0%, #FFFBF5 100%);">
+
+        <div class="max-w-4xl mx-auto">
+            <span class="inline-block py-1 px-3 rounded-full text-xs font-medium mb-6"
+                style="background: rgba(233,84,32,0.12); border: 1px solid rgba(233,84,32,0.4); color: #E95420;">
+                ✓ Chrome ウェブストア 公開中
+            </span>
+            <h1 class="text-5xl md:text-7xl font-black tracking-tight mb-6 text-[#2D1B0E]">
+                推し窓
+            </h1>
+            <p class="text-xl md:text-2xl font-bold mb-4 text-[#2D1B0E]">
+                推しのYouTube新着を、1画面に集約する
+            </p>
+            <p class="text-[#6B4C35] mb-8 max-w-xl mx-auto leading-relaxed">
+                登録チャンネルの動画・ライブ配信・配信予定を横断表示するChrome拡張。<br>種類別タブとチャンネル絞り込みで新着コンテンツが一目でわかります。
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <a href="https://chromewebstore.google.com/detail/%E6%8E%A8%E3%81%97%E7%AA%93-oshi-mado/gockednaohkhlfcpofmdaeioaaeohnbl?hl=ja-JA"
+                    target="_blank"
+                    class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-white text-sm transition hover:opacity-90"
+                    style="background: #E95420;">
+                    Chromeに追加（無料）
+                </a>
+                <a href="https://github.com/YoyogiPinball/oshi-mado" target="_blank"
+                    class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm transition hover:opacity-80"
+                    style="background: rgba(233,84,32,0.08); border: 1px solid rgba(233,84,32,0.3); color: #E95420;">
+                    View on GitHub
+                </a>
+            </div>
+
+            <div class="flex justify-center">
+                <div class="browser-frame w-full max-w-3xl cursor-pointer group"
+                    onclick="openModal('images/oshi-mado/filter_ALL.png')">
+                    <div class="browser-bar">
+                        <span class="browser-dot" style="background:#E9857A;"></span>
+                        <span class="browser-dot" style="background:#E8C46B;"></span>
+                        <span class="browser-dot" style="background:#8FBF8F;"></span>
+                    </div>
+                    <img src="images/oshi-mado/filter_ALL.png" alt="推し窓 新着一覧画面" class="w-full h-auto block">
+                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center"
+                        style="background: rgba(45,27,14,0.10);">
+                        <span class="text-[#2D1B0E] text-sm font-medium bg-white/80 px-3 py-1 rounded-full">クリックで拡大</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- なぜ作ったか -->
+    <section class="py-24" style="background-color: #F5EDE0;">
+        <div class="max-w-5xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-4 text-[#2D1B0E]">なぜ作ったか</h2>
+            <p class="text-[#6B4C35] text-center mb-16 max-w-2xl mx-auto">
+                登録したチャンネルの数が増えるにつれて<br>「登録チャンネル」画面に様々なジャンルのコンテンツが並ぶようになってきたため、<br>
+                推しの配信や動画をスムーズに閲覧するための拡張機能を開発しました。
+            </p>
+
+            <!-- Before -->
+            <div class="card p-8 mb-8">
+                <h3 class="text-base font-bold text-[#6B4C35] mb-8 tracking-wide uppercase text-sm">今まで</h3>
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="card-warm text-[#2D1B0E] text-sm px-4 py-2 rounded-full">YouTubeの登録チャンネルを開く</span>
+                    <span class="text-[#E95420] font-bold">→</span>
+                    <span class="card-warm text-[#2D1B0E] text-sm px-4 py-2 rounded-full">学習・ニュースなど雑多なチャンネルに推しが埋もれている</span>
+                    <span class="text-[#E95420] font-bold">→</span>
+                    <span class="card-warm text-[#2D1B0E] text-sm px-4 py-2 rounded-full">目当ての配信・動画を1つずつ探し出す</span>
+                    <span class="text-[#E95420] font-bold">→</span>
+                    <span class="card-warm text-[#2D1B0E] text-sm px-4 py-2 rounded-full">配信中なのか予定なのか判別しづらい（配信予定だけの絞り込みができない）</span>
+                </div>
+            </div>
+
+            <!-- Arrow -->
+            <div class="flex justify-center mb-8">
+                <span class="text-[#E95420] text-2xl font-bold">↓</span>
+            </div>
+
+            <!-- After -->
+            <div class="card p-8" style="border-color: rgba(233,84,32,0.3); background: rgba(233,84,32,0.04);">
+                <h3 class="text-base font-bold mb-8 tracking-wide uppercase text-sm" style="color: #E95420;">推し窓なら</h3>
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-sm px-4 py-2 rounded-full font-medium text-white" style="background:#E95420;">ツールバーのアイコンを押す</span>
+                    <span class="text-[#E95420] font-bold">→</span>
+                    <span class="text-sm px-4 py-2 rounded-full font-medium text-white" style="background:#E95420;">直近7日間の新着が種類別に一覧表示される</span>
+                </div>
+                <p class="text-[#6B4C35] text-sm mt-6 leading-relaxed">
+                    これだけです。
+                    配信中 / 動画 / アーカイブ / 予定をタブで切り替えでき、チャンネルでの絞り込みもワンクリック。
+                    「いま何が来ているか」を、YouTubeを巡回せずに把握できます。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 主な機能 -->
+    <section class="py-24" style="background-color: #FFFBF5;">
+        <div class="max-w-5xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-16 text-[#2D1B0E]">主な機能</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="card p-6">
+                    <h3 class="text-base font-bold mb-2 text-[#2D1B0E]">新着の横断表示</h3>
+                    <p class="text-[#6B4C35] text-sm leading-relaxed">推しリストへ登録した全チャンネルの投稿を直近7日間ぶん日付ごとにまとめて表示可能。</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-base font-bold mb-2 text-[#2D1B0E]">種類別タブとバッジ</h3>
+                    <p class="text-[#6B4C35] text-sm leading-relaxed">配信中 / 全て / 動画 / アーカイブ / 予定 のタブで、見たいコンテンツの種類を絞り込めます。</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-base font-bold mb-2 text-[#2D1B0E]">チャンネルで絞り込み</h3>
+                    <p class="text-[#6B4C35] text-sm leading-relaxed">リストから特定のチャンネルを選ぶと、そのチャンネルの投稿だけを表示できます。</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-base font-bold mb-2 text-[#2D1B0E]">視聴可能時刻でソート</h3>
+                    <p class="text-[#6B4C35] text-sm leading-relaxed">配信・アーカイブは「配信開始時刻」、動画・Shortsは「公開時刻」を基準に並べています。</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-base font-bold mb-2 text-[#2D1B0E]">APIキーは任意（段階的）</h3>
+                    <p class="text-[#6B4C35] text-sm leading-relaxed">APIキー登録を行うことでアイコンや正確な配信ステータスが補完されます。キー未登録でも公開RSSで動作します。</p>
+                </div>
+                <div class="card p-6">
+                    <h3 class="text-base font-bold mb-2 text-[#2D1B0E]">タブとして開く</h3>
+                    <p class="text-[#6B4C35] text-sm leading-relaxed">推し窓を通常のタブとして開いて広い画面で新着コンテンツを確認できます。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 画面紹介 -->
+    <section class="py-24" style="background-color: #F5EDE0;">
+        <div class="max-w-5xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-16 text-[#2D1B0E]">画面紹介</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <div class="flex flex-col gap-3">
+                    <div class="browser-frame cursor-pointer group" onclick="openModal('images/oshi-mado/filter_Streaming.png')">
+                        <div class="browser-bar">
+                            <span class="browser-dot" style="background:#E9857A;"></span>
+                            <span class="browser-dot" style="background:#E8C46B;"></span>
+                            <span class="browser-dot" style="background:#8FBF8F;"></span>
+                        </div>
+                        <img src="images/oshi-mado/filter_Streaming.png" alt="配信中タブ" class="w-full h-auto block">
+                    </div>
+                    <p class="text-[#2D1B0E] text-sm font-medium">配信中タブ</p>
+                    <p class="text-[#9C7A5E] text-xs">標準で選択されている「いまライブ配信しているチャンネル」だけを抽出して表示。</p>
+                </div>
+
+                <div class="flex flex-col gap-3">
+                    <div class="browser-frame cursor-pointer group" onclick="openModal('images/oshi-mado/filter_Movie.png')">
+                        <div class="browser-bar">
+                            <span class="browser-dot" style="background:#E9857A;"></span>
+                            <span class="browser-dot" style="background:#E8C46B;"></span>
+                            <span class="browser-dot" style="background:#8FBF8F;"></span>
+                        </div>
+                        <img src="images/oshi-mado/filter_Movie.png" alt="動画タブ" class="w-full h-auto block">
+                    </div>
+                    <p class="text-[#2D1B0E] text-sm font-medium">動画タブ</p>
+                    <p class="text-[#9C7A5E] text-xs">Shorts動画を含むアップロードされた動画を公開時刻順に一覧表示。</p>
+                </div>
+
+                <div class="flex flex-col gap-3">
+                    <div class="browser-frame cursor-pointer group" onclick="openModal('images/oshi-mado/filter_VTuberName.png')">
+                        <div class="browser-bar">
+                            <span class="browser-dot" style="background:#E9857A;"></span>
+                            <span class="browser-dot" style="background:#E8C46B;"></span>
+                            <span class="browser-dot" style="background:#8FBF8F;"></span>
+                        </div>
+                        <img src="images/oshi-mado/filter_VTuberName.png" alt="チャンネル絞り込み" class="w-full h-auto block">
+                    </div>
+                    <p class="text-[#2D1B0E] text-sm font-medium">チャンネル絞り込み</p>
+                    <p class="text-[#9C7A5E] text-xs">特定の推しを選んで、そのチャンネルの投稿だけを表示。</p>
+                </div>
+
+                <div class="flex flex-col gap-3">
+                    <div class="browser-frame cursor-pointer group" onclick="openModal('images/oshi-mado/Settings_Ue.png')">
+                        <div class="browser-bar">
+                            <span class="browser-dot" style="background:#E9857A;"></span>
+                            <span class="browser-dot" style="background:#E8C46B;"></span>
+                            <span class="browser-dot" style="background:#8FBF8F;"></span>
+                        </div>
+                        <img src="images/oshi-mado/Settings_Ue.png" alt="設定画面" class="w-full h-auto block">
+                    </div>
+                    <p class="text-[#2D1B0E] text-sm font-medium">設定画面</p>
+                    <p class="text-[#9C7A5E] text-xs">APIキーの登録と、リストへの登録を行えます。</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech stack -->
+    <section class="py-24" style="background-color: #FFFBF5;">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-16 text-[#2D1B0E]">Tech Stack</h2>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <div class="card p-5 rounded-xl text-center">
+                    <div class="font-bold text-sm text-[#2D1B0E]">Chrome Extension</div>
+                    <div class="text-[#9C7A5E] text-xs mt-1">Manifest V3</div>
+                </div>
+                <div class="card p-5 rounded-xl text-center">
+                    <div class="font-bold text-sm text-[#2D1B0E]">JavaScript</div>
+                    <div class="text-[#9C7A5E] text-xs mt-1">Vanilla</div>
+                </div>
+                <div class="card p-5 rounded-xl text-center">
+                    <div class="font-bold text-sm text-[#2D1B0E]">YouTube Data API</div>
+                    <div class="text-[#9C7A5E] text-xs mt-1">v3 / BYOD</div>
+                </div>
+                <div class="card p-5 rounded-xl text-center">
+                    <div class="font-bold text-sm text-[#2D1B0E]">RSS Feed</div>
+                    <div class="text-[#9C7A5E] text-xs mt-1">新着発見・クォータ節約</div>
+                </div>
+                <div class="card p-5 rounded-xl text-center">
+                    <div class="font-bold text-sm text-[#2D1B0E]">chrome.storage</div>
+                    <div class="text-[#9C7A5E] text-xs mt-1">sync / local</div>
+                </div>
+                <div class="card p-5 rounded-xl text-center">
+                    <div class="font-bold text-sm text-[#2D1B0E]">Google Takeout</div>
+                    <div class="text-[#9C7A5E] text-xs mt-1">一括インポート</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 今後のロードマップ -->
+    <section class="py-24" style="background-color: #F5EDE0;">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-16 text-[#2D1B0E]">今後のロードマップ</h2>
+
+            <div class="card p-6" style="border-left: 4px solid #D4B896;">
+                <div class="flex items-start gap-4">
+                    <span class="text-xs font-bold px-2 py-1 rounded shrink-0 mt-0.5 text-[#6B4C35]" style="background:#E8D4BC;">構想</span>
+                    <div>
+                        <h3 class="font-bold mb-1 text-[#2D1B0E]">右クリックで推しを追加</h3>
+                        <p class="text-[#6B4C35] text-sm leading-relaxed">
+                            リストに加えたいYouTubeチャンネルのページ上で右クリックし、コンテキストメニューから直接推しリストへ追加できる機能を予定しています。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 text-center border-t" style="border-color: #E8D4BC; background-color: #FFFBF5;">
+        <p class="text-[#9C7A5E]">&copy; 2026 YoyogiPinball.</p>
+        <div class="mt-4 flex justify-center gap-6">
+            <a href="index.html" class="text-[#9C7A5E] hover:text-[#2D1B0E] transition text-sm">Portfolio Home</a>
+            <a href="https://github.com/YoyogiPinball/oshi-mado" target="_blank"
+                class="text-[#9C7A5E] hover:text-[#2D1B0E] transition text-sm">GitHub</a>
+        </div>
+    </footer>
+
+    <!-- Image Modal -->
+    <div id="imageModal"
+        class="fixed inset-0 z-50 bg-black/80 hidden flex items-center justify-center p-4 backdrop-blur-sm transition-opacity duration-300 opacity-0"
+        onclick="closeModal()">
+        <div class="relative max-w-7xl max-h-screen w-full h-full flex items-center justify-center">
+            <img id="modalImage" src="" alt="Full view"
+                class="max-w-full max-h-full object-contain rounded-2xl shadow-2xl transform scale-95 transition-transform duration-300">
+            <button class="absolute top-4 right-4 text-white hover:text-gray-300 z-50 bg-black/50 rounded-full p-2 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+
+        function openModal(src) {
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalImg.classList.remove('scale-95');
+                modalImg.classList.add('scale-100');
+            }, 10);
+            modalImg.src = src;
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            modalImg.classList.remove('scale-100');
+            modalImg.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modalImg.src = '';
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === "Escape") {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+
+</html>
