@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="使っていないノートPCと縦置きモニターを時計・カレンダー・天気・写真・推しの配信予定を確認可能な常時表示のサイネージに変える yp-signage の紹介。">
+    <title>yp-signage - 部屋の片隅に、次の予定が見える画面を</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #2b1c16;
+            --brown: #684a3b;
+            --cream: #fffaf2;
+            --sand: #f1e5d6;
+            --line: #dfcdbb;
+            --orange: #e85b2a;
+            --night: #1d1512;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            background: var(--cream);
+            color: var(--ink);
+        }
+
+        .font-label {
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .hero-atmosphere {
+            background:
+                radial-gradient(circle at 76% 45%, rgba(232, 91, 42, 0.22), transparent 26rem),
+                radial-gradient(circle at 16% 0%, rgba(242, 181, 119, 0.12), transparent 30rem),
+                linear-gradient(150deg, #241915 0%, #160f0d 72%);
+        }
+
+        .hero-atmosphere::after {
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.17'/%3E%3C/svg%3E");
+            content: '';
+            opacity: .15;
+            pointer-events: none;
+        }
+
+        .screen-frame {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.17);
+            border-radius: 1.5rem;
+            background: #120d0b;
+            box-shadow: 0 38px 90px rgba(0, 0, 0, .48), 0 0 0 8px rgba(255, 255, 255, .025);
+        }
+
+        .eyebrow::before {
+            display: inline-block;
+            width: 2rem;
+            height: 1px;
+            margin-right: .75rem;
+            background: currentColor;
+            content: '';
+            vertical-align: middle;
+        }
+
+        .soft-card {
+            border: 1px solid var(--line);
+            border-radius: 1.25rem;
+            background: rgba(255, 255, 255, .7);
+        }
+
+        .feature-row + .feature-row {
+            border-top: 1px solid var(--line);
+        }
+
+        .reveal {
+            animation: rise .7s ease-out both;
+        }
+
+        .reveal-delay-1 {
+            animation-delay: .12s;
+        }
+
+        .reveal-delay-2 {
+            animation-delay: .24s;
+        }
+
+        @keyframes rise {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        ::selection {
+            background: var(--orange);
+            color: white;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased">
+    <header class="hero-atmosphere relative min-h-screen overflow-hidden text-[#fffaf2]">
+        <nav class="relative z-20 mx-auto flex max-w-7xl items-center justify-between px-5 py-6 md:px-8" aria-label="ページナビゲーション">
+            <a href="index.html"
+                class="inline-flex cursor-pointer items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm text-[#eaded3] backdrop-blur-sm transition-colors duration-200 hover:border-white/30 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f59672]">
+                <span aria-hidden="true">←</span>
+                Portfolio
+            </a>
+            <span class="font-label text-xs font-semibold tracking-[0.22em] text-[#c9b8ad]">YP-SIGNAGE</span>
+        </nav>
+
+        <div class="relative z-10 mx-auto grid min-h-[calc(100vh-88px)] max-w-7xl grid-cols-1 items-center gap-16 px-5 pb-20 pt-10 md:px-8 lg:grid-cols-[1.05fr_.7fr] lg:gap-24 lg:pb-24 lg:pt-4">
+            <div class="max-w-2xl">
+                <p class="eyebrow reveal font-label mb-8 text-xs font-semibold tracking-[0.2em] text-[#f59672]">
+                    HOME DISPLAY PROJECT
+                </p>
+                <h1 class="reveal reveal-delay-1 text-[clamp(2.8rem,7vw,5.8rem)] font-black leading-[1.08] tracking-[-0.045em]">
+                    部屋の片隅に、<br>
+                    次の予定が<br>
+                    見える画面を。
+                </h1>
+                <p class="reveal reveal-delay-2 mt-8 max-w-xl text-base leading-8 text-[#d8c9bf] md:text-lg">
+                    使っていないノートPCと縦置きモニターを<br>時計・カレンダー・天気・写真・推しの配信予定を確認可能な<br>常時表示のサイネージに変える yp-signage の紹介
+                </p>
+                <div class="reveal reveal-delay-2 mt-10 flex flex-wrap gap-3">
+                    <a href="https://github.com/YoyogiPinball/yp-signage" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex cursor-pointer items-center justify-center rounded-full border border-white/20 px-6 py-3 text-sm font-bold text-[#fffaf2] transition-colors duration-200 hover:border-white/40 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f59672]">
+                        GitHub リポジトリ
+                    </a>
+                </div>
+            </div>
+
+            <div class="reveal reveal-delay-2 relative mx-auto w-full max-w-[22rem] lg:justify-self-end">
+                <div class="absolute -inset-8 rounded-full bg-[#e85b2a]/15 blur-3xl" aria-hidden="true"></div>
+                <button type="button"
+                    class="screen-frame group relative w-full cursor-pointer focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#f59672]/70 focus-visible:ring-offset-4 focus-visible:ring-offset-[#1d1512]"
+                    onclick="openModal('images/yp-signage/screenshot.jpg')" aria-label="yp-signageの画面を拡大表示">
+                    <img src="images/yp-signage/screenshot.jpg"
+                        alt="時計、2か月カレンダー、天気、背景画像、配信予定を表示した縦長のyp-signage画面"
+                        class="block h-auto w-full">
+                    <span class="absolute inset-0 flex items-center justify-center bg-black/25 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100">
+                        <span class="rounded-full bg-[#fffaf2] px-4 py-2 text-xs font-bold text-[#2b1c16]">クリックで拡大</span>
+                    </span>
+                </button>
+                <p class="font-label mt-5 text-center text-[11px] tracking-[0.12em] text-[#aa9589]">1080 × 1920 / DEMO SCREEN</p>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="screen" class="scroll-mt-8 bg-[#f1e5d6] py-24 md:py-32">
+            <div class="mx-auto max-w-6xl px-5 md:px-8">
+                <div class="grid grid-cols-1 gap-14 lg:grid-cols-[.72fr_1fr] lg:gap-24">
+                    <div>
+                        <p class="eyebrow font-label mb-5 text-xs font-bold tracking-[0.18em] text-[#e85b2a]">AT A GLANCE</p>
+                        <h2 class="text-3xl font-black leading-tight tracking-tight md:text-5xl">この画面で<br class="hidden lg:block">わかること</h2>
+                        <p class="mt-6 max-w-md leading-8 text-[#684a3b]">
+                            一日のあいだに何度も確認する情報を一画面へまとめました。
+                            各種表示は自動で更新されます。
+                        </p>
+                    </div>
+
+                    <div class="border-y border-[#dfcdbb]">
+                        <article class="feature-row grid grid-cols-[3rem_1fr] gap-4 py-6 md:grid-cols-[4rem_12rem_1fr] md:items-center">
+                            <span class="font-label text-xs font-bold text-[#e85b2a]">01</span>
+                            <h3 class="font-bold">時計と日付</h3>
+                            <p class="col-start-2 text-sm leading-7 text-[#684a3b] md:col-start-auto">離れた場所からでも読める大きさで、現在時刻を表示します。</p>
+                        </article>
+                        <article class="feature-row grid grid-cols-[3rem_1fr] gap-4 py-6 md:grid-cols-[4rem_12rem_1fr] md:items-center">
+                            <span class="font-label text-xs font-bold text-[#e85b2a]">02</span>
+                            <h3 class="font-bold">2か月カレンダー</h3>
+                            <p class="col-start-2 text-sm leading-7 text-[#684a3b] md:col-start-auto">先の日付を確認しやすいよう今月と来月を並べ、日本の祝日も色分けで表示します。</p>
+                        </article>
+                        <article class="feature-row grid grid-cols-[3rem_1fr] gap-4 py-6 md:grid-cols-[4rem_12rem_1fr] md:items-center">
+                            <span class="font-label text-xs font-bold text-[#e85b2a]">03</span>
+                            <h3 class="font-bold">5日間の天気</h3>
+                            <p class="col-start-2 text-sm leading-7 text-[#684a3b] md:col-start-auto">天気と最高・最低気温を、日ごとに確認できます。外出予定を立てる判断材料に。</p>
+                        </article>
+                        <article class="feature-row grid grid-cols-[3rem_1fr] gap-4 py-6 md:grid-cols-[4rem_12rem_1fr] md:items-center">
+                            <span class="font-label text-xs font-bold text-[#e85b2a]">04</span>
+                            <h3 class="font-bold">写真スライド</h3>
+                            <p class="col-start-2 text-sm leading-7 text-[#684a3b] md:col-start-auto">フォルダーに配置した画像が背景としてスライドショー再生されます。</p>
+                        </article>
+                        <article class="feature-row grid grid-cols-[3rem_1fr] gap-4 py-6 md:grid-cols-[4rem_12rem_1fr] md:items-center">
+                            <span class="font-label text-xs font-bold text-[#e85b2a]">05</span>
+                            <h3 class="font-bold">推しの配信予定</h3>
+                            <p class="col-start-2 text-sm leading-7 text-[#684a3b] md:col-start-auto">これから始まる推しの配信予定を画面の下にまとめて表示します。</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-[#fffaf2] py-24 md:py-32">
+            <div class="mx-auto max-w-6xl px-5 md:px-8">
+                        <h2 class="text-3xl font-black tracking-tight md:text-4xl">作ったきっかけ</h2>
+                        <div class="mt-8 space-y-6 text-base leading-8 text-[#684a3b]">
+                            <p>
+                                空いているモニター（21.5inch, モニターアームで縦置き状態）があり、<br>
+                                ミニPCやスティックPCを繋いでサイネージ化できないかと画策していたところにOSなしのノートPCが手に入りました。<br>
+                                せっかくなら、時計やカレンダーだけでなく、<br>お気に入りの画像のスライドショーを流しながら推しの配信予定も見える画面にしたいと考えたのが始まりです。
+                            </p>
+                            <p>
+                                机に配置していた時計、カレンダーを置き換える形で、<br>
+                                作業中にふと目を向けるだけで、次の配信や明日の天気を確認できるようになりました。
+                            </p>
+                        </div>
+            </div>
+        </section>
+
+        <section class="bg-[#2b1c16] py-24 text-[#fffaf2] md:py-32">
+            <div class="mx-auto max-w-6xl px-5 md:px-8">
+                <div class="mx-auto max-w-3xl text-center">
+                    <p class="font-label mb-5 text-xs font-bold tracking-[0.18em] text-[#f59672]">FROM IMAGE TO DISPLAY</p>
+                    <h2 class="text-3xl font-black tracking-tight md:text-5xl">推しスケとつながる</h2>
+                    <p class="mx-auto mt-6 max-w-2xl leading-8 text-[#d8c9bf]">
+                        配信スケジュール画像を「推しスケ」が解析し、その予定をyp-signageが受け取ります。
+                        １回購読設定を行えば、更新された予定がyp-signageまで届きます。
+                    </p>
+                </div>
+
+                <div class="mx-auto mt-14 grid max-w-4xl grid-cols-1 items-center gap-4 md:grid-cols-[1fr_auto_1fr_auto_1fr]">
+                    <div class="rounded-2xl border border-white/15 bg-white/[.06] p-6 text-center">
+                        <span class="font-label block text-[10px] font-bold tracking-[0.18em] text-[#f59672]">STEP 01</span>
+                        <span class="mt-3 block font-bold">予定画像を用意</span>
+                    </div>
+                    <svg class="mx-auto h-5 w-5 rotate-90 text-[#806b60] md:rotate-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+                        <path d="M5 12h14M14 7l5 5-5 5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <div class="rounded-2xl border border-white/15 bg-white/[.06] p-6 text-center">
+                        <span class="font-label block text-[10px] font-bold tracking-[0.18em] text-[#f59672]">STEP 02</span>
+                        <span class="mt-3 block font-bold">推しスケが解析する</span>
+                    </div>
+                    <svg class="mx-auto h-5 w-5 rotate-90 text-[#806b60] md:rotate-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+                        <path d="M5 12h14M14 7l5 5-5 5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <div class="rounded-2xl border border-[#e85b2a]/70 bg-[#e85b2a]/15 p-6 text-center">
+                        <span class="font-label block text-[10px] font-bold tracking-[0.18em] text-[#f59672]">STEP 03</span>
+                        <span class="mt-3 block font-bold">部屋の画面に表示</span>
+                    </div>
+                </div>
+
+                <div class="mt-10 text-center">
+                    <a href="oshi-sche-webapp.html"
+                        class="inline-flex cursor-pointer items-center gap-2 rounded-full text-sm font-bold text-[#f59672] underline decoration-[#f59672]/40 underline-offset-4 transition-colors duration-200 hover:text-white hover:decoration-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f59672]">
+                        推しスケ（Web版）を見る <span aria-hidden="true">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-[#fffaf2] py-24 md:py-28">
+            <div class="mx-auto max-w-6xl px-5 md:px-8">
+                <div class="grid grid-cols-1 gap-12 border-b border-[#dfcdbb] pb-20 lg:grid-cols-[.75fr_1fr] lg:items-end lg:gap-24">
+                    <div>
+                        <p class="font-label mb-5 text-xs font-bold tracking-[0.18em] text-[#e85b2a]">UNDER THE HOOD</p>
+                        <h2 class="text-3xl font-black tracking-tight md:text-4xl">使ったもの</h2>
+                    </div>
+                    <div class="flex flex-wrap gap-2.5">
+                        <span class="rounded-full border border-[#dfcdbb] bg-white px-4 py-2 text-sm font-medium">MagicMirror²</span>
+                        <span class="rounded-full border border-[#dfcdbb] bg-white px-4 py-2 text-sm font-medium">JavaScript</span>
+                        <span class="rounded-full border border-[#dfcdbb] bg-white px-4 py-2 text-sm font-medium">Node.js</span>
+                        <span class="rounded-full border border-[#dfcdbb] bg-white px-4 py-2 text-sm font-medium">iCal</span>
+                        <span class="rounded-full border border-[#dfcdbb] bg-white px-4 py-2 text-sm font-medium">OpenWeatherMap</span>
+                        <span class="rounded-full border border-[#dfcdbb] bg-white px-4 py-2 text-sm font-medium">systemd</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 gap-10 pt-20 lg:grid-cols-[1fr_auto] lg:items-center">
+                    <div>
+                        <h2 class="text-3xl font-black tracking-tight md:text-5xl">もう少し詳しく見る</h2>
+                        <p class="mt-5 max-w-2xl leading-8 text-[#684a3b]">
+                            設定方法、対応環境、自作モジュールの構成はGitHubにまとめています。
+                            MITライセンスで公開しています。
+                        </p>
+                        <p class="mt-3 text-xs leading-6 text-[#806554]">検証環境：Ubuntu 26.04、縦置き外部モニター（1080×1920）</p>
+                    </div>
+                    <a href="https://github.com/YoyogiPinball/yp-signage" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex cursor-pointer items-center justify-center rounded-full bg-[#2b1c16] px-7 py-3.5 text-sm font-bold text-white transition-colors duration-200 hover:bg-[#e85b2a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e85b2a] focus-visible:ring-offset-4">
+                        GitHubで詳細を見る
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-[#dfcdbb] bg-[#fffaf2] py-10">
+        <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-5 px-5 text-sm text-[#806554] sm:flex-row md:px-8">
+            <p>&copy; 2026 YoyogiPinball.</p>
+            <div class="flex items-center gap-6">
+                <a href="index.html" class="cursor-pointer rounded transition-colors duration-200 hover:text-[#2b1c16] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e85b2a]">Portfolio Home</a>
+                <a href="https://github.com/YoyogiPinball/yp-signage" target="_blank" rel="noopener noreferrer" class="cursor-pointer rounded transition-colors duration-200 hover:text-[#2b1c16] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e85b2a]">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="imageModal" role="dialog" aria-modal="true" aria-label="画像の拡大表示" aria-hidden="true"
+        class="fixed inset-0 z-50 hidden items-center justify-center bg-black/85 p-4 opacity-0 backdrop-blur-sm transition-opacity duration-200"
+        onclick="closeModal()">
+        <div class="relative flex h-full w-full max-w-7xl items-center justify-center" onclick="event.stopPropagation()">
+            <img id="modalImage" src="" alt="yp-signageの実機デモ画面（拡大）"
+                class="max-h-full max-w-full rounded-2xl object-contain shadow-2xl">
+            <button type="button" aria-label="拡大画像を閉じる" onclick="closeModal()"
+                class="absolute right-2 top-2 cursor-pointer rounded-full bg-black/70 p-3 text-white transition-colors duration-200 hover:bg-[#e85b2a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white md:right-4 md:top-4">
+                <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        let modalTrigger = null;
+
+        function openModal(src) {
+            modalTrigger = document.activeElement;
+            modalImg.src = src;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            requestAnimationFrame(() => {
+                modal.classList.remove('opacity-0');
+                modal.querySelector('button').focus();
+            });
+        }
+
+        function closeModal() {
+            if (modal.classList.contains('hidden')) return;
+            modal.classList.add('opacity-0');
+            window.setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                modal.setAttribute('aria-hidden', 'true');
+                modalImg.src = '';
+                document.body.style.overflow = '';
+                if (modalTrigger) modalTrigger.focus();
+            }, 200);
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') closeModal();
+        });
+    </script>
+</body>
+
+</html>

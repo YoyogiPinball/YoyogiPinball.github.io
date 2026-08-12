@@ -114,7 +114,37 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-            <!-- 推し窓（最新作・グリッド先頭） -->
+            <!-- yp-signage（最新作・グリッド先頭） -->
+            <div
+                class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-gray-700 flex flex-col">
+                <div class="h-40 bg-gray-700 flex items-center justify-center overflow-hidden cursor-pointer group"
+                    onclick="openModal('images/yp-signage/screenshot.jpg')">
+                    <img src="images/yp-signage/card.png" alt="yp-signage"
+                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h4 class="text-xl font-bold mb-2 text-white">yp-signage</h4>
+                    <p class="text-gray-400 mb-4 text-sm flex-1">
+                        使っていないノートPCと縦置きモニターを常時稼働のサイネージに。時計・2か月カレンダー・天気・写真スライドショーに加え、推しスケ（Web版）の配信予定をiCalで取り込んで一画面に表示する。
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 py-1 bg-cyan-900 text-cyan-200 text-xs rounded">MagicMirror²</span>
+                        <span class="px-2 py-1 bg-[#5E2750] text-gray-200 text-xs rounded">JavaScript</span>
+                        <span class="px-2 py-1 bg-green-900 text-green-200 text-xs rounded">iCal</span>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-3 mt-auto">
+                        <span class="text-green-400 text-xs font-mono border border-green-400/30 px-2 py-1 rounded">✓ 公開中</span>
+                        <a href="https://github.com/YoyogiPinball/yp-signage" target="_blank"
+                            class="text-gray-400 hover:text-white text-sm transition">GitHub →</a>
+                        <a href="yp-signage.html"
+                            class="ml-auto bg-[#E95420] hover:bg-[#dd4814] text-white text-sm font-bold py-2 px-4 rounded transition">
+                            詳細を見る &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 推し窓 -->
             <div
                 class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-gray-700 flex flex-col">
                 <div class="h-40 bg-gray-700 flex items-center justify-center overflow-hidden cursor-pointer group"
