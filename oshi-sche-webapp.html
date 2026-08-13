@@ -31,7 +31,7 @@
         </div></div></section>
 
         <section class="content-section" aria-labelledby="features-title"><div class="section-grid wrap"><p class="section-label">Features</p><div class="section-content">
-            <h2 id="features-title">推しスケの 機能</h2>
+            <h2 id="features-title">推しスケの機能</h2>
             <div class="feature-list">
                 <article class="feature"><span class="feature-no">01</span><h3>画像をAIで解析</h3><p>配信タイトル、日付、開始時刻を画像から読み取り、ユーザーへ確認を行ってから購読用のカレンダーへ登録をします。</p></article>
                 <article class="feature"><span class="feature-no">02</span><h3>日・週・月表示</h3><p>今日の予定から月全体まで、確認したい範囲に切り替えて表示できます。</p></article>
@@ -54,7 +54,7 @@
         </div></div></section>
 
         <section class="content-section" aria-labelledby="storage-title"><div class="section-grid wrap"><p class="section-label">Data &amp; Account</p><div class="section-content">
-            <h2 id="storage-title">使い方に合わせて<br>保存先と解析方法を選べる。</h2>
+            <h2 id="storage-title"><span class="title-line">使い方に合わせて</span><span class="title-line">保存先と解析方法を選べる。</span></h2>
             <p class="section-intro">ゲスト利用、Googleログイン、無料解析、BYOKでは、データの保存場所と通る経路が異なります。設定画面から自分の使い方を選べます。</p>
             <div class="gallery gallery--three gallery--contain"><figure class="shot"><div class="browser"><a class="zoom-button" href="images/oshi-sche-webapp/settings.png" data-image="images/oshi-sche-webapp/settings.png" aria-label="設定画面を拡大"><img src="images/oshi-sche-webapp/settings.png" alt="推しスケの設定画面"></a></div><figcaption><strong>設定画面</strong><p>APIキー、iCal購読、利用状況、データ削除をまとめています。</p></figcaption></figure></div>
             <dl class="tech-list"><div><dt>ゲスト利用</dt><dd>ログイン不要。推しと予定は利用中の端末のlocalStorageへ保存</dd></div><div><dt>Googleログイン</dt><dd>Auth.jsで認証し、推しデータをlocalStorageとUpstash Redisの間で同期</dd></div><div><dt>無料解析</dt><dd>サーバー側APIを経由して開発者側のGemini APIを使用。ログインはAuth.jsのセッション、ゲストは端末が発行したゲストIDで利用量を数え、いずれも週10枚が上限</dd></div><div><dt>BYOK解析</dt><dd>Gemini APIキーをlocalStorageへ保存し、ブラウザからGemini APIへ直接送信</dd></div><div><dt>iCal購読</dt><dd>ログインユーザーの予定をRedisへ保存し、トークン付きURLから配信</dd></div></dl>
