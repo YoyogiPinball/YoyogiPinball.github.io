@@ -22,7 +22,7 @@
                 <p class="status">Chrome ウェブストアで公開中</p>
                 <h1>推し窓</h1>
                 <h2 class="tagline"><span class="title-line">推しのYouTube新着を、</span><span class="title-line">1画面に集約する。</span></h2>
-                <p class="hero-description">登録したチャンネルの動画、ライブ配信、配信予定を横断表示するChrome拡張です。種類別のタブとチャンネル絞り込みで、見たいコンテンツをすぐに探せます。</p>
+                <p class="hero-description">推しのチャンネルの動画、ライブ配信、配信予定を横断表示するChrome拡張です。種類別のタブとチャンネル絞り込みで、見たいコンテンツをすぐに探せます。</p>
                 <div class="actions">
                     <a class="button button-primary" href="https://chromewebstore.google.com/detail/%E6%8E%A8%E3%81%97%E7%AA%93-oshi-mado/gockednaohkhlfcpofmdaeioaaeohnbl?hl=ja-JA">Chromeに追加（無料）↗</a>
                     <a class="button" href="https://github.com/YoyogiPinball/oshi-mado">GitHubを見る ↗</a>
@@ -59,12 +59,12 @@
                     <p class="section-intro">起動後の操作を増やさず、一覧、種類、チャンネルという単純な切り口で探せるようにしています。</p>
 
                     <div class="feature-list">
-                        <article class="feature"><span class="feature-no">01</span><h3>新着の横断表示</h3><p>推しリストに登録した全チャンネルの投稿を、直近7日間ぶん日付ごとにまとめて表示します。</p></article>
-                        <article class="feature"><span class="feature-no">02</span><h3>種類別タブ</h3><p>配信中、すべて、動画、アーカイブ、予定のタブから、見たい種類だけを選べます。</p></article>
+                        <article class="feature"><span class="feature-no">01</span><h3>新着の横断表示</h3><p>推しリストに登録した全チャンネルの投稿を直近7日間ぶん日付ごとにまとめて表示します。</p></article>
+                        <article class="feature"><span class="feature-no">02</span><h3>種類別タブ</h3><p>配信中、すべて、動画、アーカイブ、予定のタブから見たい種類だけを選べます。</p></article>
                         <article class="feature"><span class="feature-no">03</span><h3>チャンネル絞り込み</h3><p>特定のチャンネルを選び、そのチャンネルの投稿だけに絞って確認できます。</p></article>
-                        <article class="feature"><span class="feature-no">04</span><h3>視聴可能時刻で整列</h3><p>配信とアーカイブは配信開始時刻、動画とShortsは公開時刻を基準に並べます。開始時刻を取得できない場合は公開時刻で代用します。</p></article>
+                        <article class="feature"><span class="feature-no">04</span><h3>視聴可能時刻で整列</h3><p>配信とアーカイブは配信開始時刻、動画とShortsは公開時刻を基準に並べます（配信終了時間は一般的には不定で基準にしづらいため）。開始時刻を取得できない場合は公開時刻で代用します。</p></article>
                         <article class="feature"><span class="feature-no">05</span><h3>APIキーなしでも利用可能</h3><p>公開RSSを使い、APIキーを登録しなくても新着一覧を表示できます。詳しい種類判定はAPIキー登録後に利用できます。</p></article>
-                        <article class="feature"><span class="feature-no">06</span><h3>通常のタブでも表示</h3><p>ポップアップだけでなく通常のタブとして開き、広い画面で新着を確認できます。</p></article>
+                        <article class="feature"><span class="feature-no">06</span><h3>通常のタブでも表示</h3><p>ポップアップだけでなく通常のタブとして開き、広い画面で新着を確認することもできます。</p></article>
                     </div>
                 </div>
             </div>
@@ -75,13 +75,11 @@
                 <p class="section-label">Screens</p>
                 <div class="section-content">
                     <h2 id="screens-title">画面と操作</h2>
-                    <p class="section-intro">表示する情報は変わっても、タブと絞り込みの位置は変えず、同じ操作で探せるようにしています。</p>
-
                     <div class="gallery">
-                        <figure class="shot"><div class="browser"><div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span></div><a class="zoom-button" href="images/oshi-mado/filter_Streaming.png" data-image="images/oshi-mado/filter_Streaming.png" aria-label="配信中タブの画面を拡大"><img src="images/oshi-mado/filter_Streaming.png" alt="推し窓の配信中タブ"></a></div><figcaption><strong>配信中タブ</strong><p>現在ライブ配信しているチャンネルだけを表示します。</p></figcaption></figure>
-                        <figure class="shot"><div class="browser"><div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span></div><a class="zoom-button" href="images/oshi-mado/filter_Movie.png" data-image="images/oshi-mado/filter_Movie.png" aria-label="動画タブの画面を拡大"><img src="images/oshi-mado/filter_Movie.png" alt="推し窓の動画タブ"></a></div><figcaption><strong>動画タブ</strong><p>Shortsを含むアップロード動画を、公開時刻順に表示します。</p></figcaption></figure>
-                        <figure class="shot"><div class="browser"><div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span></div><a class="zoom-button" href="images/oshi-mado/filter_VTuberName.png" data-image="images/oshi-mado/filter_VTuberName.png" aria-label="チャンネル絞り込み画面を拡大"><img src="images/oshi-mado/filter_VTuberName.png" alt="推し窓のチャンネル絞り込み"></a></div><figcaption><strong>チャンネル絞り込み</strong><p>選択したチャンネルの投稿だけを一覧に残します。</p></figcaption></figure>
-                        <figure class="shot"><div class="browser"><div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span></div><a class="zoom-button" href="images/oshi-mado/Settings_Ue.png" data-image="images/oshi-mado/Settings_Ue.png" aria-label="設定画面を拡大"><img src="images/oshi-mado/Settings_Ue.png" alt="推し窓の設定画面"></a></div><figcaption><strong>設定画面</strong><p>APIキーの登録と、推しリストの管理を行います。</p></figcaption></figure>
+                        <figure class="shot"><div class="browser"><div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span></div><a class="zoom-button" href="images/oshi-mado/filter_Streaming.png" data-image="images/oshi-mado/filter_Streaming.png" aria-label="配信中タブの画面を拡大"><img src="images/oshi-mado/filter_Streaming.png" alt="推し窓の配信中タブ"></a></div><figcaption><strong>配信中タブ</strong><p>現在ライブ配信しているチャンネルだけを表示します。デフォルトでこのタブが選択されています。</p></figcaption></figure>
+                        <figure class="shot"><div class="browser"><div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span></div><a class="zoom-button" href="images/oshi-mado/filter_Movie.png" data-image="images/oshi-mado/filter_Movie.png" aria-label="動画タブの画面を拡大"><img src="images/oshi-mado/filter_Movie.png" alt="推し窓の動画タブ"></a></div><figcaption><strong>動画タブ</strong><p>Shortsを含むアップロード動画を公開時刻順に表示します。</p></figcaption></figure>
+                        <figure class="shot"><div class="browser"><div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span></div><a class="zoom-button" href="images/oshi-mado/filter_VTuberName.png" data-image="images/oshi-mado/filter_VTuberName.png" aria-label="チャンネル絞り込み画面を拡大"><img src="images/oshi-mado/filter_VTuberName.png" alt="推し窓のチャンネル絞り込み"></a></div><figcaption><strong>チャンネル絞り込み</strong><p>選択したチャンネルの投稿のみ、一覧で表示します。</p></figcaption></figure>
+                        <figure class="shot"><div class="browser"><div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span></div><a class="zoom-button" href="images/oshi-mado/Settings_Ue.png" data-image="images/oshi-mado/Settings_Ue.png" aria-label="設定画面を拡大"><img src="images/oshi-mado/Settings_Ue.png" alt="推し窓の設定画面"></a></div><figcaption><strong>設定画面</strong><p>APIキーの登録と推しリストの管理を行います。</p></figcaption></figure>
                     </div>
                 </div>
             </div>
@@ -91,7 +89,6 @@
             <div class="section-grid wrap">
                 <p class="section-label">Design &amp; Tech</p>
                 <div class="section-content">
-                    <h2 id="design-title">APIを使わなくても、まず動く。</h2>
                     <p class="section-intro">導入時の手間とAPIクォータを抑えるため、新着の発見には公開RSSを使います。より詳しい判定が必要な人だけ、YouTube Data APIを追加で使う段階的な構成です。</p>
                     <aside class="design-note"><h3>APIキーを登録すると増える情報</h3><p>配信中、配信予定、アーカイブの区別と、チャンネルアイコンの取得が有効になります。APIキーがない場合も、Shorts以外を通常動画としてまとめた新着一覧は利用できます。</p></aside>
 
@@ -105,7 +102,7 @@
                 <p class="section-label">Next</p>
                 <div class="section-content">
                     <h2 id="roadmap-title">今後追加したいこと</h2>
-                    <div class="roadmap"><span>構想中</span><div><h3>YouTubeから、そのまま推しリストへ追加する</h3><p>チャンネルページ上の右クリックメニューから、推し窓のリストへ直接追加できる機能を検討しています。</p></div></div>
+                    <div class="roadmap"><span>構想中</span><div><h3>YouTubeからそのまま推しリストへ追加する機能</h3><p>チャンネルページ上の右クリックメニューから、推し窓のリストへ直接追加できる機能を検討しています。</p></div></div>
                 </div>
             </div>
         </section>
