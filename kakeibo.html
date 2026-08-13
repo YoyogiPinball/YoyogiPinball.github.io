@@ -1,336 +1,79 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slack 家計簿 - YoyogiPinball</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-        }
-    </style>
+    <meta name="description" content="SlackからGoogleスプレッドシートへ支出と収入を記録し、月次レポートまで自動化する個人用家計簿の制作記録。">
+    <title>Slack 家計簿 — YoyogiPinball</title>
+    <link rel="stylesheet" href="styles/project-detail.css">
 </head>
+<body>
+    <a class="skip" href="#main">本文へ移動</a>
+    <header class="site-header"><nav class="nav wrap" aria-label="ページナビゲーション"><a class="back-link" href="index.html">← 制作物一覧へ</a><a class="brand" href="index.html">Yoyogi<span>Pinball</span></a></nav></header>
 
-<body class="bg-[#2c001e] text-gray-100 antialiased selection:bg-[#E95420] selection:text-white">
-
-    <!-- Navigation -->
-    <nav class="w-full py-4 bg-[#3E3E3E] border-b border-[#E95420]/40 shadow-md">
-        <div class="max-w-5xl mx-auto px-4">
-            <a href="index.html" class="text-gray-400 hover:text-white transition text-sm flex items-center gap-2">
-                &larr; Back to Portfolio
-            </a>
-        </div>
-    </nav>
-
-    <!-- Hero -->
-    <header class="max-w-5xl mx-auto px-4 pt-20 pb-16 text-center">
-        <span class="inline-block text-xs font-mono px-3 py-1 rounded border border-gray-600 text-gray-500 mb-6">Private Repository</span>
-        <h1 class="text-5xl md:text-6xl font-extrabold text-[#E95420] mb-4">Slack 家計簿</h1>
-        <p class="text-gray-200 text-xl font-medium mb-8">SlackからGoogleスプレッドシートへ記入できる個人用家計簿システム</p>
-        <div class="flex flex-wrap justify-center gap-2">
-            <span class="px-3 py-1 bg-[#5E2750] text-gray-200 text-xs rounded">Google Apps Script</span>
-            <span class="px-3 py-1 bg-[#5E2750] text-gray-200 text-xs rounded">Slack API</span>
-            <span class="px-3 py-1 bg-[#5E2750] text-gray-200 text-xs rounded">Google Spreadsheet</span>
-            <span class="px-3 py-1 bg-[#5E2750] text-gray-200 text-xs rounded">Gemini API</span>
-        </div>
-    </header>
-
-    <!-- Why section -->
-    <section class="py-16 bg-[#1a0014]">
-        <div class="max-w-4xl mx-auto px-4">
-            <h2 class="text-2xl font-bold text-center mb-10 text-white">なぜ作ったか</h2>
-
-            <!-- Before -->
-            <div class="bg-gray-800 border border-gray-700 rounded-lg p-6 mb-5">
-                <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-5">今まで</h3>
-                <div class="flex flex-wrap items-center gap-2 text-sm mb-6">
-                    <span class="bg-gray-700 text-gray-300 px-3 py-1.5 rounded-full">スプシを開く</span>
-                    <span class="text-gray-600">→</span>
-                    <span class="bg-gray-700 text-gray-300 px-3 py-1.5 rounded-full">レシートや決済アプリと見比べながら入力</span>
-                    <span class="text-gray-600">→</span>
-                    <span class="bg-gray-700 text-gray-300 px-3 py-1.5 rounded-full">週末にまとめて処理</span>
-                </div>
-                <div class="border-l-2 border-gray-700 pl-4 space-y-2">
-                    <p class="text-gray-500 text-sm">ためるほどズレが出て、修正が面倒になる</p>
-                    <p class="text-gray-500 text-sm">スマホからの入力が手間で後回しになりがち</p>
-                    <p class="text-gray-500 text-sm">月ごとにシートが分かれていて、過去データを探しにくい</p>
-                </div>
+    <main id="main">
+        <section class="hero wrap">
+            <div class="hero-copy">
+                <p class="status status--private">個人用 / Private repository</p>
+                <h1>Slack 家計簿</h1>
+                <h2 class="tagline"><span class="title-line">支出は、</span><span class="title-line">使ったその場で記録する。</span></h2>
+                <p class="hero-description">Slackのコマンドから支出と収入を入力し、Googleスプレッドシートへ自動で反映する個人用家計簿です。引き落とし月の計算と月次レポートもまとめて処理します。</p>
+                <dl class="facts"><dt>種類</dt><dd>Slack連携の自動化システム</dd><dt>できること</dt><dd>収支入力、請求月計算、月次集計</dd><dt>公開状況</dt><dd>個人用のため非公開</dd></dl>
             </div>
+            <div class="hero-shot hero-shot--contain"><div class="browser"><div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span></div><a class="zoom-button" href="images/kakeibo/slack-form.png" data-image="images/kakeibo/slack-form.png" aria-label="Slack家計簿の入力画面を拡大"><img src="images/kakeibo/slack-form.png" alt="Slack家計簿の支出入力フォーム"></a></div><p class="image-note">Slackから開く入力フォーム</p></div>
+        </section>
 
-            <div class="flex justify-center mb-5">
-                <span class="text-[#E95420] text-2xl font-bold">↓</span>
+        <section class="content-section sand-section" aria-labelledby="reason-title"><div class="section-grid wrap"><p class="section-label">Why I built it</p><div class="section-content">
+            <h2 id="reason-title"><span class="title-line">週末にまとめて入力すると、</span><span class="title-line">記録が少しずつずれていく。</span></h2>
+            <p class="section-intro">レシートや決済アプリを見ながらスプレッドシートへまとめて入力すると、ためるほど確認と修正が増えます。スマートフォンからシートを直接編集する手間も、後回しにする原因でした。</p>
+            <div class="comparison"><section class="comparison-block" aria-labelledby="before-title"><h3 id="before-title">これまで</h3><ol class="steps"><li>レシートや決済履歴をためる</li><li>スプレッドシートを開いて転記する</li><li>入力漏れや請求月のずれを修正する</li></ol></section><section class="comparison-block after" aria-labelledby="after-title"><h3 id="after-title">Slack 家計簿なら</h3><ol class="steps"><li>買った直後にSlackを開く</li><li>フォーム、または自然言語で記録する</li><li>シートと集計へ自動で反映する</li></ol></section></div>
+        </div></div></section>
+
+        <section class="content-section" aria-labelledby="features-title"><div class="section-grid wrap"><p class="section-label">Features</p><div class="section-content">
+            <h2 id="features-title">入力から振り返りまでを、一つの流れにする。</h2>
+            <div class="feature-list">
+                <article class="feature"><span class="feature-no">01</span><h3>支出を1件記録</h3><p><code>/k</code>から日付、品目、金額、支払い方法をフォームで入力します。</p></article>
+                <article class="feature"><span class="feature-no">02</span><h3>収入を記録</h3><p><code>/ki</code>から給与や副収入を種別と一緒に記録します。</p></article>
+                <article class="feature"><span class="feature-no">03</span><h3>自然言語で一括入力</h3><p><code>/kb</code>へ文章を渡すと、Geminiが複数の支出を解析して確認画面を作ります。</p></article>
+                <article class="feature"><span class="feature-no">04</span><h3>引き落とし月を計算</h3><p>クレジットカードの締め日に応じて、口座から引き落とされる月を自動で求めます。</p></article>
+                <article class="feature"><span class="feature-no">05</span><h3>月次レポート</h3><p>購入日ベースの支出と請求月ベースの資金繰りを分けて集計します。</p></article>
             </div>
+        </div></div></section>
 
-            <!-- After -->
-            <div class="bg-gray-800 border border-[#E95420]/40 rounded-lg p-6">
-                <h3 class="text-xs font-bold text-[#E95420] uppercase tracking-widest mb-5">Slack 家計簿なら</h3>
-                <div class="space-y-3 mb-6">
-                    <div class="flex items-start gap-3">
-                        <code class="text-[#E95420] font-mono font-bold text-sm bg-black/40 px-2 py-0.5 rounded shrink-0">/k</code>
-                        <div>
-                            <p class="text-gray-200 text-sm font-medium">支出を 1 件記録</p>
-                            <p class="text-gray-500 text-xs">日付・品目・金額・支払い方法をフォームで</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3">
-                        <code class="text-[#E95420] font-mono font-bold text-sm bg-black/40 px-2 py-0.5 rounded shrink-0">/ki</code>
-                        <div>
-                            <p class="text-gray-200 text-sm font-medium">収入を記録</p>
-                            <p class="text-gray-500 text-xs">給与・副収入などを種別付きで管理</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3 border border-[#E95420]/25 rounded-lg p-3 bg-[#E95420]/5">
-                        <code class="text-[#E95420] font-mono font-bold text-sm bg-black/40 px-2 py-0.5 rounded shrink-0">/kb</code>
-                        <div>
-                            <p class="text-gray-200 text-sm font-medium">まとめて自然言語で入力 <span class="text-[#E95420] text-xs font-normal ml-1">Gemini</span></p>
-                            <p class="text-gray-500 text-xs">テキストを渡すだけ。AI が解析し複数件を一括記録</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="border-l-2 border-[#E95420]/50 pl-4 space-y-2">
-                    <p class="text-gray-400 text-sm">買ったその瞬間に記録できる。ためない、ズレない</p>
-                    <p class="text-gray-400 text-sm">シートは全期間1枚。過去データも一発で探せる</p>
-                    <p class="text-gray-400 text-sm">カード利用なら引き落とし月を自動計算して管理</p>
-                </div>
+        <section class="content-section sand-section" aria-labelledby="slack-title"><div class="section-grid wrap"><p class="section-label">Slack input</p><div class="section-content">
+            <h2 id="slack-title">普段使う画面から、そのまま入力する。</h2>
+            <div class="gallery gallery--three gallery--contain">
+                <figure class="shot"><div class="browser"><a class="zoom-button" href="images/kakeibo/slack-form.png" data-image="images/kakeibo/slack-form.png" aria-label="入力フォームを拡大"><img src="images/kakeibo/slack-form.png" alt="Slack家計簿の入力フォーム"></a></div><figcaption><strong>入力フォーム</strong><p>日付、品目、金額、支払い方法を入力します。</p></figcaption></figure>
+                <figure class="shot"><div class="browser"><a class="zoom-button" href="images/kakeibo/slack-ic-response.png" data-image="images/kakeibo/slack-ic-response.png" aria-label="即時払いの返答を拡大"><img src="images/kakeibo/slack-ic-response.png" alt="交通系ICなど即時払いを記録した返答"></a></div><figcaption><strong>即時払いの返答</strong><p>記録した内容をSlack上ですぐに確認できます。</p></figcaption></figure>
+                <figure class="shot"><div class="browser"><a class="zoom-button" href="images/kakeibo/slack-card-message.png" data-image="images/kakeibo/slack-card-message.png" aria-label="カード払いの通知を拡大"><img src="images/kakeibo/slack-card-message.png" alt="カード払いの引き落とし月を示す通知"></a></div><figcaption><strong>カード払いの通知</strong><p>支払い内容と自動計算した引き落とし月を返します。</p></figcaption></figure>
             </div>
-        </div>
-    </section>
+        </div></div></section>
 
-    <!-- Slack UI section -->
-    <section class="py-16 bg-[#2c001e]">
-        <div class="max-w-5xl mx-auto px-4">
-            <h2 class="text-2xl font-bold text-center mb-10 text-white">Slack から入力する</h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-                <div class="flex flex-col items-center gap-3">
-                    <div class="bg-gray-800 border border-gray-700 rounded-lg overflow-hidden cursor-pointer group w-full"
-                        onclick="openModal('images/kakeibo/slack-form.png')">
-                        <img src="images/kakeibo/slack-form.png" alt="入力フォーム"
-                            class="w-full h-56 object-cover object-top group-hover:scale-105 transition duration-500">
-                        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center pointer-events-none"
-                            style="background: rgba(0,0,0,0.3);">
-                            <span class="text-white text-sm bg-black/60 px-3 py-1 rounded-full">Expand</span>
-                        </div>
-                    </div>
-                    <p class="text-white text-sm font-medium">入力モーダル</p>
-                    <p class="text-gray-500 text-xs text-center">日付・品目・金額・支払い方法</p>
-                </div>
-
-                <div class="flex flex-col items-center gap-3">
-                    <div class="bg-gray-800 border border-gray-700 rounded-lg overflow-hidden cursor-pointer group w-full"
-                        onclick="openModal('images/kakeibo/slack-ic-response.png')">
-                        <img src="images/kakeibo/slack-ic-response.png" alt="ICカード返答"
-                            class="w-full h-56 object-cover object-top group-hover:scale-105 transition duration-500">
-                    </div>
-                    <p class="text-white text-sm font-medium">即時払いの返答</p>
-                    <p class="text-gray-500 text-xs text-center">交通系ICなど即時払いの場合</p>
-                </div>
-
-                <div class="flex flex-col items-center gap-3">
-                    <div class="bg-gray-800 border border-gray-700 rounded-lg overflow-hidden cursor-pointer group w-full"
-                        onclick="openModal('images/kakeibo/slack-card-message.png')">
-                        <img src="images/kakeibo/slack-card-message.png" alt="カード払いメッセージ"
-                            class="w-full h-56 object-cover object-top group-hover:scale-105 transition duration-500">
-                    </div>
-                    <p class="text-white text-sm font-medium">カード払いの通知</p>
-                    <p class="text-gray-500 text-xs text-center">カード払い時のみ表示。引き落とし月を自動計算</p>
-                </div>
-
+        <section class="content-section" aria-labelledby="bulk-title"><div class="section-grid wrap"><p class="section-label">Bulk entry</p><div class="section-content">
+            <h2 id="bulk-title">文章でまとめて渡し、確認してから記録する。</h2>
+            <p class="section-intro"><code>/kb</code>では、Geminiの解析結果をそのまま書き込まず、内容を確認する段階を挟みます。</p>
+            <ol class="process-list"><li><strong>文章を解析する</strong><span>品目、支払い方法、金額を読み取り、確認用のUIを生成します。</span></li><li><strong>内容を確認する</strong><span>誤りがないことを確かめてから「記録する」を選びます。</span></li><li><strong>シートへ反映する</strong><span>複数件の日付、支払い種別、金額をまとめて追記します。</span></li></ol>
+            <div class="gallery gallery--three gallery--contain">
+                <figure class="shot"><div class="browser"><a class="zoom-button" href="images/kakeibo/kb_kirokusuruyo.png" data-image="images/kakeibo/kb_kirokusuruyo.png" aria-label="Gemini解析結果を拡大"><img src="images/kakeibo/kb_kirokusuruyo.png" alt="Geminiが解析した支出の確認画面"></a></div><figcaption><strong>解析と確認</strong></figcaption></figure>
+                <figure class="shot"><div class="browser"><a class="zoom-button" href="images/kakeibo/kb_kirokusitayo.png" data-image="images/kakeibo/kb_kirokusitayo.png" aria-label="記録完了メッセージを拡大"><img src="images/kakeibo/kb_kirokusitayo.png" alt="Slack家計簿の記録完了メッセージ"></a></div><figcaption><strong>記録完了</strong></figcaption></figure>
+                <figure class="shot"><div class="browser"><a class="zoom-button" href="images/kakeibo/kb_kirokusareteruyo.png" data-image="images/kakeibo/kb_kirokusareteruyo.png" aria-label="スプレッドシート反映を拡大"><img src="images/kakeibo/kb_kirokusareteruyo.png" alt="支出がスプレッドシートへ反映された画面"></a></div><figcaption><strong>シートへ反映</strong></figcaption></figure>
             </div>
-        </div>
-    </section>
+        </div></div></section>
 
-    <!-- /kb section -->
-    <section class="py-16 bg-[#1a0014]">
-        <div class="max-w-2xl mx-auto px-4">
-            <h2 class="text-2xl font-bold text-center mb-3 text-white">/kb でまとめて入力</h2>
-            <p class="text-center text-gray-400 text-sm mb-10">自然言語で書くだけ。Gemini が読み取って一括記録する</p>
-
-            <!-- Step 1 -->
-            <div class="mb-3">
-                <div class="flex items-center gap-2 mb-3">
-                    <span class="w-6 h-6 rounded-full bg-[#E95420] text-white text-xs font-bold flex items-center justify-center shrink-0">1</span>
-                    <div>
-                        <p class="text-white text-sm font-medium">Gemini が解析・確認メッセージを表示</p>
-                        <p class="text-gray-500 text-xs">内容・支払い方法・金額を読み取り、確認 UI を生成</p>
-                    </div>
-                </div>
-                <div class="bg-gray-800 border border-gray-700 rounded-lg overflow-hidden cursor-pointer group"
-                    onclick="openModal('images/kakeibo/kb_kirokusuruyo.png')">
-                    <img src="images/kakeibo/kb_kirokusuruyo.png" alt="Gemini解析・確認メッセージ"
-                        class="w-full object-contain group-hover:scale-[1.02] transition duration-500">
-                </div>
+        <section class="content-section sand-section" aria-labelledby="sheet-title"><div class="section-grid wrap"><p class="section-label">Spreadsheet</p><div class="section-content">
+            <h2 id="sheet-title">記録したあとを、自動で整える。</h2>
+            <div class="gallery gallery--three gallery--contain">
+                <figure class="shot"><div class="browser"><a class="zoom-button" href="images/kakeibo/spreadsheet-entry.png" data-image="images/kakeibo/spreadsheet-entry.png" aria-label="入力内容の反映を拡大"><img src="images/kakeibo/spreadsheet-entry.png" alt="スプレッドシートへ反映された入力内容"></a></div><figcaption><strong>入力内容の反映</strong><p>Slackから送信するとログへ即時追記します。</p></figcaption></figure>
+                <figure class="shot"><div class="browser"><a class="zoom-button" href="images/kakeibo/spreadsheet-log.png" data-image="images/kakeibo/spreadsheet-log.png" aria-label="支払見込シートを拡大"><img src="images/kakeibo/spreadsheet-log.png" alt="引き落とし見込とフリー資金の集計"></a></div><figcaption><strong>支払見込とフリー資金</strong><p>今月の請求額と自由に使える金額を表示します。</p></figcaption></figure>
+                <figure class="shot"><div class="browser"><a class="zoom-button" href="images/kakeibo/spreadsheet-monthly.png" data-image="images/kakeibo/spreadsheet-monthly.png" aria-label="月次レポートを拡大"><img src="images/kakeibo/spreadsheet-monthly.png" alt="支払い方法別グラフを含む月次レポート"></a></div><figcaption><strong>月次レポート</strong><p>支払い方法別グラフと支出一覧を自動生成します。</p></figcaption></figure>
             </div>
+            <dl class="tech-list"><div><dt>Google Apps Script</dt><dd>入力、計算、レポート生成のメインロジック</dd></div><div><dt>Slack API</dt><dd>Slash Commands、モーダル、確認メッセージ</dd></div><div><dt>Google Sheets</dt><dd>データ保存、資金繰り表示、月次レポート</dd></div><div><dt>Gemini 2.5 Flash</dt><dd>自然言語で入力した複数支出の解析</dd></div></dl>
+        </div></div></section>
 
-            <div class="flex justify-center my-3">
-                <span class="text-gray-600 text-xl">↓</span>
-            </div>
-
-            <!-- Step 2 -->
-            <div class="mb-3">
-                <div class="flex items-center gap-2 mb-3">
-                    <span class="w-6 h-6 rounded-full bg-[#E95420] text-white text-xs font-bold flex items-center justify-center shrink-0">2</span>
-                    <div>
-                        <p class="text-white text-sm font-medium">確認して記録</p>
-                        <p class="text-gray-500 text-xs">「記録する」を押すとスプシへ一括書き込み</p>
-                    </div>
-                </div>
-                <div class="bg-gray-800 border border-gray-700 rounded-lg overflow-hidden cursor-pointer group"
-                    onclick="openModal('images/kakeibo/kb_kirokusitayo.png')">
-                    <img src="images/kakeibo/kb_kirokusitayo.png" alt="記録完了メッセージ"
-                        class="w-full object-contain group-hover:scale-[1.02] transition duration-500">
-                </div>
-            </div>
-
-            <div class="flex justify-center my-3">
-                <span class="text-gray-600 text-xl">↓</span>
-            </div>
-
-            <!-- Step 3 -->
-            <div>
-                <div class="flex items-center gap-2 mb-3">
-                    <span class="w-6 h-6 rounded-full bg-[#E95420] text-white text-xs font-bold flex items-center justify-center shrink-0">3</span>
-                    <div>
-                        <p class="text-white text-sm font-medium">スプレッドシートに即時反映</p>
-                        <p class="text-gray-500 text-xs">日付・支払い種別・金額がそのまま追記される</p>
-                    </div>
-                </div>
-                <div class="bg-gray-800 border border-gray-700 rounded-lg overflow-hidden cursor-pointer group"
-                    onclick="openModal('images/kakeibo/kb_kirokusareteruyo.png')">
-                    <img src="images/kakeibo/kb_kirokusareteruyo.png" alt="スプレッドシート反映"
-                        class="w-full object-contain group-hover:scale-[1.02] transition duration-500">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Spreadsheet section -->
-    <section class="py-16 bg-[#1a0014]">
-        <div class="max-w-5xl mx-auto px-4">
-            <h2 class="text-2xl font-bold text-center mb-10 text-white">スプレッドシートに反映</h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-                <div class="flex flex-col gap-3">
-                    <div class="bg-gray-800 border border-gray-700 rounded-lg overflow-hidden cursor-pointer group"
-                        onclick="openModal('images/kakeibo/spreadsheet-entry.png')">
-                        <img src="images/kakeibo/spreadsheet-entry.png" alt="シート反映"
-                            class="w-full h-48 object-cover object-top group-hover:scale-105 transition duration-500">
-                    </div>
-                    <p class="text-white text-sm font-medium">入力内容の反映</p>
-                    <p class="text-gray-500 text-xs">送信すると即追記</p>
-                </div>
-
-                <div class="flex flex-col gap-3">
-                    <div class="bg-gray-800 border border-gray-700 rounded-lg overflow-hidden cursor-pointer group"
-                        onclick="openModal('images/kakeibo/spreadsheet-log.png')">
-                        <img src="images/kakeibo/spreadsheet-log.png" alt="支払見込シート"
-                            class="w-full h-48 object-cover object-top group-hover:scale-105 transition duration-500">
-                    </div>
-                    <p class="text-white text-sm font-medium">支払見込・フリー資金</p>
-                    <p class="text-gray-500 text-xs">今月の引き落とし合計と使える余裕をリアルタイム表示</p>
-                </div>
-
-                <div class="flex flex-col gap-3">
-                    <div class="bg-gray-800 border border-gray-700 rounded-lg overflow-hidden cursor-pointer group"
-                        onclick="openModal('images/kakeibo/spreadsheet-monthly.png')">
-                        <img src="images/kakeibo/spreadsheet-monthly.png" alt="マンスリーレポート"
-                            class="w-full h-48 object-cover object-top group-hover:scale-105 transition duration-500">
-                    </div>
-                    <p class="text-white text-sm font-medium">マンスリーレポート</p>
-                    <p class="text-gray-500 text-xs">カテゴリ別グラフと支出一覧を自動生成</p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Tech Stack -->
-    <section class="py-16 bg-[#1a0014]">
-        <div class="max-w-4xl mx-auto px-4">
-            <h2 class="text-2xl font-bold text-center mb-10 text-white">Tech Stack</h2>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                <div class="bg-gray-800 border border-gray-700 rounded-lg p-4 text-center">
-                    <div class="text-white font-bold text-sm">Google Apps Script</div>
-                    <div class="text-gray-500 text-xs mt-1">メインロジック</div>
-                </div>
-                <div class="bg-gray-800 border border-gray-700 rounded-lg p-4 text-center">
-                    <div class="text-white font-bold text-sm">Slack API</div>
-                    <div class="text-gray-500 text-xs mt-1">Slash Commands / Modals</div>
-                </div>
-                <div class="bg-gray-800 border border-gray-700 rounded-lg p-4 text-center">
-                    <div class="text-white font-bold text-sm">Google Sheets</div>
-                    <div class="text-gray-500 text-xs mt-1">データ管理・レポート</div>
-                </div>
-                <div class="bg-gray-800 border border-gray-700 rounded-lg p-4 text-center">
-                    <div class="text-white font-bold text-sm">GAS Web App</div>
-                    <div class="text-gray-500 text-xs mt-1">Webhook エンドポイント</div>
-                </div>
-                <div class="bg-gray-800 border border-[#E95420]/40 rounded-lg p-4 text-center">
-                    <div class="text-[#E95420] font-bold text-sm">Gemini 2.5 Flash</div>
-                    <div class="text-gray-500 text-xs mt-1">自然言語パース</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-10 text-center border-t border-gray-800">
-        <p class="text-gray-600 text-sm">&copy; 2026 YoyogiPinball.</p>
-        <div class="mt-3">
-            <a href="index.html" class="text-gray-600 hover:text-white transition text-sm">Portfolio Home</a>
-        </div>
-    </footer>
-
-    <!-- Image Modal -->
-    <div id="imageModal"
-        class="fixed inset-0 z-50 bg-black/90 hidden flex items-center justify-center p-4 backdrop-blur-sm transition-opacity duration-300 opacity-0"
-        onclick="closeModal()">
-        <div class="relative max-w-7xl max-h-screen w-full h-full flex items-center justify-center">
-            <img id="modalImage" src="" alt="Full view"
-                class="max-w-full max-h-full object-contain rounded shadow-2xl transform scale-95 transition-transform duration-300">
-            <button
-                class="absolute top-4 right-4 text-white hover:text-gray-300 z-50 bg-black/50 rounded-full p-2 transition">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-        </div>
-    </div>
-
-    <script>
-        const modal = document.getElementById('imageModal');
-        const modalImg = document.getElementById('modalImage');
-
-        function openModal(src) {
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modal.classList.remove('opacity-0');
-                modalImg.classList.remove('scale-95');
-                modalImg.classList.add('scale-100');
-            }, 10);
-            modalImg.src = src;
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            modal.classList.add('opacity-0');
-            modalImg.classList.remove('scale-100');
-            modalImg.classList.add('scale-95');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                modalImg.src = '';
-                document.body.style.overflow = '';
-            }, 300);
-        }
-
-        document.addEventListener('keydown', function (event) {
-            if (event.key === 'Escape') closeModal();
-        });
-    </script>
+        <section class="page-end"><div class="page-end-grid wrap"><div><p>NEXT PROJECT</p><h2>Glance</h2></div><a href="glance.html">次の制作物を見る →</a></div></section>
+    </main>
+    <footer class="wrap"><span>© 2026 YoyogiPinball</span><span><a href="index.html">制作物一覧</a></span></footer>
+    <dialog class="image-dialog" id="image-dialog" aria-label="スクリーンショット拡大表示"><div class="dialog-head"><button class="dialog-close" type="button" aria-label="拡大表示を閉じる">閉じる</button></div><img id="dialog-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></dialog>
+    <script src="scripts/image-dialog.js"></script>
 </body>
-
 </html>

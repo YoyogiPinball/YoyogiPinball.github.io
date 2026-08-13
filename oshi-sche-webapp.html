@@ -1,422 +1,76 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>推しスケ（Web版） - VTuber配信スケジュール管理</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #FFFBF5;
-            color: #2D1B0E;
-        }
-
-        .phone-frame {
-            border-radius: 2rem;
-            border: 1px solid #D4B896;
-            box-shadow: 0 8px 32px rgba(80, 40, 10, 0.12), 0 2px 8px rgba(80, 40, 10, 0.08);
-            overflow: hidden;
-            position: relative;
-        }
-
-        .card {
-            background: #ffffff;
-            border: 1px solid #E8D4BC;
-            border-radius: 1rem;
-        }
-
-        .card-warm {
-            background: #FAF3EA;
-            border: 1px solid #E8D4BC;
-            border-radius: 1rem;
-        }
-
-        ::selection {
-            background-color: #E95420;
-            color: white;
-        }
-    </style>
+    <meta name="description" content="配信スケジュール画像をAIで読み取り、日・週・月表示とiCal購読に整理する推しスケ Web版の制作記録。">
+    <title>推しスケ Web版 — YoyogiPinball</title>
+    <link rel="stylesheet" href="styles/project-detail.css">
 </head>
+<body>
+    <a class="skip" href="#main">本文へ移動</a>
+    <header class="site-header"><nav class="nav wrap" aria-label="ページナビゲーション"><a class="back-link" href="index.html">← 制作物一覧へ</a><a class="brand" href="index.html">Yoyogi<span>Pinball</span></a></nav></header>
 
-<body class="antialiased">
-
-    <!-- Navigation -->
-    <nav class="absolute top-0 left-0 w-full p-6 flex justify-between items-center z-50">
-        <a href="index.html" class="text-[#6B4C35] hover:text-[#2D1B0E] transition flex items-center gap-2 text-sm">
-            &larr; Back to Portfolio
-        </a>
-    </nav>
-
-    <!-- Hero -->
-    <header class="relative flex flex-col items-center justify-center text-center px-4 pt-32 pb-20 overflow-hidden"
-        style="background: linear-gradient(180deg, #FFF8EE 0%, #FFFBF5 100%);">
-
-        <div class="max-w-4xl mx-auto">
-            <span class="inline-block py-1 px-3 rounded-full text-xs font-medium mb-6"
-                style="background: rgba(233,84,32,0.12); border: 1px solid rgba(233,84,32,0.4); color: #E95420;">
-                ✓ 公開中
-            </span>
-            <h1 class="text-5xl md:text-7xl font-black tracking-tight mb-6 text-[#2D1B0E]">
-                推しスケ
-            </h1>
-            <p class="text-xl md:text-2xl font-bold mb-4 text-[#2D1B0E]">
-                推しの配信スケジュールをひとまとめ
-            </p>
-            <p class="text-[#6B4C35] mb-8 max-w-xl mx-auto leading-relaxed">
-                スケジュール画像をアップロードするだけで、Gemini AIが解析して自動登録。<br>
-                日・週・月のビューで、複数の推しの予定をまとめて確認できるWebアプリです。
-            </p>
-
-
-            <div class="flex flex-wrap justify-center gap-3 mb-12">
-                <a href="https://oshi-sche-webapp.vercel.app/" target="_blank"
-                    class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-white text-sm transition hover:opacity-90"
-                    style="background: #E95420;">
-                    今すぐ使う（無料）
-                </a>
-                <a href="https://oshi-sche-webapp.vercel.app/demo" target="_blank"
-                    class="inline-flex items-center gap-2 px-6 py-3 rounded-full font-bold text-sm transition hover:opacity-80"
-                    style="background: rgba(233,84,32,0.08); border: 1px solid rgba(233,84,32,0.3); color: #E95420;">
-                    デモを見る
-                </a>
+    <main id="main">
+        <section class="hero wrap">
+            <div class="hero-copy">
+                <p class="status">無料で公開中 / ゲスト利用可能</p>
+                <h1>推しスケ</h1>
+                <h2 class="tagline"><span class="title-line">推しの配信予定を、</span><span class="title-line">いつものカレンダーへ。</span></h2>
+                <p class="hero-description">配信スケジュール画像をAIが読み取り、複数の推しの予定を日・週・月表示に整理します。iCalの購読URLを使えば、GoogleカレンダーやAppleカレンダーからも確認できます。</p>
+                <div class="actions"><a class="button button-primary" href="https://oshi-sche-webapp.vercel.app/">今すぐ使う（無料）↗</a><a class="button" href="https://oshi-sche-webapp.vercel.app/demo">デモを見る ↗</a></div>
+                <dl class="facts"><dt>種類</dt><dd>Webアプリ / PWA</dd><dt>できること</dt><dd>画像解析、予定管理、iCal購読</dd><dt>利用方法</dt><dd>ゲスト、またはGoogleアカウント</dd></dl>
             </div>
+            <div class="hero-shot hero-shot--portrait hero-shot--contain"><div class="browser"><div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span></div><a class="zoom-button" href="images/oshi-sche-webapp/home.png" data-image="images/oshi-sche-webapp/home.png" aria-label="推しスケのホーム画面を拡大"><img src="images/oshi-sche-webapp/home.png" alt="推しスケ Web版のホーム画面"></a></div><p class="image-note">ホーム画面</p></div>
+        </section>
 
-            <div class="flex justify-center">
-                <div class="phone-frame w-64 md:w-72 cursor-pointer group"
-                    onclick="openModal('images/oshi-sche-webapp/home.png')">
-                    <img src="images/oshi-sche-webapp/home.png" alt="推しスケ ホーム画面" class="w-full h-auto block">
-                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center rounded-[2rem]"
-                        style="background: rgba(45,27,14,0.15);">
-                        <span class="text-[#2D1B0E] text-sm font-medium bg-white/80 px-3 py-1 rounded-full">クリックで拡大</span>
-                    </div>
-                </div>
+        <section class="content-section sand-section" aria-labelledby="reason-title"><div class="section-grid wrap"><p class="section-label">Why I built it</p><div class="section-content">
+            <h2 id="reason-title"><span class="title-line">毎週の予定確認を、</span><span class="title-line">巡回作業にしたくなかった。</span></h2>
+            <p class="section-intro">複数のVTuberを追っていると、Xの投稿、YouTubeのコミュニティ、配信ページを順番に開き、スケジュール画像を探すだけでも時間がかかります。</p>
+            <div class="comparison"><section class="comparison-block" aria-labelledby="before-title"><h3 id="before-title">これまで</h3><ol class="steps"><li>XやYouTubeで推しのアカウントを開く</li><li>タイムラインからスケジュール画像を探す</li><li>複数人ぶんの日時を頭の中で整理する</li></ol></section><section class="comparison-block after" aria-labelledby="after-title"><h3 id="after-title">推しスケなら</h3><ol class="steps"><li>見つけたスケジュール画像をアップロードする</li><li>AIの解析結果を確認して登録する</li><li>アプリや普段のカレンダーからまとめて見る</li></ol></section></div>
+        </div></div></section>
+
+        <section class="content-section" aria-labelledby="features-title"><div class="section-grid wrap"><p class="section-label">Features</p><div class="section-content">
+            <h2 id="features-title">画像を一枚入れるところから、予定の確認まで。</h2>
+            <div class="feature-list">
+                <article class="feature"><span class="feature-no">01</span><h3>画像をAIで解析</h3><p>配信タイトル、日付、開始時刻を読み取り、登録前に内容を編集できます。</p></article>
+                <article class="feature"><span class="feature-no">02</span><h3>日・週・月表示</h3><p>今日の予定から月全体まで、確認したい範囲に切り替えて表示します。</p></article>
+                <article class="feature"><span class="feature-no">03</span><h3>推し名簿</h3><p>所属や担当カラーと一緒に推しを管理し、個人・グループ単位で予定を見られます。</p></article>
+                <article class="feature"><span class="feature-no">04</span><h3>iCal購読</h3><p>Googleカレンダー、Appleカレンダー、Outlookなどから予定を購読できます。</p></article>
+                <article class="feature"><span class="feature-no">05</span><h3>ゲストモード</h3><p>ログインせずに実際のアプリを試せます。ゲストの予定は利用中の端末内へ保存します。</p></article>
+                <article class="feature"><span class="feature-no">06</span><h3>無料枠とBYOK</h3><p>週10枚の無料解析に加え、自分のGemini APIキーを登録すれば、推しスケ側の枚数制限を受けずに解析できます。Gemini側の利用制限と料金は別に適用されます。</p></article>
             </div>
-        </div>
-    </header>
+        </div></div></section>
 
-    <!-- Before / After -->
-    <section class="py-24" style="background-color: #F5EDE0;">
-        <div class="max-w-5xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-4 text-[#2D1B0E]">なぜ作ったか</h2>
-            <p class="text-[#6B4C35] text-center mb-16 max-w-2xl mx-auto">
-                複数のVTuberを追っていると、配信予定の確認だけで毎週それなりの時間がかかります。<br>
-                その巡回作業をなくしたくて作りました。
-            </p>
-
-            <!-- Before -->
-            <div class="card p-8 mb-8">
-                <h3 class="text-base font-bold text-[#6B4C35] mb-8 tracking-wide uppercase text-sm">今まで</h3>
-
-                <div class="space-y-8">
-                    <div>
-                        <div class="mb-4">
-                            <span class="text-xs font-medium text-[#9C7A5E] bg-[#F5EDE0] px-2 py-1 rounded">Twitter / X</span>
-                        </div>
-                        <div class="flex flex-wrap items-center gap-2">
-                            <span class="card-warm text-[#2D1B0E] text-sm px-4 py-2 rounded-full">Twitterを開く</span>
-                            <span class="text-[#E95420] font-bold">→</span>
-                            <span class="card-warm text-[#2D1B0E] text-sm px-4 py-2 rounded-full">推しのアカウントへ移動</span>
-                            <span class="text-[#E95420] font-bold">→</span>
-                            <span class="card-warm text-[#2D1B0E] text-sm px-4 py-2 rounded-full">タイムラインをスクロールしてスケジュール投稿を探す</span>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="mb-4">
-                            <span class="text-xs font-medium text-[#9C7A5E] bg-[#F5EDE0] px-2 py-1 rounded">YouTube</span>
-                        </div>
-                        <div class="flex flex-wrap items-center gap-2">
-                            <span class="card-warm text-[#2D1B0E] text-sm px-4 py-2 rounded-full">YouTubeを開く</span>
-                            <span class="text-[#E95420] font-bold">→</span>
-                            <span class="card-warm text-[#2D1B0E] text-sm px-4 py-2 rounded-full">推しのチャンネルへ移動</span>
-                            <span class="text-[#E95420] font-bold">→</span>
-                            <span class="card-warm text-[#2D1B0E] text-sm px-4 py-2 rounded-full">「投稿」タブを開く</span>
-                            <span class="text-[#E95420] font-bold">→</span>
-                            <span class="card-warm text-[#2D1B0E] text-sm px-4 py-2 rounded-full">スケジュール投稿を探す</span>
-                        </div>
-                    </div>
-                </div>
+        <section class="content-section sand-section" aria-labelledby="screens-title"><div class="section-grid wrap"><p class="section-label">Screens</p><div class="section-content">
+            <h2 id="screens-title">予定の量に合わせて、表示を切り替える。</h2>
+            <p class="section-intro">日間、週間、月間で同じ予定を見られるため、直近の確認と先の見通しを行き来できます。</p>
+            <div class="gallery gallery--portrait gallery--contain">
+                <figure class="shot"><div class="browser"><a class="zoom-button" href="images/oshi-sche-webapp/meibo.png" data-image="images/oshi-sche-webapp/meibo.png" aria-label="推し名簿を拡大"><img src="images/oshi-sche-webapp/meibo.png" alt="推しスケの推し名簿"></a></div><figcaption><strong>推し名簿</strong><p>所属、担当カラー、記念日と一緒に管理します。</p></figcaption></figure>
+                <figure class="shot"><div class="browser"><a class="zoom-button" href="images/oshi-sche-webapp/daily.png" data-image="images/oshi-sche-webapp/daily.png" aria-label="日間ビューを拡大"><img src="images/oshi-sche-webapp/daily.png" alt="推しスケの日間ビュー"></a></div><figcaption><strong>日間ビュー</strong><p>今日の配信予定を一覧で確認します。</p></figcaption></figure>
+                <figure class="shot"><div class="browser"><a class="zoom-button" href="images/oshi-sche-webapp/weekly.png" data-image="images/oshi-sche-webapp/weekly.png" aria-label="週間ビューを拡大"><img src="images/oshi-sche-webapp/weekly.png" alt="推しスケの週間ビュー"></a></div><figcaption><strong>週間ビュー</strong><p>一週間の予定と今日の位置をまとめて見ます。</p></figcaption></figure>
+                <figure class="shot"><div class="browser"><a class="zoom-button" href="images/oshi-sche-webapp/monthly.png" data-image="images/oshi-sche-webapp/monthly.png" aria-label="月間ビューを拡大"><img src="images/oshi-sche-webapp/monthly.png" alt="推しスケの月間ビュー"></a></div><figcaption><strong>月間ビュー</strong><p>日付を選び、その日の予定を確認します。</p></figcaption></figure>
             </div>
+        </div></div></section>
 
-            <!-- Arrow -->
-            <div class="flex justify-center mb-8">
-                <div class="flex flex-col items-center gap-1">
-                    <span class="text-[#E95420] text-2xl font-bold">↓</span>
-                </div>
-            </div>
+        <section class="content-section" aria-labelledby="storage-title"><div class="section-grid wrap"><p class="section-label">Data &amp; Account</p><div class="section-content">
+            <h2 id="storage-title">使い方に合わせて、保存先と解析方法を選べる。</h2>
+            <p class="section-intro">ゲスト利用、Googleログイン、無料解析、BYOKでは、データの保存場所と通る経路が異なります。設定画面から自分の使い方を選べます。</p>
+            <div class="gallery gallery--three gallery--contain"><figure class="shot"><div class="browser"><a class="zoom-button" href="images/oshi-sche-webapp/settings.png" data-image="images/oshi-sche-webapp/settings.png" aria-label="設定画面を拡大"><img src="images/oshi-sche-webapp/settings.png" alt="推しスケの設定画面"></a></div><figcaption><strong>設定画面</strong><p>APIキー、iCal購読、利用状況、データ削除をまとめています。</p></figcaption></figure></div>
+            <dl class="tech-list"><div><dt>ゲスト利用</dt><dd>ログイン不要。推しと予定は利用中の端末のlocalStorageへ保存</dd></div><div><dt>Googleログイン</dt><dd>Auth.jsで認証し、推しデータをlocalStorageとUpstash Redisの間で同期</dd></div><div><dt>無料解析</dt><dd>サーバー側APIを経由して開発者側のGemini APIを使用。ログインはAuth.jsのセッション、ゲストは端末が発行したゲストIDで利用量を数え、いずれも週10枚が上限</dd></div><div><dt>BYOK解析</dt><dd>Gemini APIキーをlocalStorageへ保存し、ブラウザからGemini APIへ直接送信</dd></div><div><dt>iCal購読</dt><dd>ログインユーザーの予定をRedisへ保存し、トークン付きURLから配信</dd></div></dl>
+            <aside class="design-note"><h3>APIキーとログイン情報は別管理</h3><p>BYOK用のGemini APIキーだけをlocalStorageへ保存します。ログイン状態はAuth.jsのセッションJWTとしてhttpOnly Cookieで管理し、localStorageには置きません。Googleへ要求する権限は本人確認・メールアドレス・表示名だけで、アクセストークンとリフレッシュトークンは保存していません。</p></aside>
+        </div></div></section>
 
-            <!-- After -->
-            <div class="card p-8" style="border-color: rgba(233,84,32,0.3); background: rgba(233,84,32,0.04);">
-                <h3 class="text-base font-bold mb-8 tracking-wide uppercase text-sm" style="color: #E95420;">推しスケなら</h3>
-                <div class="flex flex-wrap items-center gap-2">
-                    <span class="text-sm px-4 py-2 rounded-full font-medium text-white" style="background:#E95420;">普段使いのカレンダーアプリを開く</span>
-                    <span class="text-[#E95420] font-bold">→</span>
-                    <span class="text-sm px-4 py-2 rounded-full font-medium text-white" style="background:#E95420;">スケジュールを確認</span>
-                </div>
-                <p class="text-[#6B4C35] text-sm mt-6 leading-relaxed">
-                    これだけです。
-                    iCal形式に対応しているため、使い慣れたカレンダーアプリからそのまま購読できます。
-                    スケジュール画像を1枚アップロードするだけで、Gemini AIが解析して購読用のカレンダーへ登録します。
-                </p>
-            </div>
-        </div>
-    </section>
+        <section class="content-section sand-section" aria-labelledby="tech-title"><div class="section-grid wrap"><p class="section-label">Under the hood</p><div class="section-content">
+            <h2 id="tech-title">使ったもの</h2>
+            <dl class="tech-list"><div><dt>Next.js 16</dt><dd>App Router</dd></div><div><dt>Tailwind CSS v4</dt><dd>shadcn/uiと組み合わせた画面構築</dd></div><div><dt>Gemini 2.5 Flash</dt><dd>スケジュール画像の解析</dd></div><div><dt>Auth.js v5</dt><dd>Google OAuthとCookieセッション</dd></div><div><dt>Upstash Redis</dt><dd>推しデータ同期、iCalイベント、使用量管理</dd></div><div><dt>Vercel</dt><dd>ホスティングとAnalytics</dd></div></dl>
+            <div class="roadmap"><span>将来構想</span><div><h3>推しを登録するだけで、予定が届く形へ</h3><p>現在は画像の取得だけが手動です。将来的には公開されたスケジュール画像の取得から配信までを自動化したいと考えていますが、XのAPI制限を含めて実現方法を検討中です。</p></div></div>
+        </div></div></section>
 
-    <!-- Feature screenshots gallery -->
-    <section class="py-24" style="background-color: #FFFBF5;">
-        <div class="max-w-5xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-4 text-[#2D1B0E]">画面紹介</h2>
-
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 justify-items-center">
-
-                <div class="flex flex-col items-center gap-3">
-                    <div class="phone-frame w-40 md:w-48 cursor-pointer group"
-                        onclick="openModal('images/oshi-sche-webapp/meibo.png')">
-                        <img src="images/oshi-sche-webapp/meibo.png" alt="推し名簿" class="w-full h-auto block">
-                        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center rounded-[2rem]"
-                            style="background: rgba(45,27,14,0.15);">
-                            <span class="text-[#2D1B0E] text-xs bg-white/80 px-2 py-1 rounded-full">拡大</span>
-                        </div>
-                    </div>
-                    <p class="text-[#2D1B0E] text-sm font-medium">推し名簿</p>
-                    <p class="text-[#9C7A5E] text-xs text-center">推しを登録・管理。<br>グループや担当カラーも設定できる</p>
-                </div>
-
-                <div class="flex flex-col items-center gap-3">
-                    <div class="phone-frame w-40 md:w-48 cursor-pointer group"
-                        onclick="openModal('images/oshi-sche-webapp/daily.png')">
-                        <img src="images/oshi-sche-webapp/daily.png" alt="日間スケジュール" class="w-full h-auto block">
-                        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center rounded-[2rem]"
-                            style="background: rgba(45,27,14,0.15);">
-                            <span class="text-[#2D1B0E] text-xs bg-white/80 px-2 py-1 rounded-full">拡大</span>
-                        </div>
-                    </div>
-                    <p class="text-[#2D1B0E] text-sm font-medium">日間ビュー</p>
-                    <p class="text-[#9C7A5E] text-xs text-center">今日の配信を一覧表示。<br>推しごとの担当カラーで識別できる</p>
-                </div>
-
-                <div class="flex flex-col items-center gap-3">
-                    <div class="phone-frame w-40 md:w-48 cursor-pointer group"
-                        onclick="openModal('images/oshi-sche-webapp/weekly.png')">
-                        <img src="images/oshi-sche-webapp/weekly.png" alt="週間スケジュール" class="w-full h-auto block">
-                        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center rounded-[2rem]"
-                            style="background: rgba(45,27,14,0.15);">
-                            <span class="text-[#2D1B0E] text-xs bg-white/80 px-2 py-1 rounded-full">拡大</span>
-                        </div>
-                    </div>
-                    <p class="text-[#2D1B0E] text-sm font-medium">週間ビュー</p>
-                    <p class="text-[#9C7A5E] text-xs text-center">1週間の配信をまとめて確認。<br>当日の予定を強調表示</p>
-                </div>
-
-                <div class="flex flex-col items-center gap-3">
-                    <div class="phone-frame w-40 md:w-48 cursor-pointer group"
-                        onclick="openModal('images/oshi-sche-webapp/monthly.png')">
-                        <img src="images/oshi-sche-webapp/monthly.png" alt="月間スケジュール" class="w-full h-auto block">
-                        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center rounded-[2rem]"
-                            style="background: rgba(45,27,14,0.15);">
-                            <span class="text-[#2D1B0E] text-xs bg-white/80 px-2 py-1 rounded-full">拡大</span>
-                        </div>
-                    </div>
-                    <p class="text-[#2D1B0E] text-sm font-medium">月間ビュー</p>
-                    <p class="text-[#9C7A5E] text-xs text-center">月カレンダーから日付を選ぶと、<br>その日の配信スケジュールを表示</p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Settings / BYOK / iCal -->
-    <section class="py-24" style="background-color: #F5EDE0;">
-        <div class="max-w-5xl mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div class="flex justify-center md:justify-end">
-                    <div class="phone-frame w-64 cursor-pointer group"
-                        onclick="openModal('images/oshi-sche-webapp/settings.png')">
-                        <img src="images/oshi-sche-webapp/settings.png" alt="設定画面" class="w-full h-auto block">
-                        <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center rounded-[2rem]"
-                            style="background: rgba(45,27,14,0.15);">
-                            <span class="text-[#2D1B0E] text-sm bg-white/80 px-3 py-1 rounded-full">拡大</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <h2 class="text-3xl font-bold mb-8 text-[#2D1B0E]">設計のこだわり</h2>
-
-                    <div class="space-y-4">
-                        <div class="card p-6">
-                            <h3 class="text-base font-bold mb-2 text-[#2D1B0E]">BYOK（Bring Your Own Key）</h3>
-                            <p class="text-[#6B4C35] text-sm leading-relaxed">
-                                Gemini APIキーを自分で取得して登録する方式です。キーはブラウザのlocalStorageにのみ保存され、サーバーには送信されません。開発者側のAPIコストを抑えながら、プライバシーも守れる設計です。
-                            </p>
-                        </div>
-
-                        <div class="card p-6">
-                            <h3 class="text-base font-bold mb-2 text-[#2D1B0E]">iCal購読</h3>
-                            <p class="text-[#6B4C35] text-sm leading-relaxed">
-                                登録したスケジュールをiCal形式で出力します。Googleカレンダー、iPhoneのカレンダー、Outlookなど、使い慣れたカレンダーアプリからそのまま購読できます。
-                            </p>
-                        </div>
-
-                        <div class="card p-6">
-                            <h3 class="text-base font-bold mb-2 text-[#2D1B0E]">データはローカル管理</h3>
-                            <p class="text-[#6B4C35] text-sm leading-relaxed">
-                                推しの情報やAPIキーは外部サービスに個人データを預けない構成になっています。
-                            </p>
-                        </div>
-
-                        <div class="card p-6" style="border-color: rgba(233,84,32,0.35); background: rgba(233,84,32,0.04);">
-                            <div class="flex items-center gap-2 mb-2">
-                                <span class="text-xs font-bold px-2 py-0.5 rounded text-white" style="background:#E95420;">無料</span>
-                                <h3 class="text-base font-bold text-[#2D1B0E]">Googleアカウントでログイン</h3>
-                            </div>
-                            <p class="text-[#6B4C35] text-sm leading-relaxed">
-                                利用は無料です。ログインにはGoogleアカウントが必要になります。複数デバイス間で推しデータを同期するために使用します。
-                            </p>
-                            <a href="https://oshi-sche-webapp.vercel.app/" target="_blank"
-                                class="inline-block mt-4 text-xs font-bold px-4 py-2 rounded-full transition hover:opacity-80"
-                                style="background: rgba(233,84,32,0.1); border: 1px solid rgba(233,84,32,0.3); color: #E95420;">
-                                今すぐ使う →
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Tech stack -->
-    <section class="py-24" style="background-color: #FFFBF5;">
-        <div class="max-w-4xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-16 text-[#2D1B0E]">Tech Stack</h2>
-
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                <div class="card p-5 rounded-xl text-center">
-                    <div class="font-bold text-sm text-[#2D1B0E]">Next.js</div>
-                    <div class="text-[#9C7A5E] text-xs mt-1">App Router</div>
-                </div>
-                <div class="card p-5 rounded-xl text-center">
-                    <div class="font-bold text-sm text-[#2D1B0E]">Tailwind CSS</div>
-                    <div class="text-[#9C7A5E] text-xs mt-1">+ shadcn/ui</div>
-                </div>
-                <div class="card p-5 rounded-xl text-center">
-                    <div class="font-bold text-sm text-[#2D1B0E]">Gemini API</div>
-                    <div class="text-[#9C7A5E] text-xs mt-1">画像解析 / BYOK</div>
-                </div>
-                <div class="card p-5 rounded-xl text-center">
-                    <div class="font-bold text-sm text-[#2D1B0E]">iCal</div>
-                    <div class="text-[#9C7A5E] text-xs mt-1">スケジュール配信</div>
-                </div>
-                <div class="card p-5 rounded-xl text-center">
-                    <div class="font-bold text-sm text-[#2D1B0E]">Google OAuth</div>
-                    <div class="text-[#9C7A5E] text-xs mt-1">認証</div>
-                </div>
-                <div class="card p-5 rounded-xl text-center">
-                    <div class="font-bold text-sm text-[#2D1B0E]">Vercel</div>
-                    <div class="text-[#9C7A5E] text-xs mt-1">ホスティング</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Future vision -->
-    <section class="py-24" style="background-color: #F5EDE0;">
-        <div class="max-w-4xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-4 text-[#2D1B0E]">将来構想</h2>
-            <p class="text-[#6B4C35] text-center mb-16 max-w-2xl mx-auto">
-                今は「画像をアップロードして解析」が起点。<br>
-                最終的には、推しを登録するだけでスケジュールが届く形を目指している。
-            </p>
-
-            <div>
-                <div class="card p-6 mb-4" style="border-left: 4px solid #E95420;">
-                    <div class="flex items-start gap-4">
-                        <span class="text-xs font-bold px-2 py-1 rounded shrink-0 mt-0.5 text-white" style="background:#E95420;">現在</span>
-                        <div>
-                            <h3 class="font-bold mb-1 text-[#2D1B0E]">スケジュール画像を手動でアップロード → Geminiが解析 → 一覧表示</h3>
-                            <p class="text-[#6B4C35] text-sm">画像の取得は手動だが、解析・登録・表示は自動化されている。</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flex justify-center mb-4">
-                    <span class="text-[#9C7A5E] text-xl">↓</span>
-                </div>
-
-                <div class="card p-6" style="border-left: 4px solid #D4B896;">
-                    <div class="flex items-start gap-4">
-                        <span class="text-xs font-bold px-2 py-1 rounded shrink-0 mt-0.5 text-[#6B4C35]" style="background:#E8D4BC;">構想</span>
-                        <div>
-                            <h3 class="font-bold mb-1 text-[#2D1B0E]">推しを登録するだけで、スケジュールが自動で届く</h3>
-                            <p class="text-[#6B4C35] text-sm leading-relaxed">
-                                推しのTwitter / YouTubeアカウントに投稿されたスケジュール画像を自動で取得し、購読者へ配信する形が理想。<br>
-                                ただしTwitter（X）のAPI制限の都合上、現時点では実現方法を模索中。
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-12 text-center border-t" style="border-color: #E8D4BC; background-color: #FFFBF5;">
-        <p class="text-[#9C7A5E]">&copy; 2026 YoyogiPinball.</p>
-        <div class="mt-4">
-            <a href="index.html" class="text-[#9C7A5E] hover:text-[#2D1B0E] transition text-sm">Portfolio Home</a>
-        </div>
-    </footer>
-
-    <!-- Image Modal -->
-    <div id="imageModal"
-        class="fixed inset-0 z-50 bg-black/80 hidden flex items-center justify-center p-4 backdrop-blur-sm transition-opacity duration-300 opacity-0"
-        onclick="closeModal()">
-        <div class="relative max-w-7xl max-h-screen w-full h-full flex items-center justify-center">
-            <img id="modalImage" src="" alt="Full view"
-                class="max-w-full max-h-full object-contain rounded-2xl shadow-2xl transform scale-95 transition-transform duration-300">
-            <button class="absolute top-4 right-4 text-white hover:text-gray-300 z-50 bg-black/50 rounded-full p-2 transition">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-        </div>
-    </div>
-
-    <script>
-        const modal = document.getElementById('imageModal');
-        const modalImg = document.getElementById('modalImage');
-
-        function openModal(src) {
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modal.classList.remove('opacity-0');
-                modalImg.classList.remove('scale-95');
-                modalImg.classList.add('scale-100');
-            }, 10);
-            modalImg.src = src;
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            modal.classList.add('opacity-0');
-            modalImg.classList.remove('scale-100');
-            modalImg.classList.add('scale-95');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                modalImg.src = '';
-                document.body.style.overflow = '';
-            }, 300);
-        }
-
-        document.addEventListener('keydown', function (event) {
-            if (event.key === "Escape") {
-                closeModal();
-            }
-        });
-    </script>
+        <section class="page-end"><div class="page-end-grid wrap"><div><p>NEXT PROJECT</p><h2>Slack 家計簿</h2></div><a href="kakeibo.html">次の制作物を見る →</a></div></section>
+    </main>
+    <footer class="wrap"><span>© 2026 YoyogiPinball</span><span><a href="index.html">制作物一覧</a> / <a href="https://oshi-sche-webapp.vercel.app/">公開サイト</a></span></footer>
+    <dialog class="image-dialog" id="image-dialog" aria-label="スクリーンショット拡大表示"><div class="dialog-head"><button class="dialog-close" type="button" aria-label="拡大表示を閉じる">閉じる</button></div><img id="dialog-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></dialog>
+    <script src="scripts/image-dialog.js"></script>
 </body>
-
 </html>

@@ -1,215 +1,65 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glance - Personal Dashboard Extension</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-
-        .glass {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-    </style>
+    <meta name="description" content="Chromeの新規タブに時計、予定、ToDo、天気をまとめる個人用ダッシュボード拡張、Glanceの制作記録。">
+    <title>Glance — YoyogiPinball</title>
+    <link rel="stylesheet" href="styles/project-detail.css">
 </head>
+<body>
+    <a class="skip" href="#main">本文へ移動</a>
+    <header class="site-header"><nav class="nav wrap" aria-label="ページナビゲーション"><a class="back-link" href="index.html">← 制作物一覧へ</a><a class="brand" href="index.html">Yoyogi<span>Pinball</span></a></nav></header>
 
-<body class="bg-[#2c001e] text-gray-100 antialiased selection:bg-[#E95420] selection:text-white">
-
-    <nav class="absolute top-0 left-0 w-full p-6 flex justify-between items-center z-50">
-        <a href="index.html" class="text-gray-400 hover:text-white transition flex items-center gap-2">
-            &larr; Back to Portfolio
-        </a>
-        <a href="https://github.com/YoyogiPinball/Glance" class="text-white font-bold text-lg">GitHub</a>
-    </nav>
-
-    <header
-        class="relative min-h-screen flex flex-col items-center justify-center text-center px-4 pt-20 overflow-hidden">
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-6xl opacity-20 pointer-events-none">
-            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-[#E95420] rounded-full blur-[128px]"></div>
-            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600 rounded-full blur-[128px]"></div>
-        </div>
-
-        <div class="relative z-10 max-w-4xl mx-auto">
-            <span
-                class="inline-block py-1 px-3 rounded-full bg-[#E95420]/20 border border-[#E95420]/30 text-[#E95420] text-sm mb-6">
-                Chrome Extension (In Development)
-            </span>
-            <h1
-                class="text-5xl md:text-7xl font-black tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
-                Glance
-            </h1>
-            <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-                新規タブを、あなた専用のダッシュボードへ。<br>
-                自身のスケジュール、天気、ToDo、そして「推したち」の配信予定を、<br>
-                ブラウザを開いた瞬間に把握する。
-            </p>
-
-            <div class="relative rounded-xl overflow-hidden shadow-2xl border border-gray-700 group cursor-pointer"
-                onclick="openModal('images/glance_dashboard_v2.png')">
-                <img src="images/glance_dashboard_v2.png" alt="Glance Dashboard Screenshot" class="w-full h-auto">
-                <div
-                    class="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-500 flex items-end justify-center pb-10">
-                    <span class="text-white font-medium">Click to Expand</span>
-                </div>
+    <main id="main">
+        <section class="hero wrap">
+            <div class="hero-copy">
+                <p class="status status--dev">開発中 / Chrome Extension</p>
+                <h1>Glance</h1>
+                <h2 class="tagline"><span class="title-line">新規タブを、</span><span class="title-line">一日の見通しに変える。</span></h2>
+                <p class="hero-description">時計、Googleカレンダー、Google Tasks、天気を一画面にまとめるChrome拡張機能です。ブラウザを開いた瞬間に、その日に必要な情報を確認できます。</p>
+                <div class="actions"><a class="button button-primary" href="https://github.com/YoyogiPinball/Glance">GitHubを見る ↗</a></div>
+                <dl class="facts"><dt>種類</dt><dd>Chrome新規タブ拡張</dd><dt>できること</dt><dd>予定、ToDo、天気、時計の表示</dd><dt>公開状況</dt><dd>開発者モード向けに公開</dd></dl>
             </div>
-        </div>
-    </header>
+            <div class="hero-shot"><div class="browser"><div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span></div><a class="zoom-button" href="images/glance_dashboard_v2.png" data-image="images/glance_dashboard_v2.png" aria-label="Glanceのダッシュボードを拡大"><img src="images/glance_dashboard_v2.png" alt="時計、カレンダー、予定、天気を表示したGlanceのダッシュボード"></a></div><p class="image-note">新規タブのダッシュボード</p></div>
+        </section>
 
-    <section class="py-24">
-        <div class="max-w-6xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-16">All-in-One Features</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="glass p-8 rounded-2xl hover:bg-gray-800/50 transition">
-                    <div
-                        class="w-12 h-12 bg-yellow-500/20 text-yellow-400 rounded-lg flex items-center justify-center text-2xl mb-6">
-                        📅</div>
-                    <h3 class="text-xl font-bold mb-3">Calendar</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Googleカレンダーと同期。月間ビューと日間タイムラインを同時に表示。また、当日の予定はポップアップで強調表示されます。
-                    </p>
-                </div>
-                <div class="glass p-8 rounded-2xl hover:bg-gray-800/50 transition">
-                    <div
-                        class="w-12 h-12 bg-[#E95420]/20 text-[#E95420] rounded-lg flex items-center justify-center text-2xl mb-6">
-                        ✅</div>
-                    <h3 class="text-xl font-bold mb-3">ToDo</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Google ToDoと連携。タスクを確認可能。
-                    </p>
-                </div>
-                <div class="glass p-8 rounded-2xl hover:bg-gray-800/50 transition">
-                    <div
-                        class="w-12 h-12 bg-purple-500/20 text-purple-400 rounded-lg flex items-center justify-center text-2xl mb-6">
-                        🌤️</div>
-                    <h3 class="text-xl font-bold mb-3">Weather & Time</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        OpenWeatherMapによる正確な天気予報。時計はデジタル・アナログ、ドット絵フォントなど好みのデザインに着せ替え可能。
-                    </p>
-                </div>
+        <section class="content-section sand-section" aria-labelledby="reason-title"><div class="section-grid wrap"><p class="section-label">Why I built it</p><div class="section-content">
+            <h2 id="reason-title"><span class="title-line">今日の情報を、</span><span class="title-line">別々の場所へ見に行きたくなかった。</span></h2>
+            <p class="section-intro">予定はカレンダー、タスクはToDo、天気は天気予報と確認先が分かれていました。毎日必ず開く新規タブにまとめれば、確認するための操作そのものを減らせます。</p>
+            <div class="comparison"><section class="comparison-block" aria-labelledby="before-title"><h3 id="before-title">これまで</h3><ol class="steps"><li>カレンダーで予定を見る</li><li>ToDoアプリで残りのタスクを見る</li><li>天気予報を開いて外出時間を考える</li></ol></section><section class="comparison-block after" aria-labelledby="after-title"><h3 id="after-title">Glanceなら</h3><ol class="steps"><li>Chromeで新規タブを開く</li><li>予定、タスク、天気を一画面で確認する</li><li>必要な作業へそのまま移る</li></ol></section></div>
+        </div></div></section>
+
+        <section class="content-section" aria-labelledby="features-title"><div class="section-grid wrap"><p class="section-label">Features</p><div class="section-content">
+            <h2 id="features-title">一日を見渡すための情報を、一画面へ。</h2>
+            <div class="feature-list">
+                <article class="feature"><span class="feature-no">01</span><h3>時計</h3><p>デジタルとアナログ、それぞれ5種類のデザインから選べます。</p></article>
+                <article class="feature"><span class="feature-no">02</span><h3>月間カレンダー</h3><p>Google Calendarと連携し、予定のある日をマーカーで示します。</p></article>
+                <article class="feature"><span class="feature-no">03</span><h3>日間スケジュール</h3><p>その日の予定を時間順のタイムラインで表示します。</p></article>
+                <article class="feature"><span class="feature-no">04</span><h3>ToDoリスト</h3><p>Google Tasksと連携し、残っているタスクを確認できます。</p></article>
+                <article class="feature"><span class="feature-no">05</span><h3>5日間の天気</h3><p>OpenWeatherMapから、設定画面で選んだ都市の予報を取得して表示します。</p></article>
+                <article class="feature"><span class="feature-no">06</span><h3>背景の変更</h3><p>画像や配色を設定し、新規タブの見た目を調整できます。</p></article>
             </div>
-        </div>
-    </section>
+        </div></div></section>
 
-    <section class="py-24 bg-gray-800/50">
-        <div class="max-w-5xl mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h2 class="text-3xl font-bold mb-6 text-white">
-                        <a href="https://github.com/YoyogiPinball/oshi-sche" class="hover:underline"><span
-                                class="text-[#E95420]">推しスケ（GAS版）</span></a>との強力なシナジー
-                    </h2>
-                    <p class="text-gray-300 mb-6 leading-relaxed">
-                        自作ツールの <a href="https://github.com/YoyogiPinball/oshi-sche"
-                            class="text-[#E95420] hover:underline">推しスケ（GAS版）</a>
-                        で取得したVTuberの配信スケジュールをGoogleカレンダーに同期させれば、Glanceがそれを自動的に表示します。
-                    </p>
-                    <p class="text-gray-400 text-sm mb-6 leading-relaxed italic border-l-4 border-[#E95420] pl-4">
-                        推しの配信スケジュールを確認するには推しのスケジュール画像、チャンネル、Twitter(現:X）のアカウントの投稿、有志の非公式サイトなどを確認する手間がありました。<br>
-                        それをこのツールを使えばGoogleカレンダー1箇所の確認でOKに。
-                    </p>
-                    <ul class="space-y-4">
-                        <li class="flex items-start">
-                            <svg class="w-6 h-6 text-green-400 mr-3 mt-1" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
-                            <span class="text-gray-300">新規タブを開くだけで、推したちの配信スケジュールを即確認</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="bg-gray-900 p-8 rounded-2xl border border-gray-700 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-[#E95420]/10 rounded-full blur-3xl"></div>
-                    <h3 class="text-xl font-bold mb-4 text-white">Workflow</h3>
-                    <div class="space-y-6 relative z-10">
-                        <div class="flex items-center p-4 bg-gray-800 rounded-lg border border-gray-700">
-                            <div class="w-10 h-10 bg-[#5E2750] rounded flex items-center justify-center mr-4">📁</div>
-                            <div>
-                                <div class="text-sm text-gray-400">Step 1</div>
-                                <div class="font-bold">Cloud Upload (Google Drive)</div>
-                            </div>
-                        </div>
-                        <div class="flex justify-center text-gray-500 text-xs">⬇️ Image Analysis (GAS + Gemini) -> JSON
-                            -> Calendar</div>
-                        <div
-                            class="flex items-center p-4 bg-gray-800 rounded-lg border border-gray-700 ring-2 ring-[#E95420]">
-                            <div class="w-10 h-10 bg-[#E95420] rounded flex items-center justify-center mr-4">🗓️</div>
-                            <div>
-                                <div class="text-sm text-[#E95420]">Step 2</div>
-                                <div class="font-bold text-white">Glance (View GCal)</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        <section class="content-section sand-section" aria-labelledby="connection-title"><div class="section-grid wrap"><p class="section-label">Connection</p><div class="section-content">
+            <h2 id="connection-title">推しスケの予定も、Googleカレンダー経由で表示する。</h2>
+            <p class="section-intro">推しスケ GAS版でスケジュール画像を解析し、Googleカレンダーへ同期しておけば、Glanceの日間スケジュールにも配信予定が並びます。</p>
+            <ol class="process-list"><li><strong>予定画像を用意する</strong><span>公開された配信スケジュール画像をGoogle Driveへ置きます。</span></li><li><strong>推しスケが解析する</strong><span>GASとGeminiで日時を読み取り、Googleカレンダーへ登録します。</span></li><li><strong>Glanceで見る</strong><span>新規タブを開くと、ほかの予定と一緒に配信予定を確認できます。</span></li></ol>
+            <div class="actions"><a class="button" href="https://github.com/YoyogiPinball/oshi-sche">推しスケ GAS版を見る ↗</a></div>
+        </div></div></section>
 
-    <footer class="py-12 text-center text-gray-600 border-t border-gray-800">
-        <p>&copy; 2026 YoyogiPinball. Built for Chrome.</p>
-        <div class="mt-4 space-x-4">
-            <a href="https://github.com/YoyogiPinball/Glance" class="hover:text-white transition">Repository</a>
-            <a href="index.html" class="hover:text-white transition">Portfolio Home</a>
-        </div>
-    </footer>
+        <section class="content-section" aria-labelledby="tech-title"><div class="section-grid wrap"><p class="section-label">Under the hood</p><div class="section-content">
+            <h2 id="tech-title">ブラウザだけで動く、個人用ダッシュボード。</h2>
+            <p class="section-intro">フレームワークを使わず、Chrome Extension Manifest V3とVanilla JavaScriptで構成しています。Googleアカウント連携と天気APIは設定画面から行います。</p>
+            <dl class="tech-list"><div><dt>Vanilla JavaScript</dt><dd>画面制御、時計、カレンダー、設定</dd></div><div><dt>Chrome Extension</dt><dd>Manifest V3で新規タブを置き換え</dd></div><div><dt>Google Calendar API</dt><dd>月間カレンダーと日間予定</dd></div><div><dt>Google Tasks API</dt><dd>ToDoリスト</dd></div><div><dt>OpenWeatherMap</dt><dd>5日間の天気予報</dd></div></dl>
+            <aside class="design-note"><h3>現在は開発者モードで導入</h3><p>Chrome ウェブストアでは未公開です。リポジトリを取得し、拡張機能ページから「パッケージ化されていない拡張機能」として読み込みます。</p></aside>
+        </div></div></section>
 
-
-    <!-- Image Modal -->
-    <div id="imageModal"
-        class="fixed inset-0 z-50 bg-black/90 hidden flex items-center justify-center p-4 backdrop-blur-sm transition-opacity duration-300 opacity-0"
-        onclick="closeModal()">
-        <div class="relative max-w-7xl max-h-screen w-full h-full flex items-center justify-center">
-            <img id="modalImage" src="" alt="Full view"
-                class="max-w-full max-h-full object-contain rounded shadow-2xl transform scale-95 transition-transform duration-300">
-            <button
-                class="absolute top-4 right-4 text-white hover:text-gray-300 z-50 bg-black/50 rounded-full p-2 transition">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-        </div>
-    </div>
-
-    <script>
-        const modal = document.getElementById('imageModal');
-        const modalImg = document.getElementById('modalImage');
-
-        function openModal(src) {
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modal.classList.remove('opacity-0');
-                modalImg.classList.remove('scale-95');
-                modalImg.classList.add('scale-100');
-            }, 10);
-            modalImg.src = src;
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            modal.classList.add('opacity-0');
-            modalImg.classList.remove('scale-100');
-            modalImg.classList.add('scale-95');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                modalImg.src = '';
-                document.body.style.overflow = '';
-            }, 300);
-        }
-
-        document.addEventListener('keydown', function (event) {
-            if (event.key === "Escape") {
-                closeModal();
-            }
-        });
-    </script>
+        <section class="page-end"><div class="page-end-grid wrap"><div><p>NEXT PROJECT</p><h2>yp-signage</h2></div><a href="yp-signage.html">次の制作物を見る →</a></div></section>
+    </main>
+    <footer class="wrap"><span>© 2026 YoyogiPinball</span><span><a href="index.html">制作物一覧</a> / <a href="https://github.com/YoyogiPinball/Glance">GitHub</a></span></footer>
+    <dialog class="image-dialog" id="image-dialog" aria-label="スクリーンショット拡大表示"><div class="dialog-head"><button class="dialog-close" type="button" aria-label="拡大表示を閉じる">閉じる</button></div><img id="dialog-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></dialog>
+    <script src="scripts/image-dialog.js"></script>
 </body>
-
 </html>

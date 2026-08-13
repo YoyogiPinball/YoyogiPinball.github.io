@@ -1,536 +1,215 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YoyogiPinball Portfolio</title>
-    <!-- OGP Settings -->
-    <meta property="og:title" content="YoyogiPinball Portfolio">
-    <meta property="og:description" content="日々の「面倒」を解決する自動化ツールを作っています。">
+    <meta name="description" content="日々の不便を解決するWebアプリ、Chrome拡張機能、自動化ツールを紹介するYoyogiPinballのポートフォリオ。">
+    <title>YoyogiPinball — 個人開発者の道具帖</title>
+    <meta property="og:title" content="YoyogiPinball — 個人開発者の道具帖">
+    <meta property="og:description" content="日々の面倒を、使える道具にする。Webアプリ、Chrome拡張機能、自動化ツールの制作記録。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://yoyogipinball.github.io/">
-    <meta property="og:image" content="https://yoyogipinball.github.io/images/glance_dashboard_v2.png">
+    <meta property="og:image" content="https://yoyogipinball.github.io/images/yp-signage/card.png">
     <meta name="twitter:card" content="summary_large_image">
-    <!-- Favicon -->
     <link rel="icon" href="images/favicon.ico">
-
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-75QL11ZYT2"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'G-75QL11ZYT2');
-    </script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-75QL11ZYT2');</script>
     <style>
-        /* カスタムフォントなどを入れたい場合はここに */
-        body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+        :root {
+            --ink:#2c231e;
+            --sub:#675d55;
+            --paper:#fffaf2;
+            --white:#fffdf9;
+            --sand:#efe5d8;
+            --line:#d9cbbc;
+            --accent:#d34e1c;
+            --accent-dark:#ad3d18;
+            --green:#397148;
         }
-        /* ナビのアンカー移動を滑らかに。sticky ヘッダー分だけ着地点を下げる */
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 80px;
+        * { box-sizing:border-box; }
+        html { scroll-behavior:smooth; scroll-padding-top:84px; }
+        body { margin:0; color:var(--ink); background:var(--paper); font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif; }
+        img { display:block; width:100%; }
+        a { color:inherit; }
+        button, a { -webkit-tap-highlight-color:transparent; }
+        .wrap { width:min(1120px, calc(100% - 48px)); margin-inline:auto; }
+        .skip { position:absolute; top:-60px; left:16px; z-index:100; padding:10px 14px; color:white; background:var(--ink); }
+        .skip:focus { top:12px; }
+
+        .site-header { position:sticky; top:0; z-index:20; border-bottom:1px solid var(--line); background:rgba(255,250,242,.96); }
+        .nav { display:flex; min-height:70px; align-items:center; justify-content:space-between; gap:28px; }
+        .brand { font-size:16px; font-weight:700; letter-spacing:-.02em; text-decoration:none; }
+        .brand span { color:var(--accent-dark); }
+        .nav-links { display:flex; align-items:center; gap:24px; font-size:12px; }
+        .nav-links a { color:var(--sub); text-decoration:none; }
+        .nav-links a:hover { color:var(--ink); text-decoration:underline; text-underline-offset:5px; }
+
+        .hero { display:grid; grid-template-columns:minmax(0,1.45fr) minmax(250px,.55fr); gap:78px; padding:108px 0 96px; }
+        .eyebrow { margin:0 0 20px; color:var(--accent-dark); font-size:11px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; }
+        h1 { max-width:760px; margin:0; font-family:"Yu Mincho","Hiragino Mincho ProN",serif; font-size:clamp(43px,7vw,80px); font-weight:600; line-height:1.2; letter-spacing:-.05em; }
+        .hero-line { display:block; }
+        .lead { max-width:670px; margin:32px 0 0; color:var(--sub); font-size:16px; line-height:2; }
+        .hero-note { align-self:end; padding-top:21px; border-top:2px solid var(--ink); }
+        .hero-note p { margin:0; color:var(--sub); font-size:12px; line-height:1.9; }
+        .hero-note dl { display:grid; grid-template-columns:76px 1fr; gap:8px 12px; margin:20px 0 0; font-size:11px; line-height:1.6; }
+        .hero-note dt { color:var(--sub); }
+        .hero-note dd { margin:0; }
+
+        .section-head { display:flex; align-items:baseline; justify-content:space-between; gap:24px; padding:24px 0 17px; border-top:2px solid var(--ink); border-bottom:1px solid var(--line); }
+        .section-head h2 { margin:0; font-family:"Yu Mincho","Hiragino Mincho ProN",serif; font-size:29px; font-weight:600; }
+        .section-head p { margin:0; color:var(--sub); font-size:11px; }
+        .project-no { color:var(--accent-dark); font-family:Georgia,serif; font-size:12px; }
+        .project-status { margin:0 0 14px; color:var(--sub); font-size:10px; font-weight:700; letter-spacing:.1em; }
+        .project-status.live::before { display:inline-block; width:7px; height:7px; margin-right:7px; border-radius:50%; background:var(--green); content:""; }
+        .project-status.dev::before { display:inline-block; width:7px; height:7px; margin-right:7px; border-radius:50%; background:var(--accent); content:""; }
+        .project-title { margin:0; font-size:clamp(27px,3.5vw,42px); line-height:1.25; letter-spacing:-.045em; }
+        .project-copy { margin:18px 0 0; color:var(--sub); font-size:14px; line-height:1.9; }
+        .project-meta { margin-top:auto; padding-top:22px; color:var(--sub); font-size:10px; line-height:1.8; }
+        .project-links { display:flex; flex-wrap:wrap; gap:18px; margin-top:21px; font-size:12px; font-weight:700; }
+        .project-links a { text-underline-offset:5px; }
+        .project-links a:hover { color:var(--accent-dark); }
+        .image-link { display:block; overflow:hidden; border:1px solid var(--line); background:var(--sand); }
+        .image-link:hover { border-color:#a99888; }
+        .image-link img { height:100%; object-fit:cover; }
+
+        .featured { display:grid; grid-template-columns:64px minmax(0,1.18fr) minmax(270px,.82fr); gap:30px; padding:48px 0 56px; border-bottom:1px solid var(--line); }
+        .featured .image-link { aspect-ratio:16/10; }
+        .featured-info { display:flex; flex-direction:column; padding:2px 0; }
+        .pair { display:grid; grid-template-columns:1fr 1fr; border-bottom:1px solid var(--line); }
+        .pair-project { padding:40px 34px 46px 0; }
+        .pair-project + .pair-project { padding-right:0; padding-left:34px; border-left:1px solid var(--line); }
+        .pair-project .image-link { aspect-ratio:16/9; margin-bottom:26px; }
+        .pair-project .project-title { font-size:28px; }
+        .pair-project .project-copy { min-height:5.7em; font-size:13px; }
+
+        .secondary { padding:92px 0 104px; }
+        .secondary-grid { display:grid; grid-template-columns:repeat(3,1fr); }
+        .secondary-project { padding:30px 28px 36px 0; border-bottom:1px solid var(--line); }
+        .secondary-project + .secondary-project { padding-left:28px; border-left:1px solid var(--line); }
+        .secondary-project .image-link { aspect-ratio:16/10; margin-bottom:23px; }
+        .secondary-project h3 { margin:0; font-size:20px; letter-spacing:-.025em; }
+        .secondary-project p { min-height:6.8em; margin:13px 0 0; color:var(--sub); font-size:12px; line-height:1.8; }
+        .secondary-project .project-links { margin-top:18px; }
+
+        .archive-head { margin-top:70px; }
+        .archive-grid { display:grid; grid-template-columns:repeat(4,1fr); border-bottom:1px solid var(--line); }
+        .archive-project { padding:28px 22px 32px 0; }
+        .archive-project + .archive-project { padding-left:22px; border-left:1px solid var(--line); }
+        .archive-project .image-link { aspect-ratio:4/3; margin-bottom:18px; }
+        .archive-project h3 { margin:0; font-size:16px; line-height:1.4; }
+        .archive-project p { margin:10px 0 0; color:var(--sub); font-size:11px; line-height:1.75; }
+        .archive-project > a:last-child { display:inline-block; margin-top:17px; font-size:11px; text-underline-offset:4px; }
+
+        .info { padding:76px 0; border-top:1px solid var(--line); background:var(--sand); }
+        .info-grid { display:grid; grid-template-columns:1fr 2fr; gap:72px; }
+        .info h2 { margin:0; font-family:"Yu Mincho","Hiragino Mincho ProN",serif; font-size:27px; font-weight:600; }
+        .skills { margin:0; }
+        .skills div { display:grid; grid-template-columns:140px 1fr; gap:24px; padding:13px 0; border-bottom:1px solid #d2c4b4; }
+        .skills div:first-child { padding-top:0; }
+        .skills dt { color:var(--sub); font-size:11px; }
+        .skills dd { margin:0; font-size:12px; line-height:1.7; }
+
+        .links-section { padding:80px 0; }
+        .text-links { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+        .text-link { padding:28px 26px 30px 0; text-decoration:none; }
+        .text-link + .text-link { padding-left:26px; border-left:1px solid var(--line); }
+        .text-link strong { display:block; margin-bottom:10px; font-size:18px; }
+        .text-link span { color:var(--sub); font-size:12px; line-height:1.7; }
+        .text-link:hover strong { color:var(--accent-dark); text-decoration:underline; text-underline-offset:5px; }
+
+        .contact { padding:70px 0; color:#f8efe5; background:var(--ink); }
+        .contact-grid { display:grid; grid-template-columns:1fr 2fr; gap:72px; }
+        .contact h2 { margin:0; font-family:"Yu Mincho","Hiragino Mincho ProN",serif; font-size:28px; font-weight:600; }
+        .contact-copy p { max-width:650px; margin:0; color:#d1c3b8; line-height:1.95; }
+        .contact-links { display:flex; flex-wrap:wrap; gap:12px; margin-top:26px; }
+        .contact-links a { padding:10px 15px; border:1px solid #8f7d70; font-size:12px; font-weight:700; text-decoration:none; }
+        .contact-links a:hover { color:var(--ink); background:var(--paper); }
+        footer { padding:28px 0; color:var(--sub); font-size:11px; }
+        :focus-visible { outline:3px solid var(--accent-dark); outline-offset:4px; }
+        /* 濃色セクションでは反転させる。焦茶の背景に濃いオレンジだと 2.53:1 しか出ない */
+        .contact :focus-visible { outline-color:var(--paper); }
+
+        @media (max-width:860px) {
+            .wrap { width:min(100% - 32px,1120px); }
+            .nav-links a:nth-child(-n+3) { display:none; }
+            .hero { grid-template-columns:1fr; gap:50px; padding:76px 0; }
+            .hero-note { max-width:430px; }
+            .featured { grid-template-columns:42px 1fr; }
+            .featured-info { grid-column:2; }
+            .pair, .secondary-grid { grid-template-columns:1fr; }
+            .pair-project, .pair-project + .pair-project, .secondary-project, .secondary-project + .secondary-project { padding:34px 0; border-left:0; border-bottom:1px solid var(--line); }
+            .pair-project .project-copy, .secondary-project p { min-height:0; }
+            .archive-grid { grid-template-columns:1fr 1fr; }
+            .archive-project:nth-child(3) { border-left:0; }
+            .archive-project:nth-child(n+3) { border-top:1px solid var(--line); }
+            .info-grid, .contact-grid { grid-template-columns:1fr; gap:30px; }
         }
+        @media (max-width:560px) {
+            .hero-line { display:inline; }
+            .section-head { align-items:flex-start; flex-direction:column; gap:7px; }
+            .featured { grid-template-columns:28px 1fr; gap:12px; padding:34px 0 42px; }
+            .archive-grid, .text-links { grid-template-columns:1fr; }
+            .archive-project, .archive-project + .archive-project, .archive-project:nth-child(3), .text-link, .text-link + .text-link { padding:25px 0; border-left:0; border-top:1px solid var(--line); }
+            .archive-project:first-child, .text-link:first-child { border-top:0; }
+            .archive-project .image-link { aspect-ratio:16/9; }
+            .skills div { grid-template-columns:92px 1fr; gap:14px; }
+        }
+        @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
     </style>
 </head>
-
-<body class="bg-[#2c001e] text-gray-100 antialiased selection:bg-[#E95420] selection:text-white">
-
-    <!--
-　　　　　　r　‐､
-　　　　　　| ○ | 　　　　　　　　r‐‐､
-　　　　　_,;ﾄ - ｲ、　　　　　　∧l☆│∧
-　　　 （⌒`　　　 ⌒ヽ　　　/,､,,ﾄ.-ｲ/,､ l
-　　　　|ヽ　 ~~⌒γ⌒）　r'⌒　｀!´ `⌒）
-　　　│　ヽー―'^ー-'　（ ⌒γ⌒~~　/|
-　　　│　　〉　　　 |│　　|｀ー^ｰ― r'　|
-　　　│　/───|　|　　|/　| 　l　　ﾄ､ |
-　　　|　 irｰ-､ ｰ　,}　|　　　 / 　　　　i
-　　　| /　　　｀X´　ヽ 　　 / 　 入　　｜
-    -->
-
-    <header class="w-full py-4 bg-[#3E3E3E] shadow-md border-b-4 border-[#E95420] sticky top-0 z-40">
-        <div class="max-w-4xl mx-auto px-4 flex flex-wrap justify-between items-center gap-y-2">
-            <a href="#home" class="text-2xl font-bold text-[#E95420]">YoyogiPinball</a>
-            <nav class="flex flex-wrap items-center gap-x-5 gap-y-1 text-sm">
-                <a href="#projects" class="text-gray-300 hover:text-white transition">Projects</a>
-                <a href="#skills" class="text-gray-300 hover:text-white transition">Skills</a>
-                <a href="#writing" class="text-gray-300 hover:text-white transition">Writing</a>
-                <a href="#contact" class="text-gray-300 hover:text-white transition">Contact</a>
-                <a href="https://github.com/YoyogiPinball" class="text-gray-300 hover:text-white transition">GitHub</a>
-            </nav>
-        </div>
+<body>
+    <a class="skip" href="#main">本文へ移動</a>
+    <header class="site-header">
+        <nav class="nav wrap" aria-label="メインナビゲーション">
+            <a class="brand" href="#top">Yoyogi<span>Pinball</span></a>
+            <div class="nav-links"><a href="#projects">制作物</a><a href="#skills">技術</a><a href="#writing">発信</a><a href="#contact">連絡先</a><a href="https://github.com/YoyogiPinball">GitHub ↗</a></div>
+        </nav>
     </header>
 
-    <section id="home" class="max-w-4xl mx-auto px-4 py-20 text-center">
-        <h2 class="text-4xl md:text-5xl font-extrabold mb-4 text-[#E95420]">YoyogiPinball</h2>
-        <p class="text-lg text-gray-300 leading-relaxed">
-            日々の「面倒」を解決する自動化ツールを作っています。<br class="hidden md:inline">
-            Python、Google Apps Script、Chrome拡張機能を中心に、<br class="hidden md:inline">
-            AI連携やファイル管理の効率化に取り組んでいます。
-        </p>
-    </section>
+    <main id="main">
+        <section class="hero wrap" id="top">
+            <div><p class="eyebrow">Personal tools / Tokyo</p><h1><span class="hero-line">日々の面倒を、</span><span class="hero-line">使える道具にする。</span></h1><p class="lead">予定を見落とさない、入力をためない、情報を探し回らない。身近な不便を起点に、WebアプリやChrome拡張機能、自動化ツールを作っています。</p></div>
+            <aside class="hero-note" aria-label="プロフィール概要"><p>目新しさより、自分の日常で使い続けられることを大切にしています。</p><dl><dt>名前</dt><dd>YoyogiPinball</dd><dt>主な領域</dt><dd>自動化 / Web / Chrome拡張</dd><dt>最終更新</dt><dd>2026年8月</dd></dl></aside>
+        </section>
 
-    <section id="projects" class="max-w-4xl mx-auto px-4 pb-20">
-        <h3 class="text-2xl font-bold mb-8 border-b border-gray-700 pb-2">Projects</h3>
+        <section class="wrap" id="projects">
+            <div class="section-head"><h2>主な制作物</h2><p>生活の中で使っている、または公開しているもの</p></div>
 
-        <!-- Featured: 公開中の目玉プロダクトを別格表示 -->
-        <div class="mb-10">
-            <div class="flex items-center gap-3 mb-4">
-                <span class="text-[#E95420] text-sm font-bold tracking-widest">★ FEATURED</span>
-                <span class="flex-1 border-b border-gray-700"></span>
+            <article class="featured">
+                <div class="project-no">01</div>
+                <a class="image-link" href="oshi-sche-webapp.html"><img src="images/oshi-sche-webapp/home.png" alt="推しスケ Web版のホーム画面"></a>
+                <div class="featured-info"><p class="project-status live">公開中 / WEB APP</p><h3 class="project-title">推しスケ Web版</h3><p class="project-copy">複数の配信予定を毎週探し回る手間を減らすためのWebアプリ。スケジュール画像を読み取り、日・週・月の予定に整理します。</p><div class="project-meta">Next.js / Gemini API / Upstash Redis</div><div class="project-links"><a href="oshi-sche-webapp.html">制作記録を読む →</a><a href="https://oshi-sche-webapp.vercel.app/demo">デモを見る ↗</a></div></div>
+            </article>
+
+            <div class="pair">
+                <article class="pair-project"><a class="image-link" href="yp-signage.html"><img src="images/yp-signage/card.png" alt="yp-signageの表示画面"></a><p class="project-status live">02 / 稼働中</p><h3 class="project-title">yp-signage</h3><p class="project-copy">予定や天気を見るたび端末を開かなくて済むよう、使っていないPCを常設の情報画面にしました。</p><div class="project-meta">MagicMirror² / JavaScript / iCal</div><div class="project-links"><a href="yp-signage.html">制作記録を読む →</a></div></article>
+                <article class="pair-project"><a class="image-link" href="oshi-mado.html"><img src="images/oshi-mado/card.png" alt="推し窓の新着一覧画面"></a><p class="project-status live">03 / 公開中</p><h3 class="project-title">推し窓</h3><p class="project-copy">YouTube上で分散している動画・ライブ・配信予定を、チャンネルをまたいで1画面に集約するChrome拡張です。</p><div class="project-meta">Chrome Extension / YouTube Data API</div><div class="project-links"><a href="oshi-mado.html">制作記録を読む →</a></div></article>
             </div>
-            <div
-                class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-gray-700 md:flex">
-                <div class="md:w-1/2 h-56 md:h-auto bg-gray-700 flex items-center justify-center overflow-hidden cursor-pointer group"
-                    onclick="openModal('images/oshi-sche-webapp/home.png')">
-                    <img src="images/oshi-sche-webapp/home.png" alt="推しスケ（Web版）"
-                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                </div>
-                <div class="md:w-1/2 p-6 md:p-8 flex flex-col">
-                    <h4 class="text-2xl font-bold mb-3 text-white">推しスケ（Web版）</h4>
-                    <p class="text-gray-400 mb-4 text-sm flex-1">
-                        推しの配信スケジュールをひとまとめ。スケジュール画像をアップロードするだけで、Gemini AIが解析して日・週・月ビューで一覧表示。<span class="text-[#E95420] font-medium">無料で使えます。</span>
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-5">
-                        <span class="px-2 py-1 bg-blue-900 text-blue-200 text-xs rounded">Next.js</span>
-                        <span class="px-2 py-1 bg-[#5E2750] text-gray-200 text-xs rounded">Gemini API</span>
-                    </div>
-                    <div class="flex flex-wrap items-center gap-3 mt-auto">
-                        <span class="text-green-400 text-xs font-mono border border-green-400/30 px-2 py-1 rounded">✓ 公開中</span>
-                        <a href="https://oshi-sche-webapp.vercel.app/demo" target="_blank"
-                            class="text-gray-400 hover:text-white text-sm transition">デモ →</a>
-                        <a href="oshi-sche-webapp.html"
-                            class="ml-auto bg-[#E95420] hover:bg-[#dd4814] text-white text-sm font-bold py-2 px-4 rounded transition">
-                            詳細を見る &rarr;</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </section>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-            <!-- yp-signage（最新作・グリッド先頭） -->
-            <div
-                class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-gray-700 flex flex-col">
-                <div class="h-40 bg-gray-700 flex items-center justify-center overflow-hidden cursor-pointer group"
-                    onclick="openModal('images/yp-signage/screenshot.jpg')">
-                    <img src="images/yp-signage/card.png" alt="yp-signage"
-                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                </div>
-                <div class="p-6 flex-1 flex flex-col">
-                    <h4 class="text-xl font-bold mb-2 text-white">yp-signage</h4>
-                    <p class="text-gray-400 mb-4 text-sm flex-1">
-                        使っていないノートPCと縦置きモニターを常時稼働のサイネージに。時計・2か月カレンダー・天気・写真スライドショーに加え、推しスケ（Web版）の配信予定をiCalで取り込んで一画面に表示する。
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="px-2 py-1 bg-cyan-900 text-cyan-200 text-xs rounded">MagicMirror²</span>
-                        <span class="px-2 py-1 bg-[#5E2750] text-gray-200 text-xs rounded">JavaScript</span>
-                        <span class="px-2 py-1 bg-green-900 text-green-200 text-xs rounded">iCal</span>
-                    </div>
-
-                    <div class="flex flex-wrap items-center gap-3 mt-auto">
-                        <span class="text-green-400 text-xs font-mono border border-green-400/30 px-2 py-1 rounded">✓ 公開中</span>
-                        <a href="https://github.com/YoyogiPinball/yp-signage" target="_blank"
-                            class="text-gray-400 hover:text-white text-sm transition">GitHub →</a>
-                        <a href="yp-signage.html"
-                            class="ml-auto bg-[#E95420] hover:bg-[#dd4814] text-white text-sm font-bold py-2 px-4 rounded transition">
-                            詳細を見る &rarr;</a>
-                    </div>
-                </div>
+        <section class="secondary wrap" aria-labelledby="other-projects">
+            <div class="section-head"><h2 id="other-projects">そのほかの道具</h2><p>個人利用・開発中のものを含みます</p></div>
+            <div class="secondary-grid">
+                <article class="secondary-project"><a class="image-link" href="https://github.com/YoyogiPinball/oshi-sche"><img src="images/oshi-sche.png" alt="推しスケ GAS版の画面"></a><h3>推しスケ GAS版</h3><p>Discord通知とカレンダー連携で、配信予定の確認を一か所にまとめたWeb版の前身です。</p><div class="project-meta">Python / Google Apps Script</div><div class="project-links"><a href="https://github.com/YoyogiPinball/oshi-sche">GitHub ↗</a></div></article>
+                <article class="secondary-project"><a class="image-link" href="kakeibo.html"><img src="images/kakeibo/slack-form.png" alt="Slack家計簿の入力画面"></a><h3>Slack 家計簿</h3><p>支出を後回しにして忘れないよう、普段使うSlackからその場で記録できるようにしました。</p><div class="project-meta">Google Apps Script / Slack API</div><div class="project-links"><a href="kakeibo.html">制作記録を読む →</a></div></article>
+                <article class="secondary-project"><a class="image-link" href="glance.html"><img src="images/glance_dashboard_v2.png" alt="Glanceのダッシュボード画面"></a><h3>Glance</h3><p>確認先が分かれていた予定、天気、ToDoを、新規タブを開くだけで見られるようにまとめます。</p><div class="project-meta">Chrome Extension / JavaScript</div><div class="project-links"><a href="glance.html">制作記録を読む →</a></div></article>
             </div>
 
-            <!-- 推し窓 -->
-            <div
-                class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-gray-700 flex flex-col">
-                <div class="h-40 bg-gray-700 flex items-center justify-center overflow-hidden cursor-pointer group"
-                    onclick="openModal('images/oshi-mado/card.png')">
-                    <img src="images/oshi-mado/card.png" alt="推し窓"
-                        class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500">
-                </div>
-                <div class="p-6 flex-1 flex flex-col">
-                    <h4 class="text-xl font-bold mb-2 text-white">推し窓</h4>
-                    <p class="text-gray-400 mb-4 text-sm flex-1">
-                        登録した推しのYouTubeチャンネルの新着動画・ライブ配信を1画面に集約するChrome拡張。種類別タブとチャンネル絞り込みで「いま何が来てるか」が一目でわかる。
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="px-2 py-1 bg-yellow-900 text-yellow-200 text-xs rounded">Chrome Extension</span>
-                        <span class="px-2 py-1 bg-blue-900 text-blue-200 text-xs rounded">YouTube Data API</span>
-                        <span class="px-2 py-1 bg-[#5E2750] text-gray-200 text-xs rounded">JavaScript</span>
-                    </div>
-
-                    <div class="flex flex-wrap items-center gap-3 mt-auto">
-                        <span class="text-green-400 text-xs font-mono border border-green-400/30 px-2 py-1 rounded">✓ 公開中</span>
-                        <a href="https://chromewebstore.google.com/detail/%E6%8E%A8%E3%81%97%E7%AA%93-oshi-mado/gockednaohkhlfcpofmdaeioaaeohnbl?hl=ja-JA"
-                            target="_blank"
-                            class="text-gray-400 hover:text-white text-sm transition">Chromeに追加 →</a>
-                        <a href="oshi-mado.html"
-                            class="ml-auto bg-[#E95420] hover:bg-[#dd4814] text-white text-sm font-bold py-2 px-4 rounded transition">
-                            詳細を見る &rarr;</a>
-                    </div>
-                </div>
+            <div class="section-head archive-head"><h2>小さな制作物</h2><p>用途を絞って作ったツール</p></div>
+            <div class="archive-grid">
+                <article class="archive-project"><a class="image-link" href="https://github.com/YoyogiPinball/pokeanalyzer-gen6"><img src="images/pokeanalyzer.png" alt="PokeAnalyzer-gen6の画面"></a><h3>PokeAnalyzer-gen6</h3><p>対戦中にタイプ相性や素早さをすぐ確認するためのデータビューア。</p><a href="https://github.com/YoyogiPinball/pokeanalyzer-gen6">GitHub ↗</a></article>
+                <article class="archive-project"><a class="image-link" href="https://github.com/YoyogiPinball/Loot_Organizer"><img src="images/loot_organizer.png" alt="Loot Organizerの画面"></a><h3>Loot Organizer</h3><p>繰り返し行うファイル整理を、YAMLのルールに沿って自動化。</p><a href="https://github.com/YoyogiPinball/Loot_Organizer">GitHub ↗</a></article>
+                <article class="archive-project"><a class="image-link" href="https://github.com/YoyogiPinball/NSFW-Gatekeeper"><img src="images/nsfw_gatekeeper.png" alt="NSFW-Gatekeeperの画面"></a><h3>NSFW-Gatekeeper</h3><p>画像フォルダを自動判定し、用途に応じて振り分けるスクリプト。</p><a href="https://github.com/YoyogiPinball/NSFW-Gatekeeper">GitHub ↗</a></article>
+                <article class="archive-project"><a class="image-link" href="https://github.com/YoyogiPinball/La_Byle"><img src="images/La_Byle.png" alt="La Byleの画面"></a><h3>La_Byle</h3><p>縦・横のモニターごとに壁紙を切り替えるスライドショーアプリ。</p><a href="https://github.com/YoyogiPinball/La_Byle">GitHub ↗</a></article>
             </div>
+        </section>
 
-            <div
-                class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-gray-700">
-                <div class="h-40 bg-gray-700 flex items-center justify-center overflow-hidden cursor-pointer group"
-                    onclick="openModal('images/oshi-sche.png')">
-                    <img src="images/oshi-sche.png" alt="oshi-sche"
-                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                </div>
-                <div class="p-6">
-                    <h4 class="text-xl font-bold mb-2 text-white">推しスケ（GAS版）</h4>
-                    <p class="text-gray-400 mb-4 text-sm">
-                        推し活特化のスケジュール管理ツール。Discordの通知やカレンダー連携を統合。
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="px-2 py-1 bg-[#5E2750] text-gray-200 text-xs rounded">Python</span>
-                        <span class="px-2 py-1 bg-[#5E2750] text-gray-200 text-xs rounded">GoogleAppScript</span>
-                    </div>
-                    <a href="https://github.com/YoyogiPinball/oshi-sche"
-                        class="inline-block bg-[#E95420] hover:bg-[#dd4814] text-white font-medium py-2 px-4 rounded transition">
-                        View on GitHub
-                    </a>
-                </div>
-            </div>
+        <section class="info" id="skills"><div class="info-grid wrap"><h2>扱っているもの</h2><dl class="skills"><div><dt>言語</dt><dd>Python、JavaScript / TypeScript、Google Apps Script、VBA、VB.NET</dd></div><div><dt>Web・API</dt><dd>Next.js、Gemini API、Slack API、Chrome Extension API</dd></div><div><dt>開発・公開</dt><dd>Git / GitHub、Vercel、GitHub Pages</dd></div></dl></div></section>
 
-            <div
-                class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-gray-700 flex flex-col">
-                <div class="h-40 bg-gray-700 flex items-center justify-center overflow-hidden cursor-pointer group"
-                    onclick="openModal('images/kakeibo/slack-form.png')">
-                    <img src="images/kakeibo/slack-form.png" alt="Slack 家計簿"
-                        class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500">
-                </div>
-                <div class="p-6 flex-1 flex flex-col">
-                    <h4 class="text-xl font-bold mb-2 text-white">Slack 家計簿</h4>
-                    <p class="text-gray-400 mb-4 text-sm flex-1">
-                        Slackから支出を記録してGoogleスプレッドシートへ自動反映。カード引き落とし月の自動計算から月次レポート生成まで、家計管理を一気通貫で自動化。
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="px-2 py-1 bg-[#5E2750] text-gray-200 text-xs rounded">Google Apps Script</span>
-                        <span class="px-2 py-1 bg-[#5E2750] text-gray-200 text-xs rounded">Slack API</span>
-                    </div>
-                    <div class="flex justify-between items-center mt-auto">
-                        <span class="text-gray-500 text-xs font-mono border border-gray-600 px-2 py-1 rounded">Private</span>
-                        <a href="kakeibo.html"
-                            class="text-[#E95420] hover:text-[#dd4814] text-sm font-bold flex items-center">
-                            詳細を見る &rarr;
-                        </a>
-                    </div>
-                </div>
-            </div>
+        <section class="links-section wrap" id="writing"><div class="section-head"><h2>書いている場所</h2><p>技術記事と日々の記録</p></div><div class="text-links"><a class="text-link" href="https://note.com/elettrocannone"><strong>note →</strong><span>ガジェットや日常のことを書いています。</span></a><a class="text-link" href="https://zenn.dev/elettrocannone"><strong>Zenn →</strong><span>開発中に得た知見を技術記事にしています。</span></a><a class="text-link" href="https://x.com/Yoyogi_Pinball"><strong>X →</strong><span>日々のことや短い開発メモを投稿しています。</span></a></div></section>
 
-            <div
-                class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-gray-700 flex flex-col">
-                <div class="h-40 bg-gray-700 relative group overflow-hidden cursor-pointer"
-                    onclick="openModal('images/glance_dashboard_v2.png')">
-                    <img src="images/glance_dashboard_v2.png" alt="Glance Dashboard"
-                        class="object-cover w-full h-full group-hover:scale-105 transition duration-500">
-                    <div
-                        class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none">
-                        <span class="text-white font-bold border border-white px-4 py-2 rounded-full">Expand</span>
-                    </div>
-                </div>
-                <div class="p-6 flex-1 flex flex-col">
-                    <h4 class="text-xl font-bold mb-2 text-white">Glance</h4>
-                    <p class="text-gray-400 mb-4 text-sm flex-1">
-                        新しいタブをiGoogle風のダッシュボードに。天気・カレンダー・ToDoを一画面に集約。推し活スケジュール管理にも最適。
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="px-2 py-1 bg-yellow-900 text-yellow-200 text-xs rounded">Chrome Extension</span>
-                        <span class="px-2 py-1 bg-green-900 text-green-200 text-xs rounded">oshi-sche連携</span>
-                        <span class="px-2 py-1 bg-[#5E2750] text-gray-200 text-xs rounded">JavaScript</span>
-                    </div>
-
-                    <div class="flex justify-between items-center mt-auto">
-                        <span class="text-[#E95420] text-xs font-mono border border-[#E95420]/30 px-2 py-1 rounded">⚠️
-                            Dev Preview</span>
-                        <a href="glance.html"
-                            class="text-[#E95420] hover:text-[#dd4814] text-sm font-bold flex items-center">
-                            詳細を見る &rarr;
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div
-                class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-gray-700">
-                <div class="h-40 bg-gray-700 flex items-center justify-center overflow-hidden cursor-pointer group"
-                    onclick="openModal('images/pokeanalyzer.png')">
-                    <img src="images/pokeanalyzer.png" alt="PokeAnalyzer-gen6"
-                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                </div>
-                <div class="p-6">
-                    <h4 class="text-xl font-bold mb-2 text-white">PokeAnalyzer-gen6</h4>
-                    <p class="text-gray-400 mb-4 text-sm">
-                        ポケモン対戦データビューア。タイプ相性・種族値・素早さ実数値を即座に表示するGUIアプリ (第6世代 XY, ORAS対応)。
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="px-2 py-1 bg-[#5E2750] text-gray-200 text-xs rounded">Python</span>
-                    </div>
-                    <a href="https://github.com/YoyogiPinball/pokeanalyzer-gen6"
-                        class="text-[#E95420] hover:text-[#dd4814] text-sm">View Repository &rarr;</a>
-                </div>
-            </div>
-            <div
-                class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-gray-700">
-                <div class="h-40 bg-gray-700 flex items-center justify-center overflow-hidden cursor-pointer group"
-                    onclick="openModal('images/loot_organizer.png')">
-                    <img src="images/loot_organizer.png" alt="Loot_Organizer"
-                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                </div>
-                <div class="p-6">
-                    <h4 class="text-xl font-bold mb-2 text-white">Loot_Organizer</h4>
-                    <p class="text-gray-400 mb-4 text-sm">
-                        ルールベースのファイル整理自動化ツール。ルールを記述したyamlで頻繁に行うファイル整理を自動化。
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="px-2 py-1 bg-[#5E2750] text-gray-200 text-xs rounded">Python</span>
-                    </div>
-                    <a href="https://github.com/YoyogiPinball/Loot_Organizer"
-                        class="text-[#E95420] hover:text-[#dd4814] text-sm">View Repository &rarr;</a>
-                </div>
-            </div>
-
-            <div
-                class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-gray-700">
-                <div class="h-40 bg-gray-700 flex items-center justify-center overflow-hidden cursor-pointer group"
-                    onclick="openModal('images/nsfw_gatekeeper.png')">
-                    <img src="images/nsfw_gatekeeper.png" alt="NSFW-Gatekeeper"
-                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                </div>
-                <div class="p-6">
-                    <h4 class="text-xl font-bold mb-2 text-white">NSFW-Gatekeeper</h4>
-                    <p class="text-gray-400 mb-4 text-sm">
-                        画像フォルダの健全性を保つための自動判定・振り分けスクリプト。
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="px-2 py-1 bg-[#5E2750] text-gray-200 text-xs rounded">Python</span>
-                    </div>
-                    <a href="https://github.com/YoyogiPinball/NSFW-Gatekeeper"
-                        class="text-[#E95420] hover:text-[#dd4814] text-sm">View Repository &rarr;</a>
-                </div>
-            </div>
-
-            <div
-                class="bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition duration-300 border border-gray-700">
-                <div class="h-40 bg-gray-700 flex items-center justify-center overflow-hidden cursor-pointer group"
-                    onclick="openModal('images/La_Byle.png')">
-                    <img src="images/La_Byle.png" alt="La_Byle"
-                        class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                </div>
-                <div class="p-6">
-                    <h4 class="text-xl font-bold mb-2 text-white">La_Byle</h4>
-                    <p class="text-gray-400 mb-4 text-sm">
-                        縦・横向きモニターに別フォルダーを割り当てて壁紙を自動ローテーションするスライドショーアプリ。モニター向き変更の自動検知、タスクトレイ常駐、スタートアップ登録に対応。
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="px-2 py-1 bg-[#5E2750] text-gray-200 text-xs rounded">Python</span>
-                    </div>
-                    <a href="https://github.com/YoyogiPinball/La_Byle"
-                        class="text-[#E95420] hover:text-[#dd4814] text-sm">View Repository &rarr;</a>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Technical Skills Section -->
-    <section id="skills" class="max-w-4xl mx-auto px-4 pb-20">
-        <h3 class="text-2xl font-bold mb-8 border-b-4 border-[#E95420] pb-2 text-white">Technical Skills</h3>
-        <div class="bg-gray-800 rounded-lg p-6 shadow-lg border border-gray-700">
-            <div class="space-y-6">
-                <div>
-                    <h4 class="text-[#E95420] font-bold mb-3 border-l-4 border-[#E95420] pl-3">Languages</h4>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-[#5E2750] text-gray-200 text-sm rounded">Python</span>
-                        <span class="px-3 py-1 bg-[#5E2750] text-gray-200 text-sm rounded">Google Apps Script</span>
-                        <span class="px-3 py-1 bg-[#5E2750] text-gray-200 text-sm rounded">JavaScript</span>
-                        <span class="px-3 py-1 bg-[#5E2750] text-gray-200 text-sm rounded">VBA</span>
-                        <span class="px-3 py-1 bg-[#5E2750] text-gray-200 text-sm rounded">VB.NET</span>
-                        <span class="px-3 py-1 bg-[#5E2750] text-gray-200 text-sm rounded">Access</span>
-                        <span class="px-3 py-1 bg-[#5E2750] text-gray-200 text-sm rounded">Java</span>
-                    </div>
-                </div>
-                <div>
-                    <h4 class="text-[#E95420] font-bold mb-3 border-l-4 border-[#E95420] pl-3">Frameworks &amp; APIs</h4>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-blue-900 text-blue-200 text-sm rounded">Next.js</span>
-                        <span class="px-3 py-1 bg-blue-900 text-blue-200 text-sm rounded">Gemini API</span>
-                        <span class="px-3 py-1 bg-blue-900 text-blue-200 text-sm rounded">Slack API</span>
-                        <span class="px-3 py-1 bg-blue-900 text-blue-200 text-sm rounded">Chrome Extension API</span>
-                    </div>
-                </div>
-                <div>
-                    <h4 class="text-[#E95420] font-bold mb-3 border-l-4 border-[#E95420] pl-3">Tools</h4>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-gray-700 text-gray-200 text-sm rounded">Claude Code</span>
-                        <span class="px-3 py-1 bg-gray-700 text-gray-200 text-sm rounded">AntiGravity</span>
-                        <span class="px-3 py-1 bg-gray-700 text-gray-200 text-sm rounded">Git / GitHub</span>
-                        <span class="px-3 py-1 bg-gray-700 text-gray-200 text-sm rounded">Vercel</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Writing & SNS Section -->
-    <section id="writing" class="max-w-4xl mx-auto px-4 pb-20">
-        <h3 class="text-2xl font-bold mb-8 border-b-4 border-[#E95420] pb-2 text-white">Writing & SNS</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-            <!-- note -->
-            <a href="https://note.com/elettrocannone" target="_blank"
-                class="bg-gray-800 rounded-lg p-6 border border-gray-700 hover:border-[#41C9B4] transition group flex flex-col gap-3">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-[#41C9B4] flex items-center justify-center font-bold text-white text-lg">n</div>
-                    <span class="text-white font-bold text-lg">note</span>
-                </div>
-                <p class="text-gray-400 text-sm">ガジェットや日常のことを書いています。</p>
-                <span class="text-[#41C9B4] text-xs mt-auto group-hover:underline">読みに行く →</span>
-            </a>
-
-            <!-- Zenn -->
-            <a href="https://zenn.dev/elettrocannone" target="_blank"
-                class="bg-gray-800 rounded-lg p-6 border border-gray-700 hover:border-[#3EA8FF] transition group flex flex-col gap-3">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-[#3EA8FF] flex items-center justify-center font-bold text-white text-lg">Z</div>
-                    <span class="text-white font-bold text-lg">Zenn</span>
-                </div>
-                <p class="text-gray-400 text-sm">技術記事を書いています。</p>
-                <span class="text-[#3EA8FF] text-xs mt-auto group-hover:underline">読みに行く →</span>
-            </a>
-
-            <!-- X (Twitter) -->
-            <a href="https://x.com/Yoyogi_Pinball" target="_blank"
-                class="bg-gray-800 rounded-lg p-6 border border-gray-700 hover:border-gray-400 transition group flex flex-col gap-3">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-black border border-gray-600 flex items-center justify-center font-bold text-white text-lg">𝕏</div>
-                    <span class="text-white font-bold text-lg">X (Twitter)</span>
-                </div>
-                <p class="text-gray-400 text-sm">日々のことや開発メモなど。</p>
-                <span class="text-gray-400 text-xs mt-auto group-hover:underline">フォローする →</span>
-            </a>
-
-        </div>
-    </section>
-
-    <!-- About Me & Contact Section -->
-    <section id="contact" class="max-w-4xl mx-auto px-4 pb-20">
-        <h3 class="text-2xl font-bold mb-8 border-b-4 border-[#E95420] pb-2 text-white">About Me & Contact</h3>
-        <div class="bg-gray-800 rounded-lg p-8 shadow-lg border border-gray-700">
-            <p class="text-gray-300 leading-relaxed mb-6">
-                日々の単純作業を自動化し、<br class="hidden md:inline">
-                クリエイティブな時間を生み出すことに情熱を注いでいます。<br><br>
-                「必要」は開発の母。<br class="hidden md:inline">
-                ツール開発を通じて、効率化と快適さを追求し続けます。
-            </p>
-
-            <div class="flex flex-col md:flex-row gap-4 items-center justify-center mt-8">
-                <button onclick="revealEmail(this)"
-                    class="bg-[#E95420] hover:bg-[#dd4814] text-white font-bold py-3 px-6 rounded-full transition flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                    </svg>
-                    <span>Show Email Address</span>
-                </button>
-                <div id="emailContainer"
-                    class="hidden bg-white text-gray-900 font-mono py-3 px-6 rounded-full select-all">
-                    k1kurosawa@gmail.com
-                </div>
-
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSc5_w_dLCIEvyE7xUxhwADu7VvCNUVRgpdDb4W5DjD-qGGImw/viewform"
-                    target="_blank"
-                    class="bg-[#5E2750] hover:bg-[#4a1f3f] text-white font-bold py-3 px-6 rounded-full transition flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                            clip-rule="evenodd" />
-                    </svg>
-                    <span>お問い合わせフォーム</span>
-                </a>
-
-                <a href="https://buymeacoffee.com/yoyogipinball" target="_blank"
-                    class="bg-[#FFDD00] hover:bg-[#e6c700] text-gray-900 font-bold py-3 px-6 rounded-full transition flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
-                        <path
-                            d="M20,3H4V13c0,2.2,1.8,4,4,4h6c2.2,0,4-1.8,4-4V10h2c1.1,0,2-0.9,2-2V5C22,3.9,21.1,3,20,3z M20,8h-2V5h2V8z M2,21h20v-2H2V21z M12,15c-1.1,0-2-0.9-2-2V5h4v8C14,14.1,13.1,15,12,15z" />
-                    </svg>
-                    <span>Buy Me a Coffee</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <script>
-        function revealEmail(btn) {
-            const emailContainer = document.getElementById('emailContainer');
-            btn.classList.add('hidden');
-            emailContainer.classList.remove('hidden');
-        }
-    </script>
-
-    <footer class="text-center py-6 text-gray-600 text-sm">
-        &copy; 2026 YoyogiPinball. All rights reserved.
-    </footer>
-
-
-    <!-- Image Modal -->
-    <div id="imageModal"
-        class="fixed inset-0 z-50 bg-black/90 hidden flex items-center justify-center p-4 backdrop-blur-sm transition-opacity duration-300 opacity-0"
-        onclick="closeModal()">
-        <div class="relative max-w-7xl max-h-screen w-full h-full flex items-center justify-center">
-            <img id="modalImage" src="" alt="Full view"
-                class="max-w-full max-h-full object-contain rounded shadow-2xl transform scale-95 transition-transform duration-300">
-            <button
-                class="absolute top-4 right-4 text-white hover:text-gray-300 z-50 bg-black/50 rounded-full p-2 transition">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-        </div>
-    </div>
-
-    <script>
-        const modal = document.getElementById('imageModal');
-        const modalImg = document.getElementById('modalImage');
-
-        function openModal(src) {
-            modal.classList.remove('hidden');
-            // Small delay to allow display:flex to apply before opacity transition
-            setTimeout(() => {
-                modal.classList.remove('opacity-0');
-                modalImg.classList.remove('scale-95');
-                modalImg.classList.add('scale-100');
-            }, 10);
-            modalImg.src = src;
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
-        }
-
-        function closeModal() {
-            modal.classList.add('opacity-0');
-            modalImg.classList.remove('scale-100');
-            modalImg.classList.add('scale-95');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                modalImg.src = '';
-                document.body.style.overflow = '';
-            }, 300);
-        }
-
-        // Close on escape key
-        document.addEventListener('keydown', function (event) {
-            if (event.key === "Escape") {
-                closeModal();
-            }
-        });
-    </script>
+        <section class="contact" id="contact"><div class="contact-grid wrap"><h2>連絡先</h2><div class="contact-copy"><p>制作物についての連絡やお問い合わせは、フォームまたはメールからお願いします。公開しているコードはGitHubで確認できます。</p><div class="contact-links"><a href="https://docs.google.com/forms/d/e/1FAIpQLSc5_w_dLCIEvyE7xUxhwADu7VvCNUVRgpdDb4W5DjD-qGGImw/viewform">お問い合わせフォーム ↗</a><a href="mailto:k1kurosawa@gmail.com">メールを送る ↗</a><a href="https://github.com/YoyogiPinball">GitHub ↗</a><a href="https://buymeacoffee.com/yoyogipinball">Buy Me a Coffee ↗</a></div></div></div></section>
+    </main>
+    <footer class="wrap">© 2026 YoyogiPinball</footer>
 </body>
-
 </html>
