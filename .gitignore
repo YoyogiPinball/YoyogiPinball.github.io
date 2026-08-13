@@ -31,3 +31,5 @@ tmp/
 *.log
 # デザイン比較の試作ページ。公開対象外（コミットすると GitHub Pages から直接見えてしまう）
 design-prototypes/
+# Playwright CLI がページ調査時に吐くスナップショット置き場（作業用の一時出力）
+.playwright-cli/
