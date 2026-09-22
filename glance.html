@@ -16,7 +16,7 @@
             <div class="hero-copy">
                 <p class="status status--dev">開発中 / Chrome Extension</p>
                 <h1>Glance</h1>
-                <h2 class="tagline"><span class="title-line">新規タブを、</span><span class="title-line">一日の見通しに変える。</span></h2>
+                <h2 class="tagline"><span class="title-line">新規タブで</span><span class="title-line">今日の予定を見渡す。</span></h2>
                 <p class="hero-description">時計、Googleカレンダー、Google Tasks、天気を一画面にまとめるChrome拡張機能です。ブラウザを開いた瞬間に、その日に必要な情報を確認できます。</p>
                 <div class="actions"><a class="button button-primary" href="https://github.com/YoyogiPinball/Glance">GitHubを見る ↗</a></div>
                 <dl class="facts"><dt>種類</dt><dd>Chrome新規タブ拡張</dd><dt>できること</dt><dd>予定、ToDo、天気、時計の表示</dd><dt>公開状況</dt><dd>開発者モード向けに公開</dd></dl>
@@ -25,13 +25,13 @@
         </section>
 
         <section class="content-section sand-section" aria-labelledby="reason-title"><div class="section-grid wrap"><p class="section-label">Why I built it</p><div class="section-content">
-            <h2 id="reason-title"><span class="title-line">今日の情報を、</span><span class="title-line">別々の場所へ見に行きたくなかった。</span></h2>
-            <p class="section-intro">予定はカレンダー、タスクはToDo、天気は天気予報と確認先が分かれていました。 日に何度も開く新規タブにまとめれば確認するための操作そのものを減らせると考え、開発しました。</p>
+            <h2 id="reason-title"><span class="title-line">予定、タスク、天気を</span><span class="title-line">一度に確認したい。</span></h2>
+            <p class="section-intro">予定、タスク、天気は、それぞれ別の画面を開かなければ確認できませんでした。日に何度も使う新規タブへ集めれば、確認のたびにアプリを切り替えずに済みます。</p>
             <div class="comparison"><section class="comparison-block" aria-labelledby="before-title"><h3 id="before-title">これまで</h3><ol class="steps"><li>カレンダーで予定を見る</li><li>ToDoアプリで残りのタスクを見る</li><li>天気予報を開いて外出時間を考える</li></ol></section><section class="comparison-block after" aria-labelledby="after-title"><h3 id="after-title">Glanceなら</h3><ol class="steps"><li>Chromeで新規タブを開く</li><li>予定、タスク、天気を一画面で確認する</li><li>必要な作業へそのまま移る</li></ol></section></div>
         </div></div></section>
 
         <section class="content-section" aria-labelledby="features-title"><div class="section-grid wrap"><p class="section-label">Features</p><div class="section-content">
-            <h2 id="features-title">一日を見渡すための情報を、一画面へ。</h2>
+            <h2 id="features-title">新規タブに表示する情報</h2>
             <div class="feature-list">
                 <article class="feature"><span class="feature-no">01</span><h3>時計</h3><p>デジタルとアナログ、それぞれ5種類のデザインから選べます。</p></article>
                 <article class="feature"><span class="feature-no">02</span><h3>月間カレンダー</h3><p>Google Calendarと連携し、予定のある日をマーカーで示します。</p></article>
@@ -43,14 +43,14 @@
         </div></div></section>
 
         <section class="content-section sand-section" aria-labelledby="connection-title"><div class="section-grid wrap"><p class="section-label">Connection</p><div class="section-content">
-            <h2 id="connection-title">推しスケの予定も、Googleカレンダー経由で表示する。</h2>
+            <h2 id="connection-title">推しスケの予定をGoogleカレンダー経由で表示</h2>
             <p class="section-intro">推しスケ GAS版でスケジュール画像を解析し、Googleカレンダーへ同期しておけば、Glanceの日間スケジュールにも配信予定が並びます。</p>
             <ol class="process-list"><li><strong>予定画像を用意する</strong><span>公開された配信スケジュール画像をGoogle Driveへ置きます。</span></li><li><strong>推しスケが解析する</strong><span>GASとGeminiで日時を読み取り、Googleカレンダーへ登録します。</span></li><li><strong>Glanceで見る</strong><span>新規タブを開くと、ほかの予定と一緒に配信予定を確認できます。</span></li></ol>
             <div class="actions"><a class="button" href="https://github.com/YoyogiPinball/oshi-sche">推しスケ GAS版を見る ↗</a></div>
         </div></div></section>
 
         <section class="content-section" aria-labelledby="tech-title"><div class="section-grid wrap"><p class="section-label">Under the hood</p><div class="section-content">
-            <h2 id="tech-title">ブラウザだけで動く、個人用ダッシュボード。</h2>
+            <h2 id="tech-title">ブラウザだけで動く個人用ダッシュボード</h2>
             <p class="section-intro">フレームワークを使わず、Chrome Extension Manifest V3とVanilla JavaScriptで構成しています。Googleアカウント連携と天気APIは設定画面から行います。</p>
             <dl class="tech-list"><div><dt>Vanilla JavaScript</dt><dd>画面制御、時計、カレンダー、設定</dd></div><div><dt>Chrome Extension</dt><dd>Manifest V3で新規タブを置き換え</dd></div><div><dt>Google Calendar API</dt><dd>月間カレンダーと日間予定</dd></div><div><dt>Google Tasks API</dt><dd>ToDoリスト</dd></div><div><dt>OpenWeatherMap</dt><dd>5日間の天気予報</dd></div></dl>
             <aside class="design-note"><h3>現在は開発者モードで導入</h3><p>Chrome ウェブストアでは未公開です。リポジトリを取得し、拡張機能ページから「パッケージ化されていない拡張機能」として読み込みます。</p></aside>
@@ -61,5 +61,6 @@
     <footer class="wrap"><span>© 2026 YoyogiPinball</span><span><a href="index.html">制作物一覧</a> / <a href="https://github.com/YoyogiPinball/Glance">GitHub</a></span></footer>
     <dialog class="image-dialog" id="image-dialog" aria-label="スクリーンショット拡大表示"><div class="dialog-head"><button class="dialog-close" type="button" aria-label="拡大表示を閉じる">閉じる</button></div><img id="dialog-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></dialog>
     <script src="scripts/image-dialog.js"></script>
+    <script src="scripts/keep-kana.js" defer></script>
 </body>
 </html>

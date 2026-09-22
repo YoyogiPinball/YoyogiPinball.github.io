@@ -16,7 +16,7 @@
             <div class="hero-copy">
                 <p class="status status--private">個人用 / Private repository</p>
                 <h1>Slack家計簿</h1>
-                <h2 class="tagline"><span class="title-line">支出は、</span><span class="title-line">使ったその場で記録する。</span></h2>
+                <h2 class="tagline"><span class="title-line">使ったその場で</span><span class="title-line">支出を記録する。</span></h2>
                 <p class="hero-description">Slackのコマンドから支出と収入を入力し、Googleスプレッドシートへ自動で反映する個人用家計簿です。引き落とし月の計算と月次レポートもまとめて処理します。</p>
                 <dl class="facts"><dt>種類</dt><dd>Slack連携の自動化システム</dd><dt>できること</dt><dd>収支入力、請求月計算、月次集計</dd><dt>公開状況</dt><dd>個人用のため非公開</dd></dl>
             </div>
@@ -30,7 +30,7 @@
         </div></div></section>
 
         <section class="content-section" aria-labelledby="features-title"><div class="section-grid wrap"><p class="section-label">Features</p><div class="section-content">
-            <h2 id="features-title">入力から振り返りまでを、一つの流れにする。</h2>
+            <h2 id="features-title">収支の入力と集計</h2>
             <div class="feature-list">
                 <article class="feature"><span class="feature-no">01</span><h3>支出を1件記録</h3><p><code>/k</code>から日付、品目、金額、支払い方法をフォームで入力します。</p></article>
                 <article class="feature"><span class="feature-no">02</span><h3>収入を記録</h3><p><code>/ki</code>から給与や副収入を種別と一緒に記録します。</p></article>
@@ -41,7 +41,7 @@
         </div></div></section>
 
         <section class="content-section sand-section" aria-labelledby="slack-title"><div class="section-grid wrap"><p class="section-label">Slack input</p><div class="section-content">
-            <h2 id="slack-title">普段使う画面から、そのまま入力する。</h2>
+            <h2 id="slack-title">Slackから収支を入力</h2>
             <div class="gallery gallery--three gallery--contain">
                 <figure class="shot"><div class="browser"><a class="zoom-button" href="images/kakeibo/slack-form.png" data-image="images/kakeibo/slack-form.png" aria-label="入力フォームを拡大"><img src="images/kakeibo/slack-form.png" alt="Slack家計簿の入力フォーム"></a></div><figcaption><strong>入力フォーム</strong><p>日付、品目、金額、支払い方法を入力します。</p></figcaption></figure>
                 <figure class="shot"><div class="browser"><a class="zoom-button" href="images/kakeibo/slack-ic-response.png" data-image="images/kakeibo/slack-ic-response.png" aria-label="即時払いの返答を拡大"><img src="images/kakeibo/slack-ic-response.png" alt="交通系ICなど即時払いを記録した返答"></a></div><figcaption><strong>即時払いの返答</strong><p>記録した内容をSlack上ですぐに確認できます。</p></figcaption></figure>
@@ -50,7 +50,7 @@
         </div></div></section>
 
         <section class="content-section" aria-labelledby="bulk-title"><div class="section-grid wrap"><p class="section-label">Bulk entry</p><div class="section-content">
-            <h2 id="bulk-title">文章でまとめて渡し、確認してから記録する。</h2>
+            <h2 id="bulk-title">文章から複数の支出を記録</h2>
             <p class="section-intro"><code>/kb</code>では、Geminiの解析結果をそのまま書き込まず、内容を確認する段階を挟みます。</p>
             <ol class="process-list"><li><strong>文章を解析する</strong><span>品目、支払い方法、金額を読み取り、確認用のUIを生成します。</span></li><li><strong>内容を確認する</strong><span>誤りがないことを確かめてから「記録する」を選びます。</span></li><li><strong>シートへ反映する</strong><span>複数件の日付、支払い種別、金額をまとめて追記します。</span></li></ol>
             <div class="gallery gallery--three gallery--contain">
@@ -61,7 +61,7 @@
         </div></div></section>
 
         <section class="content-section sand-section" aria-labelledby="sheet-title"><div class="section-grid wrap"><p class="section-label">Spreadsheet</p><div class="section-content">
-            <h2 id="sheet-title">記録したあとを、自動で整える。</h2>
+            <h2 id="sheet-title">スプレッドシートへの反映と集計</h2>
             <div class="gallery gallery--three gallery--contain">
                 <figure class="shot"><div class="browser"><a class="zoom-button" href="images/kakeibo/spreadsheet-entry.png" data-image="images/kakeibo/spreadsheet-entry.png" aria-label="入力内容の反映を拡大"><img src="images/kakeibo/spreadsheet-entry.png" alt="スプレッドシートへ反映された入力内容"></a></div><figcaption><strong>入力内容の反映</strong><p>Slackから送信するとログへ即時追記します。</p></figcaption></figure>
                 <figure class="shot"><div class="browser"><a class="zoom-button" href="images/kakeibo/spreadsheet-log.png" data-image="images/kakeibo/spreadsheet-log.png" aria-label="支払見込シートを拡大"><img src="images/kakeibo/spreadsheet-log.png" alt="引き落とし見込とフリー資金の集計"></a></div><figcaption><strong>支払見込とフリー資金</strong><p>今月の請求額と自由に使える金額を表示します。</p></figcaption></figure>
@@ -75,5 +75,6 @@
     <footer class="wrap"><span>© 2026 YoyogiPinball</span><span><a href="index.html">制作物一覧</a></span></footer>
     <dialog class="image-dialog" id="image-dialog" aria-label="スクリーンショット拡大表示"><div class="dialog-head"><button class="dialog-close" type="button" aria-label="拡大表示を閉じる">閉じる</button></div><img id="dialog-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></dialog>
     <script src="scripts/image-dialog.js"></script>
+    <script src="scripts/keep-kana.js" defer></script>
 </body>
 </html>
