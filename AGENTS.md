@@ -1,5 +1,3 @@
-> 最終更新: 2026-09-22（Tue）17:10
-
 # AGENTS.md — YoyogiPinball.github.io
 
 制作物、技術スキル、発信活動を掲載する静的ポートフォリオサイトです。`main`ブランチをGitHub Pagesで公開します。
@@ -48,6 +46,7 @@ python3 -m http.server 8000
 - 製品名の大見出しは `word-break:keep-all` で守ります。語を守るために `<span>` や `white-space:nowrap` を足しません。
 - 和文の字間は0〜0.02emにします。英字ロゴと英大文字ラベルだけは広げてよいです。
 - 表示を変えたら `node scripts/check-typography.mjs` を実行し、出た一覧と `tmp/typography/` のスクリーンショットを確認します。
+- 画面の文言と配置を変えたら、`screen-audit` スキルの監査を通します。用語の基準はリポジトリ直下の `ui-terms.md` です（無ければ監査の最初に作ります）。
 
 ## デプロイ
 
