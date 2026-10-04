@@ -42,7 +42,8 @@ python3 -m http.server 8000
 - 画像ダイアログはネイティブ `<dialog>` を使う現在の実装を前提にします。
 - 文字サイズは本文16px、ラベル・技術名・キャプションは14pxにします。14px未満は使いません（デジタル庁デザインシステムの基準）。値は各CSSの `:root` にある `--fs-*` と `--lh-body` を使います。
 - 改行・禁則は共通の指定（`line-break:strict`、見出しの `text-wrap:balance`、本文の `text-wrap:pretty`、見出しと本文の `word-break:auto-phrase`）に任せ、ページ単位で上書きしません。カタカナ語や英単語を行の途中で割らないためです。
-- 全ページで `scripts/keep-kana.js` を読みます（カタカナ語を割らないための処理）。新しいページを足したら読み込みも足します。
+- 全ページで `scripts/keep-kana.js` を読みます（読点で区切った句を行の途中で割らない処理と、カタカナ語を割らない処理）。新しいページを足したら読み込みも足します。
+- 図の説明（figcaption）は短文なので `text-wrap:balance` で行の長さをそろえます。
 - 製品名の大見出しは `word-break:keep-all` で守ります。語を守るために `<span>` や `white-space:nowrap` を足しません。
 - 和文の字間は0〜0.02emにします。英字ロゴと英大文字ラベルだけは広げてよいです。
 - 表示を変えたら `node scripts/check-typography.mjs` を実行し、出た一覧と `tmp/typography/` のスクリーンショットを確認します。
