@@ -1,9 +1,0 @@
-{
-  "root": "..",
-  "pages": ["index.html", "oshi-setlist.html", "oshi-sche-webapp.html", "yp-signage.html", "oshi-mado.html", "kakeibo.html", "glance.html"],
-  "widths": [375, 560, 561, 620, 621, 820, 821, 860, 861, 1280],
-  "minFontSize": 14,
-  "headingSelector": "h1, h2, h3",
-  "blockSelector": "p, li, dt, dd, figcaption",
-  "screenshotDir": "tmp/typography"
-}

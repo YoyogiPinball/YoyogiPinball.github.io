@@ -41,3 +41,6 @@ CLAUDE.md
 .claude/
 devnote.*
 _Archives/
+# 文字組みの検査スクリプトと設定（手元の検証用。サイトの表示には使わない）
+scripts/check-typography.mjs
+scripts/typography.config.json
