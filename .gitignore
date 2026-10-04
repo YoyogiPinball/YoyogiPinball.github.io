@@ -33,3 +33,11 @@ tmp/
 design-prototypes/
 # Playwright CLI がページ調査時に吐くスナップショット置き場（作業用の一時出力）
 .playwright-cli/
+
+# === AI 向けのコンテキストファイルと開発資料（公開しない。手元でだけ使う）===
+# main がそのまま GitHub Pages で公開されるため、コミットすると /AGENTS などのURLで誰でも読める
+AGENTS.md
+CLAUDE.md
+.claude/
+devnote.*
+_Archives/
