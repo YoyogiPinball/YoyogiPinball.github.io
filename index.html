@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="業務の自動化や社内ITの整備、WebアプリやChrome拡張機能の個人開発。制作物と扱っている技術をまとめています。">
+    <meta name="description" content="WebアプリやChrome拡張機能の個人開発。制作物と扱っている技術をまとめています。">
     <title>YoyogiPinball — ポートフォリオ</title>
     <meta property="og:title" content="YoyogiPinball — ポートフォリオ">
-    <meta property="og:description" content="業務の自動化や社内ITの整備、WebアプリやChrome拡張機能の個人開発。制作物と扱っている技術をまとめています。">
+    <meta property="og:description" content="WebアプリやChrome拡張機能の個人開発。制作物と扱っている技術をまとめています。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://yoyogipinball.github.io/">
     <meta property="og:image" content="https://yoyogipinball.github.io/images/yp-signage/card.png">
@@ -22,145 +22,75 @@
             --white:#fffdf9;
             --sand:#efe5d8;
             --line:#d9cbbc;
-            --accent:#d34e1c;
             --accent-dark:#ad3d18;
-            --green:#397148;
             --fs-body:16px;   /* 本文。デジタル庁デザインシステムの基準値 */
             --fs-sub:14px;    /* ラベル・技術名・キャプション。これ未満は使わない */
             --fs-h-sub:18px;  /* 本文より一段大きい小見出し */
             --lh-body:1.75;   /* 本文の行間。DADS の本文用で最も広い値 */
         }
         * { box-sizing:border-box; }
-        html { scroll-behavior:smooth; scroll-padding-top:84px; }
+        html { scroll-behavior:smooth; scroll-padding-top:72px; }
         body { margin:0; color:var(--ink); background:var(--paper); font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif; line-break:strict; overflow-wrap:break-word; }
         /* 改行は styles/project-detail.css と同じ規則。文節で折ってカタカナ語などを途中で割らず、最後の行を1〜2字だけにしない */
         h1, h2, h3 { text-wrap:balance; word-break:auto-phrase; }
         p, li, dt, dd, figcaption { text-wrap:pretty; word-break:auto-phrase; }
         .kana-word { word-break:keep-all; }
+        .clause { display:inline-block; }
+        .clause--long { display:inline; }
         img { display:block; width:100%; }
         a { color:inherit; }
         button, a { -webkit-tap-highlight-color:transparent; }
-        .wrap { width:min(1120px, calc(100% - 48px)); margin-inline:auto; }
+        .wrap { width:min(1040px, calc(100% - 40px)); margin-inline:auto; }
         .skip { position:absolute; top:-60px; left:16px; z-index:100; padding:10px 14px; color:white; background:var(--ink); }
         .skip:focus { top:12px; }
+        .visually-hidden { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
 
         .site-header { position:sticky; top:0; z-index:20; border-bottom:1px solid var(--line); background:rgba(255,250,242,.96); }
-        .nav { display:flex; min-height:70px; align-items:center; justify-content:space-between; gap:28px; }
-        .brand { font-size:16px; font-weight:700; letter-spacing:-.02em; text-decoration:none; }
+        .nav { display:flex; min-height:56px; align-items:center; justify-content:space-between; gap:20px; }
+        .brand { font-size:var(--fs-body); font-weight:700; text-decoration:none; }
         .brand span { color:var(--accent-dark); }
-        .nav-links { display:flex; align-items:center; gap:24px; font-size:var(--fs-sub); }
-        .nav-links a { color:var(--sub); text-decoration:none; }
-        .nav-links a:hover { color:var(--ink); text-decoration:underline; text-underline-offset:5px; }
 
-        .hero { display:grid; grid-template-columns:minmax(0,1.45fr) minmax(250px,.55fr); gap:78px; padding:88px 0 80px; }
-        .eyebrow { margin:0 0 20px; color:var(--accent-dark); font-size:var(--fs-sub); font-weight:700; letter-spacing:.16em; text-transform:uppercase; }
-        h1 { max-width:760px; margin:0; font-family:"Yu Mincho","Hiragino Mincho ProN",serif; font-size:clamp(43px,7vw,80px); font-weight:600; line-height:1.4; letter-spacing:0; }
-        .lead { max-width:670px; margin:0; font-size:var(--fs-body); line-height:var(--lh-body); }
-        .lead + .lead { margin-top:14px; }
-        .visually-hidden { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
-        .hero-note { align-self:end; padding-top:21px; border-top:2px solid var(--ink); }
-        .hero-note dl { display:grid; grid-template-columns:76px 1fr; gap:8px 12px; margin:0; font-size:var(--fs-sub); line-height:1.6; }
-        .hero-note dt { color:var(--sub); }
-        .hero-note dd { margin:0; }
+        main { display:flex; flex-direction:column; gap:40px; padding-top:40px; }
+        /* 自己紹介: 左に紹介文と技術、右に連絡先と発信先をまとめた欄。狭い画面では縦に積む */
+        .intro { display:flex; flex-wrap:wrap; gap:28px 40px; align-items:flex-start; }
+        .intro-text { flex:1 1 30em; min-width:0; }
+        .lead { max-width:38em; font-size:var(--fs-body); line-height:var(--lh-body); }
+        .lead p, .card .desc p { margin:0; }
+        .lead + .lead { margin-top:10px; }
+        .skills { display:flex; flex-wrap:wrap; gap:8px; margin:18px 0 0; padding:0; list-style:none; }
+        .skills li { padding:3px 10px; border:1px solid var(--line); background:var(--white); color:var(--sub); font-size:var(--fs-sub); line-height:1.6; }
+        .profile { flex:0 1 300px; min-width:0; padding:20px 22px; border-top:2px solid var(--ink); background:var(--sand); }
+        .profile dl { display:grid; grid-template-columns:4.5em minmax(0,1fr); gap:10px 12px; margin:0; font-size:var(--fs-sub); line-height:1.7; }
+        .profile dt { color:var(--sub); }
+        .profile dd { margin:0; }
+        .profile dd a { display:inline-block; margin-right:12px; text-underline-offset:4px; }
+        .profile dd a:hover { color:var(--accent-dark); }
 
-        .section-head { display:flex; align-items:baseline; justify-content:space-between; gap:24px; padding:24px 0 17px; border-top:2px solid var(--ink); border-bottom:1px solid var(--line); }
-        .section-head h2 { margin:0; font-family:"Yu Mincho","Hiragino Mincho ProN",serif; font-size:29px; font-weight:600; }
-        .section-head p { margin:0; color:var(--sub); font-size:var(--fs-sub); }
-        .project-no { color:var(--accent-dark); font-family:Georgia,serif; font-size:var(--fs-sub); }
-        .project-status { margin:0 0 14px; color:var(--sub); font-size:var(--fs-sub); font-weight:700; letter-spacing:.1em; }
-        .project-status.live::before { display:inline-block; width:7px; height:7px; margin-right:7px; border-radius:50%; background:var(--green); content:""; }
-        .project-status.dev::before { display:inline-block; width:7px; height:7px; margin-right:7px; border-radius:50%; background:var(--accent); content:""; }
-        .project-title { margin:0; font-size:clamp(27px,3.5vw,42px); line-height:1.4; letter-spacing:0; }
-        .project-copy { margin:18px 0 0; color:var(--sub); font-size:var(--fs-body); line-height:var(--lh-body); }
-        .project-meta { margin-top:auto; padding-top:22px; color:var(--sub); font-size:var(--fs-sub); line-height:1.8; }
-        .project-links { display:flex; flex-wrap:wrap; gap:18px; margin-top:21px; font-size:var(--fs-sub); font-weight:700; }
-        .project-links a { text-underline-offset:5px; }
-        .project-links a:hover { color:var(--accent-dark); }
-        .image-link { display:block; overflow:hidden; border:1px solid var(--line); background:var(--sand); }
-        .image-link:hover { border-color:#a99888; }
-        .image-link img { height:100%; object-fit:cover; }
+        .section-title { margin:0 0 16px; padding-bottom:10px; border-bottom:2px solid var(--ink); font-size:var(--fs-h-sub); }
 
-        .featured { display:grid; grid-template-columns:64px minmax(0,1.18fr) minmax(270px,.82fr); gap:30px; padding:48px 0 56px; border-bottom:1px solid var(--line); }
-        .featured .image-link { aspect-ratio:16/10; }
-        .featured-info { display:flex; flex-direction:column; padding:2px 0; }
-        .pair { display:grid; grid-template-columns:1fr 1fr; border-bottom:1px solid var(--line); }
-        .pair-project { padding:40px 34px 46px 0; }
-        .pair-project + .pair-project { padding-right:0; padding-left:34px; border-left:1px solid var(--line); }
-        .pair-project .image-link { aspect-ratio:16/9; margin-bottom:26px; }
-        .pair-project .project-title { font-size:28px; }
-        .pair-project .project-copy { min-height:5.7em; font-size:var(--fs-body); }
+        /* 制作物: 全件を同じ大きさのカードで並べる。カード全体が詳細ページへのリンク */
+        .cards { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:28px 24px; }
+        .cards--small { grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); }
+        .card { display:flex; flex-direction:column; gap:10px; min-width:0; text-decoration:none; }
+        .card-img { aspect-ratio:16/10; overflow:hidden; border:1px solid var(--line); background:var(--sand); }
+        .card-img img { height:100%; object-fit:cover; object-position:top; }
+        .cards--small .card-img { aspect-ratio:4/3; }
+        .cards--small .card-img img { object-fit:contain; background:var(--white); }
+        .card h3 { margin:0; font-size:var(--fs-body); line-height:1.5; }
+        .card p, .card .desc { margin:0; color:var(--sub); font-size:var(--fs-body); line-height:var(--lh-body); }
+        .card .tech { margin-top:2px; font-size:var(--fs-sub); line-height:1.6; }
+        .card:hover h3 { color:var(--accent-dark); text-decoration:underline; text-underline-offset:4px; }
+        .card:hover .card-img { border-color:#a99888; }
 
-        .secondary { padding:92px 0 104px; }
-        .secondary-grid { display:grid; grid-template-columns:repeat(3,1fr); }
-        .secondary-project { padding:30px 28px 36px 0; border-bottom:1px solid var(--line); }
-        .secondary-project + .secondary-project { padding-left:28px; border-left:1px solid var(--line); }
-        .secondary-project:nth-child(3n+1) { padding-left:0; border-left:0; }
-        .secondary-project .image-link { aspect-ratio:16/10; margin-bottom:23px; }
-        .secondary-project h3 { margin:0; font-size:20px; letter-spacing:0; }
-        .secondary-project p { min-height:6.8em; margin:13px 0 0; color:var(--sub); font-size:var(--fs-body); line-height:var(--lh-body); }
-        .secondary-project .project-links { margin-top:18px; }
-
-        .archive-head { margin-top:70px; }
-        .archive-grid { display:grid; grid-template-columns:repeat(4,1fr); border-bottom:1px solid var(--line); }
-        .archive-project { padding:28px 22px 32px 0; }
-        .archive-project + .archive-project { padding-left:22px; border-left:1px solid var(--line); }
-        .archive-project .image-link { aspect-ratio:4/3; margin-bottom:18px; }
-        .archive-project h3 { margin:0; font-size:16px; line-height:1.4; }
-        .archive-project p { margin:10px 0 0; color:var(--sub); font-size:var(--fs-body); line-height:1.75; }
-        .archive-project > a:last-child { display:inline-block; margin-top:17px; font-size:var(--fs-sub); text-underline-offset:4px; }
-
-        .info { padding:76px 0; border-top:1px solid var(--line); background:var(--sand); }
-        .info-grid { display:grid; grid-template-columns:1fr 2fr; gap:72px; }
-        .info h2 { margin:0; font-family:"Yu Mincho","Hiragino Mincho ProN",serif; font-size:27px; font-weight:600; }
-        .skills { margin:0; }
-        .skills div { display:grid; grid-template-columns:140px 1fr; gap:24px; padding:13px 0; border-bottom:1px solid #d2c4b4; }
-        .skills div:first-child { padding-top:0; }
-        .skills dt { color:var(--sub); font-size:var(--fs-sub); }
-        .skills dd { margin:0; font-size:var(--fs-body); line-height:var(--lh-body); }
-
-        .links-section { padding:80px 0; }
-        .text-links { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
-        .text-link { padding:28px 26px 30px 0; text-decoration:none; }
-        .text-link + .text-link { padding-left:26px; border-left:1px solid var(--line); }
-        .text-link strong { display:block; margin-bottom:10px; font-size:18px; }
-        .text-link span { color:var(--sub); font-size:var(--fs-body); line-height:var(--lh-body); }
-        .text-link:hover strong { color:var(--accent-dark); text-decoration:underline; text-underline-offset:5px; }
-
-        .contact { padding:70px 0; color:#f8efe5; background:var(--ink); }
-        .contact-grid { display:grid; grid-template-columns:1fr 2fr; gap:72px; }
-        .contact h2 { margin:0; font-family:"Yu Mincho","Hiragino Mincho ProN",serif; font-size:28px; font-weight:600; }
-        .contact-copy p { max-width:650px; margin:0; color:#d1c3b8; line-height:var(--lh-body); }
-        .contact-links { display:flex; flex-wrap:wrap; gap:12px; margin-top:26px; }
-        .contact-links a { padding:10px 15px; border:1px solid #8f7d70; font-size:var(--fs-sub); font-weight:700; text-decoration:none; }
-        .contact-links a:hover { color:var(--ink); background:var(--paper); }
-        footer { padding:28px 0; color:var(--sub); font-size:var(--fs-sub); }
+        footer { margin-top:48px; padding:20px 0 32px; border-top:1px solid var(--line); color:var(--sub); font-size:var(--fs-sub); }
         :focus-visible { outline:3px solid var(--accent-dark); outline-offset:4px; }
-        /* 濃色セクションでは反転させる。焦茶の背景に濃いオレンジだと 2.53:1 しか出ない */
-        .contact :focus-visible { outline-color:var(--paper); }
 
-        @media (max-width:860px) {
-            .wrap { width:min(100% - 32px,1120px); }
-            .nav-links a:nth-child(-n+3) { display:none; }
-            .hero { grid-template-columns:1fr; gap:50px; padding:76px 0; }
-            .hero-note { max-width:430px; }
-            .featured { grid-template-columns:42px 1fr; }
-            .featured-info { grid-column:2; }
-            .pair, .secondary-grid { grid-template-columns:1fr; }
-            .pair-project, .pair-project + .pair-project, .secondary-project, .secondary-project + .secondary-project { padding:34px 0; border-left:0; border-bottom:1px solid var(--line); }
-            .pair-project .project-copy, .secondary-project p { min-height:0; }
-            .archive-grid { grid-template-columns:1fr 1fr; }
-            .archive-project:nth-child(3) { border-left:0; }
-            .archive-project:nth-child(n+3) { border-top:1px solid var(--line); }
-            .info-grid, .contact-grid { grid-template-columns:1fr; gap:30px; }
+        @media (max-width:820px) {
+            .profile { flex-basis:100%; }
         }
-        @media (max-width:560px) {
-            .section-head { align-items:flex-start; flex-direction:column; gap:7px; }
-            .featured { grid-template-columns:28px 1fr; gap:12px; padding:34px 0 42px; }
-            .archive-grid, .text-links { grid-template-columns:1fr; }
-            .archive-project, .archive-project + .archive-project, .archive-project:nth-child(3), .text-link, .text-link + .text-link { padding:25px 0; border-left:0; border-top:1px solid var(--line); }
-            .archive-project:first-child, .text-link:first-child { border-top:0; }
-            .archive-project .image-link { aspect-ratio:16/9; }
-            .skills div { grid-template-columns:92px 1fr; gap:14px; }
+        @media (max-width:620px) {
+            .wrap { width:calc(100% - 32px); }
+            main { padding-top:28px; gap:32px; }
         }
         @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
     </style>
@@ -170,54 +100,51 @@
     <header class="site-header">
         <nav class="nav wrap" aria-label="メインナビゲーション">
             <a class="brand" href="#top">Yoyogi<span>Pinball</span></a>
-            <div class="nav-links"><a href="#projects">制作物</a><a href="#skills">技術</a><a href="#writing">発信</a><a href="#contact">連絡先</a><a href="https://github.com/YoyogiPinball">GitHub ↗</a></div>
         </nav>
     </header>
 
-    <main id="main">
-        <section class="hero wrap" id="top">
-            <div><h1 class="visually-hidden">YoyogiPinball</h1><p class="lead">業務の中にある繰り返しの作業や手間を見つけて、仕組みで減らしています。Excel&nbsp;VBAやPythonによる定型作業の自動化、手順の文書化、社内のITまわりの整備を担当しています。</p><p class="lead">個人でも、WebアプリやChrome拡張機能を作り、公開後の運用まで一人で続けています。開発にはClaude&nbsp;CodeやGeminiなどのAIツールを使っています。</p></div>
-            <aside class="hero-note" aria-label="プロフィール概要"><dl><dt>名前</dt><dd>YoyogiPinball</dd><dt>主な領域</dt><dd>業務の自動化 / Web開発</dd><dt>最終更新</dt><dd>2026年9月</dd></dl></aside>
+    <main id="main" class="wrap">
+        <section class="intro" id="top">
+            <div class="intro-text">
+                <h1 class="visually-hidden">YoyogiPinball</h1>
+                <div class="lead"><p>WebアプリやChrome拡張機能を作り、公開後の運用まで一人で続けています。</p><p>開発にはClaude&nbsp;CodeやCodexなどの生成&#x2060;AIを使っています。</p></div>
+                <ul class="skills" aria-label="扱っている技術"><li>Python</li><li>JavaScript / TypeScript</li><li>Google Apps Script</li><li>Next.js</li><li>Chrome Extension API</li><li>Gemini API</li><li>Slack API</li><li>Git / GitHub</li><li>Vercel</li><li>Claude Code</li><li>Codex</li></ul>
+            </div>
+            <aside class="profile" id="contact" aria-label="プロフィールと連絡先">
+                <dl>
+                    <dt>名前</dt><dd>YoyogiPinball</dd>
+                    <dt>主な領域</dt><dd>Webアプリ / Chrome拡張機能</dd>
+                    <dt>コード</dt><dd><a href="https://github.com/YoyogiPinball">GitHub ↗</a></dd>
+                    <dt>発信</dt><dd><a href="https://zenn.dev/elettrocannone">Zenn ↗</a><a href="https://note.com/elettrocannone">note ↗</a><a href="https://x.com/Yoyogi_Pinball">X ↗</a></dd>
+                    <dt>連絡先</dt><dd><a href="https://docs.google.com/forms/d/e/1FAIpQLSc5_w_dLCIEvyE7xUxhwADu7VvCNUVRgpdDb4W5DjD-qGGImw/viewform">お問い合わせフォーム ↗</a><a href="mailto:k1kurosawa@gmail.com">メール</a></dd>
+                    <dt>欲しいもの</dt><dd><a href="https://www.amazon.co.jp/hz/wishlist/ls/2H3OEAHLND5Y8">Amazon ↗</a></dd>
+                </dl>
+            </aside>
         </section>
 
-        <section class="wrap" id="projects">
-            <div class="section-head"><h2>主な制作物</h2><p>生活の中で使っている、または公開しているもの</p></div>
-
-            <article class="featured">
-                <div class="project-no">01</div>
-                <a class="image-link" href="oshi-sche-webapp.html"><img src="images/oshi-sche-webapp/home.png" alt="推しスケ Web版のホーム画面"></a>
-                <div class="featured-info"><p class="project-status live">公開中 / WEB APP</p><h3 class="project-title">推しスケ Web版</h3><p class="project-copy">推しが公開したスケジュール画像から配信予定を読み取るWebアプリです。複数人の予定をまとめて表示し、普段使うカレンダーからも購読できます。</p><div class="project-meta">Next.js / Gemini API / Upstash Redis</div><div class="project-links"><a href="oshi-sche-webapp.html">制作記録を読む →</a><a href="https://oshi-sche-webapp.vercel.app/demo">デモを見る ↗</a></div></div>
-            </article>
-
-            <div class="pair">
-                <article class="pair-project"><a class="image-link" href="yp-signage.html"><img src="images/yp-signage/card.png" alt="yp-signageの表示画面"></a><p class="project-status live">02 / 稼働中</p><h3 class="project-title">yp-signage</h3><p class="project-copy">使っていないPCとモニターを再利用した常設サイネージです。時計、予定、天気、写真、推しの配信予定を表示します。</p><div class="project-meta">MagicMirror² / JavaScript / iCal</div><div class="project-links"><a href="yp-signage.html">制作記録を読む →</a></div></article>
-                <article class="pair-project"><a class="image-link" href="oshi-mado.html"><img src="images/oshi-mado/card.png" alt="推し窓の新着一覧画面"></a><p class="project-status live">03 / 公開中</p><h3 class="project-title">推し窓</h3><p class="project-copy">登録チャンネルの中から、推しの動画、ライブ、配信予定だけをまとめて表示するChrome拡張です。</p><div class="project-meta">Chrome Extension / YouTube Data API</div><div class="project-links"><a href="oshi-mado.html">制作記録を読む →</a></div></article>
+        <section aria-labelledby="projects-title">
+            <h2 class="section-title" id="projects-title">制作物</h2>
+            <div class="cards">
+                <a class="card" href="oshi-sche-webapp.html"><div class="card-img"><img src="images/oshi-sche-webapp/home.png" alt="推しスケ Web版のホーム画面"></div><h3>推しスケ Web版</h3><div class="desc"><p>推しが公開したスケジュール画像から配信予定を読み取るWebアプリです。</p><p>複数人の予定をまとめて表示し、普段使うカレンダーからも購読できます。</p></div><p class="tech">Next.js / Gemini API / Upstash Redis</p></a>
+                <a class="card" href="yp-signage.html"><div class="card-img"><img src="images/yp-signage/card.png" alt="yp-signageの表示画面"></div><h3>yp-signage</h3><div class="desc"><p>使っていないPCとモニターを再利用した常設サイネージです。</p><p>時計、予定、天気、写真、推しの配信予定を表示します。</p></div><p class="tech">MagicMirror² / JavaScript / iCal</p></a>
+                <a class="card" href="oshi-mado.html"><div class="card-img"><img src="images/oshi-mado/card.png" alt="推し窓の新着一覧画面"></div><h3>推し窓</h3><div class="desc"><p>登録チャンネルの中から推しの動画、ライブ、配信予定だけをまとめて表示するChrome拡張です。</p></div><p class="tech">Chrome Extension / YouTube Data API</p></a>
+                <a class="card" href="oshi-setlist.html"><div class="card-img"><img src="images/oshi-setlist/search-results.png" alt="推しセトリの選曲画面"></div><h3>推しセトリ</h3><div class="desc"><p>YouTube Musicから一人のアーティストの曲を集め、プレイリストを作るChrome拡張です。</p><p>既存のプレイリストには未登録の曲だけを追加できます。</p></div><p class="tech">Chrome Extension / JavaScript</p></a>
+                <a class="card" href="kakeibo.html"><div class="card-img"><img src="images/kakeibo/slack-form.png" alt="Slack家計簿の入力画面"></div><h3>Slack 家計簿</h3><div class="desc"><p>普段使うSlackから収支を記録し、請求月の計算や月次集計まで自動化した個人用家計簿です。</p></div><p class="tech">Google Apps Script / Slack API</p></a>
+                <a class="card" href="glance.html"><div class="card-img"><img src="images/glance_dashboard_v2.png" alt="Glanceのダッシュボード画面"></div><h3>Glance</h3><div class="desc"><p>Chromeの新規タブに予定、天気、ToDoを表示します。</p><p>調べたい情報へ移動せず、その日の見通しを確認できます。</p></div><p class="tech">Chrome Extension / JavaScript</p></a>
             </div>
         </section>
 
-        <section class="secondary wrap" aria-labelledby="other-projects">
-            <div class="section-head"><h2 id="other-projects">そのほかの道具</h2><p>個人利用・開発中のものを含みます</p></div>
-            <div class="secondary-grid">
-                <article class="secondary-project"><a class="image-link" href="https://github.com/YoyogiPinball/oshi-sche"><img src="images/oshi-sche.png" alt="推しスケ GAS版の画面"></a><h3>推しスケ GAS版</h3><p>Discord通知とカレンダー連携で、配信予定の確認を一か所にまとめたWeb版の前身です。（こちらはWeb版とは異なりiCal未使用です。）</p><div class="project-meta">Python / Google Apps Script</div><div class="project-links"><a href="https://github.com/YoyogiPinball/oshi-sche">GitHub ↗</a></div></article>
-                <article class="secondary-project"><a class="image-link" href="kakeibo.html"><img src="images/kakeibo/slack-form.png" alt="Slack家計簿の入力画面"></a><h3>Slack 家計簿</h3><p>普段使うSlackから収支を記録し、請求月の計算や月次集計まで自動化した個人用家計簿です。</p><div class="project-meta">Google Apps Script / Slack API</div><div class="project-links"><a href="kakeibo.html">制作記録を読む →</a></div></article>
-                <article class="secondary-project"><a class="image-link" href="glance.html"><img src="images/glance_dashboard_v2.png" alt="Glanceのダッシュボード画面"></a><h3>Glance</h3><p>Chromeの新規タブに予定、天気、ToDoを表示します。調べたい情報へ移動せず、その日の見通しを確認できます。</p><div class="project-meta">Chrome Extension / JavaScript</div><div class="project-links"><a href="glance.html">制作記録を読む →</a></div></article>
-                <article class="secondary-project"><a class="image-link" href="oshi-setlist.html"><img src="images/oshi-setlist/search-results.png" alt="推しセトリの選曲画面"></a><h3>推しセトリ</h3><p>YouTube Musicから一人のアーティストの曲を集め、プレイリストを作るChrome拡張です。既存のプレイリストには未登録の曲だけを追加できます。</p><div class="project-meta">Chrome Extension / JavaScript</div><div class="project-links"><a href="oshi-setlist.html">制作記録を読む →</a></div></article>
-            </div>
-
-            <div class="section-head archive-head"><h2>小さな制作物</h2><p>用途を絞って作ったツール</p></div>
-            <div class="archive-grid">
-                <article class="archive-project"><a class="image-link" href="https://github.com/YoyogiPinball/pokeanalyzer-gen6"><img src="images/pokeanalyzer.png" alt="PokeAnalyzer-gen6の画面"></a><h3>PokeAnalyzer-gen6</h3><p>対戦中にポケモンの名前を入力するだけでタイプ相性や素早さをすぐ確認できるデータビューア。ポケットモンスター第6世代（3DS）対戦環境用に開発したJavaFX版をPythonで再実装したものです。</p><a href="https://github.com/YoyogiPinball/pokeanalyzer-gen6">GitHub ↗</a></article>
-                <article class="archive-project"><a class="image-link" href="https://github.com/YoyogiPinball/Loot_Organizer"><img src="images/loot_organizer.png" alt="Loot Organizerの画面"></a><h3>Loot Organizer</h3><p>繰り返し行うファイル整理を、YAMLのルールに沿って自動化。</p><a href="https://github.com/YoyogiPinball/Loot_Organizer">GitHub ↗</a></article>
-                <article class="archive-project"><a class="image-link" href="https://github.com/YoyogiPinball/La_Byle"><img src="images/La_Byle.png" alt="La Byleの画面"></a><h3>La_Byle</h3><p>縦・横のモニターごとに壁紙を切り替えるスライドショーアプリ。</p><a href="https://github.com/YoyogiPinball/La_Byle">GitHub ↗</a></article>
+        <section aria-labelledby="small-title">
+            <h2 class="section-title" id="small-title">小さな制作物</h2>
+            <div class="cards cards--small">
+                <a class="card" href="https://github.com/YoyogiPinball/oshi-sche"><div class="card-img"><img src="images/oshi-sche.png" alt="推しスケ GAS版の画面"></div><h3>推しスケ GAS版 ↗</h3><div class="desc"><p>Discord通知とカレンダー連携で配信予定の確認を一か所にまとめたWeb版の前身です。</p><p>（こちらはWeb版とは異なりiCal未使用です。）</p></div><p class="tech">Python / Google Apps Script</p></a>
+                <a class="card" href="https://github.com/YoyogiPinball/pokeanalyzer-gen6"><div class="card-img"><img src="images/pokeanalyzer.png" alt="PokeAnalyzer-gen6の画面"></div><h3>PokeAnalyzer-gen6 ↗</h3><div class="desc"><p>対戦中にポケモンの名前を入力するだけでタイプ相性や素早さをすぐ確認できるデータビューア。</p><p>ポケットモンスター第6世代（3DS）対戦環境用に開発したJavaFX版をPythonで再実装したものです。</p></div></a>
+                <a class="card" href="https://github.com/YoyogiPinball/Loot_Organizer"><div class="card-img"><img src="images/loot_organizer.png" alt="Loot Organizerの画面"></div><h3>Loot Organizer ↗</h3><div class="desc"><p>繰り返し行うファイル整理をYAMLのルールに沿って自動化。</p></div></a>
+                <a class="card" href="https://github.com/YoyogiPinball/La_Byle"><div class="card-img"><img src="images/La_Byle.png" alt="La Byleの画面"></div><h3>La_Byle ↗</h3><div class="desc"><p>縦・横のモニターごとに壁紙を切り替えるスライドショーアプリ。</p></div></a>
             </div>
         </section>
-
-        <section class="info" id="skills"><div class="info-grid wrap"><h2>扱っているもの</h2><dl class="skills"><div><dt>言語</dt><dd>Python、JavaScript / TypeScript、Google Apps Script、VBA、VB.NET</dd></div><div><dt>Web・API</dt><dd>Next.js、Gemini API、Slack API、Chrome Extension API</dd></div><div><dt>開発・公開</dt><dd>Git / GitHub、Vercel、GitHub Pages</dd></div></dl></div></section>
-
-        <section class="links-section wrap" id="writing"><div class="section-head"><h2>書いている場所</h2><p>技術記事と日々の記録</p></div><div class="text-links"><a class="text-link" href="https://note.com/elettrocannone"><strong>note →</strong><span>使ってみたガジェットや日常のことを書いています。</span></a><a class="text-link" href="https://zenn.dev/elettrocannone"><strong>Zenn →</strong><span>開発中に得た知見を技術記事にしています。</span></a><a class="text-link" href="https://x.com/Yoyogi_Pinball"><strong>X →</strong><span>日々のことや短い開発メモを投稿しています。</span></a></div></section>
-
-        <section class="contact" id="contact"><div class="contact-grid wrap"><h2>連絡先など</h2><div class="contact-copy"><p>制作物についての連絡やお問い合わせは、フォームまたはメールからお願いします。公開しているコードはGitHubで確認できます。</p><div class="contact-links"><a href="https://docs.google.com/forms/d/e/1FAIpQLSc5_w_dLCIEvyE7xUxhwADu7VvCNUVRgpdDb4W5DjD-qGGImw/viewform">お問い合わせフォーム ↗</a><a href="mailto:k1kurosawa@gmail.com">メールを送る ↗</a><a href="https://github.com/YoyogiPinball">GitHub ↗</a><a href="https://buymeacoffee.com/yoyogipinball">Buy Me a Coffee ↗</a></div></div></div></section>
     </main>
+
     <footer class="wrap">© 2026 YoyogiPinball</footer>
     <script src="scripts/keep-kana.js" defer></script>
 </body>

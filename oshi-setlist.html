@@ -9,103 +9,44 @@
 </head>
 <body>
     <a class="skip" href="#main">本文へ移動</a>
-    <header class="site-header">
-        <nav class="nav wrap" aria-label="ページナビゲーション">
-            <a class="back-link" href="index.html">← 制作物一覧へ</a>
-            <a class="brand" href="index.html">Yoyogi<span>Pinball</span></a>
-        </nav>
-    </header>
+    <header class="site-header"><nav class="nav wrap" aria-label="ページナビゲーション"><a class="back-link" href="index.html">← 制作物一覧</a><a class="brand" href="index.html">Yoyogi<span>Pinball</span></a></nav></header>
 
-    <main id="main">
-        <section class="hero wrap">
+    <main id="main" class="wrap">
+        <section class="hero">
             <div class="hero-copy">
                 <p class="status status--dev">ソース公開 / ストア配布なし</p>
-                <h1 class="word-keep">推しセトリ</h1>
-                <h2 class="tagline"><span class="title-line">推しの曲を選んで</span><span class="title-line">プレイリストを作る。</span></h2>
-                <p class="hero-description">YouTube Music上で、特定アーティストの曲だけを集めたプレイリストの作成を補助するChrome拡張です。</p>
-                <p class="hero-description">新しいプレイリストの作成に加えて、既存プレイリストへ未登録の曲だけを追加できます。</p>
-                <div class="actions">
-                    <a class="button" href="https://github.com/YoyogiPinball/oshi-setlist">GitHubを見る ↗</a>
-                </div>
-                <dl class="facts"><dt>種類</dt><dd>Chrome拡張機能</dd><dt>できること</dt><dd>単推しプレイリストの選曲と作成</dd><dt>公開状況</dt><dd>ソースコードを公開（ストア配布なし）</dd></dl>
+                <h1>推しセトリ</h1>
+                <div class="hero-description"><p>YouTube Musicで一人のアーティストの曲を集められるChrome拡張です。</p><p>選んだ曲で新しいプレイリストを作れます。</p><p>既存のプレイリストには未登録の曲だけを追加できます。</p></div>
+                <div class="actions"><a class="button button-primary" href="https://github.com/YoyogiPinball/oshi-setlist">GitHubを見る ↗</a></div>
+                <dl class="facts"><dt>種類</dt><dd>Chrome拡張機能</dd><dt>技術</dt><dd>Manifest V3 / Vanilla JavaScript / chrome.storage.session</dd></dl>
             </div>
+            <figure class="hero-shot"><a class="frame zoom-button" href="images/oshi-setlist/search-results.png" data-image="images/oshi-setlist/search-results.png" aria-label="推しセトリの選曲画面を拡大"><img src="images/oshi-setlist/search-results.png" alt="推しセトリのアーティスト検索結果と選曲画面"></a><figcaption class="image-note"><p>選曲画面。</p><p>除外対象は一覧の下部にグレーで表示します。</p><span class="hint">画像を選択すると拡大できます</span></figcaption></figure>
+        </section>
 
-            <div class="hero-shot">
-                <div class="browser"><div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span></div><a class="zoom-button" href="images/oshi-setlist/search-results.png" data-image="images/oshi-setlist/search-results.png" aria-label="推しセトリの選曲画面を拡大"><img src="images/oshi-setlist/search-results.png" alt="推しセトリのアーティスト検索結果と選曲画面"></a></div>
-                <p class="image-note">画像を選択すると拡大できます</p>
+        <section class="section" aria-labelledby="screens-title">
+            <h2 id="screens-title">画面</h2>
+            <div class="gallery">
+                <figure class="shot"><a class="frame zoom-button" href="images/oshi-setlist/write-playlist.png" data-image="images/oshi-setlist/write-playlist.png" aria-label="書き込み画面を拡大"><img src="images/oshi-setlist/write-playlist.png" alt="推しセトリのプレイリスト書き込み画面"></a><figcaption><strong>書き込み画面</strong><p>書き込み先、公開範囲、曲数を確認してからプレイリストへ反映します。</p><p>公開範囲の初期値は非公開です。</p></figcaption></figure>
+                <figure class="shot"><a class="frame zoom-button" href="images/oshi-setlist/youtube-music-playlist.jpg" data-image="images/oshi-setlist/youtube-music-playlist.jpg" aria-label="作成されたプレイリストを拡大"><img src="images/oshi-setlist/youtube-music-playlist.jpg" alt="YouTube Musicに作成されたプレイリスト"></a><figcaption><strong>作成結果</strong><p>YouTube Music側に選んだ曲と並び順のままプレイリストができあがります。</p></figcaption></figure>
             </div>
         </section>
 
-        <section class="content-section sand-section" aria-label="制作した理由">
-            <div class="section-grid wrap">
-                <p class="section-label">Why I built it</p>
-                <div class="section-content">
-                    <p class="section-intro">YouTube MusicやYouTubeの楽曲には、Instrumental、ライブバージョン、Remixなども混在しています。推しの曲だけをまとめようとすると、候補を一曲ずつ確認して選び直す必要がありました。</p>
-                    <p class="section-intro">YouTube Musicでは歌ってみた動画が候補に出ないことがあり、YouTubeでは正式リリースの楽曲をアルバムやシングル単位で追いにくい、という違いもあります。</p>
-
-                    <div class="comparison">
-                        <section class="comparison-block" aria-labelledby="before-title"><h3 id="before-title">これまで</h3><ol class="steps"><li>アルバムやシングルを一つずつ開いてプレイリストへ追加</li><li>Instrumentalやライブ版を見分けて外す</li><li>歌ってみた動画はYouTube側で別に探す</li></ol></section>
-                        <section class="comparison-block after" aria-labelledby="after-title"><h3 id="after-title">推しセトリなら</h3><ol class="steps"><li>アーティスト名で検索して本人を選ぶ</li><li>除外対象が外れた状態の候補から選曲する</li><li>新規作成か、既存プレイリストへの差分追加を選ぶ</li></ol></section>
-                    </div>
-                </div>
-            </div>
+        <section class="section" aria-labelledby="features-title">
+            <h2 id="features-title">できること</h2>
+            <ul class="feature-list">
+                <li><strong>リリースから曲を抽出</strong><div><p>アーティスト名から検索し、シングル、EP、アルバムの収録曲をまとめて候補にします。</p><p>歌ってみた、共同名義、コンピレーション収録曲も候補へ追加します。</p></div></li>
+                <li><strong>除外対象を初期選択から外す</strong><div><p>Instrumental、Off Vocal、Remix、客演は最初から選ばない状態でグレー表示し、一覧の下部にまとめます。</p><p>ライブバージョンの除外は必要に応じて切り替えられます。</p></div></li>
+                <li><strong>YouTube動画を補助候補に</strong><div><p>YouTube動画を最大20件、補助候補として同じ画面に表示します。</p><p>見つからない曲はYouTube MusicまたはYouTubeのURLから追加できます。</p></div></li>
+                <li><strong>既存プレイリストに未登録の曲を追加</strong><div><p>既存プレイリストの曲と照合し、未登録の曲だけを末尾へ追加します。</p><p>登録済みの曲を削除したり並び替えたりはしません。</p></div></li>
+                <li><strong>アカウントの照合</strong><div><p>選曲時、確認時、実行時のYouTube Musicアカウントを照合し、一致しない場合は書き込みを止めます。</p></div></li>
+                <li><strong>確認した内容は一度だけ実行</strong><div><p>確認した書き込み内容は10分以内に一度だけ実行できます。</p><p>結果を確定できない場合も自動では再実行しません。</p></div></li>
+            </ul>
+            <aside class="note"><h3>非公式のInternal APIを使っています</h3><p>YouTube MusicがWeb画面で使っている公開仕様ではないAPIへアクセスします。</p><p>APIの変更によって動かなくなる可能性があります。</p><p>利用上の注意は<a href="https://github.com/YoyogiPinball/oshi-setlist#使う前に知っておいてほしいこと">README</a>を確認してください。</p><p>ソースコードを公開し、Chrome ウェブストアでの配布は行っていません。</p><p>開発者のサーバーにはデータを送りません。</p><p>認証ヘッダーはログイン中タブのCookieから都度生成し、保存しません。</p></aside>
         </section>
-
-        <section class="content-section" aria-labelledby="features-title">
-            <div class="section-grid wrap">
-                <p class="section-label">Features</p>
-                <div class="section-content">
-                    <h2 id="features-title">選曲と書き込みの仕組み</h2>
-                    <p class="section-intro">候補集めと除外は自動で済ませ、最後の選曲と書き込み内容の確認は人の目で行う流れにしています。</p>
-
-                    <div class="feature-list">
-                        <article class="feature"><span class="feature-no">01</span><h3>リリースから曲を抽出</h3><p>アーティスト名から検索し、シングル、EP、アルバムの収録曲をまとめて候補にします。歌ってみた、共同名義、コンピレーション収録曲も候補へ追加します。</p></article>
-                        <article class="feature"><span class="feature-no">02</span><h3>除外対象を初期選択から外す</h3><p>Instrumental、Off Vocal、Remix、客演は最初から選ばない状態でグレー表示し、一覧の下部にまとめます。ライブバージョンの除外は必要に応じて切り替えられます。</p></article>
-                        <article class="feature"><span class="feature-no">03</span><h3>YouTube動画を補助候補に</h3><p>YouTube動画を最大20件、補助候補として同じ画面に表示します。見つからない曲は、YouTube MusicまたはYouTubeのURLから追加できます。</p></article>
-                        <article class="feature"><span class="feature-no">04</span><h3>既存プレイリストへ差分追加</h3><p>既存プレイリストの曲と照合し、未登録の曲だけを末尾へ追加します。登録済みの曲を削除したり並び替えたりはしません。</p></article>
-                        <article class="feature"><span class="feature-no">05</span><h3>アカウントの照合</h3><p>選曲時、確認時、実行時のYouTube Musicアカウントを照合し、一致しない場合は書き込みを止めます。</p></article>
-                        <article class="feature"><span class="feature-no">06</span><h3>一度だけ実行できる確認</h3><p>確認した書き込み内容は10分以内に一度だけ実行できます。結果を確定できない場合も自動では再実行しません。</p></article>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="content-section sand-section" aria-labelledby="screens-title">
-            <div class="section-grid wrap">
-                <p class="section-label">Screens</p>
-                <div class="section-content">
-                    <h2 id="screens-title">画面と操作</h2>
-                    <div class="gallery gallery--three gallery--contain">
-                        <figure class="shot"><div class="browser"><div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span></div><a class="zoom-button" href="images/oshi-setlist/search-results.png" data-image="images/oshi-setlist/search-results.png" aria-label="選曲画面を拡大"><img src="images/oshi-setlist/search-results.png" alt="推しセトリの選曲画面"></a></div><figcaption><strong>選曲画面</strong><p>最初から選ばない設定にした曲は、グレーで下部へまとめて表示します。</p></figcaption></figure>
-                        <figure class="shot"><div class="browser"><div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span></div><a class="zoom-button" href="images/oshi-setlist/write-playlist.png" data-image="images/oshi-setlist/write-playlist.png" aria-label="書き込み画面を拡大"><img src="images/oshi-setlist/write-playlist.png" alt="推しセトリのプレイリスト書き込み画面"></a></div><figcaption><strong>書き込み画面</strong><p>書き込み先、公開範囲、曲数を確認してからプレイリストへ反映します。公開範囲の初期値は非公開です。</p></figcaption></figure>
-                        <figure class="shot"><div class="browser"><div class="browser-bar" aria-hidden="true"><span></span><span></span><span></span></div><a class="zoom-button" href="images/oshi-setlist/youtube-music-playlist.jpg" data-image="images/oshi-setlist/youtube-music-playlist.jpg" aria-label="作成されたプレイリストを拡大"><img src="images/oshi-setlist/youtube-music-playlist.jpg" alt="YouTube Musicに作成されたプレイリスト"></a></div><figcaption><strong>作成結果</strong><p>YouTube Music側に、選んだ曲と並び順のままプレイリストができあがります。</p></figcaption></figure>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="content-section">
-            <div class="section-grid wrap">
-                <p class="section-label">Design &amp; Tech</p>
-                <div class="section-content">
-                    <p class="section-intro">外部ライブラリとビルド工程を持たず、要求する権限もYouTube Musicの読み書きと一時保存だけに絞っています。開発者のサーバーへデータを送る経路はありません。</p>
-                    <aside class="design-note"><h3>非公式のInternal APIを使っています</h3><p>YouTube MusicがWeb画面で使っている、公開仕様ではないAPIへアクセスします。</p><p>予告なく動かなくなる可能性があり、YouTubeの利用規約は自動アクセスを制限しているため、Chrome ウェブストアでの配布は行わずソースコードだけを公開します。</p></aside>
-
-                    <dl class="tech-list"><div><dt>Chrome Extension</dt><dd>Manifest V3</dd></div><div><dt>JavaScript</dt><dd>フレームワークを使わないVanilla JavaScript</dd></div><div><dt>YouTube Music</dt><dd>検索、アカウント確認、プレイリストの読み書き</dd></div><div><dt>chrome.storage.session</dt><dd>確認済みの書き込み内容を一時保存</dd></div><div><dt>認証</dt><dd>ログイン中タブのCookieから認証ヘッダーを都度生成し、保存しない</dd></div><div><dt>gitleaks</dt><dd>コミット前に秘密情報の混入を検査</dd></div></dl>
-                </div>
-            </div>
-        </section>
-
-        <section class="page-end"><div class="page-end-grid wrap"><div><p>NEXT PROJECT</p><h2>推しスケ Web版</h2></div><a href="oshi-sche-webapp.html">次の制作物を見る →</a></div></section>
     </main>
 
-    <footer class="wrap"><span>© 2026 YoyogiPinball</span><span><a href="index.html">制作物一覧</a> / <a href="https://github.com/YoyogiPinball/oshi-setlist">GitHub</a></span></footer>
-
-    <dialog class="image-dialog" id="image-dialog" aria-label="スクリーンショット拡大表示">
-        <div class="dialog-head"><button class="dialog-close" type="button" aria-label="拡大表示を閉じる">閉じる</button></div>
-        <img id="dialog-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">
-    </dialog>
-
+    <footer class="wrap"><a href="index.html">← 制作物一覧</a><a href="kakeibo.html">次の制作物：Slack 家計簿 →</a></footer>
+    <dialog class="image-dialog" id="image-dialog" aria-label="スクリーンショット拡大表示"><div class="dialog-head"><button class="dialog-close" type="button" aria-label="拡大表示を閉じる">閉じる</button></div><img id="dialog-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></dialog>
     <script src="scripts/image-dialog.js"></script>
     <script src="scripts/keep-kana.js" defer></script>
 </body>
