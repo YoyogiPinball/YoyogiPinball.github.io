@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Claude CodeやCodexの通知音を推しのシステムボイスにするスキル、oshi-hookvoiceの制作記録。">
+    <title>oshi-hookvoice — YoyogiPinball</title>
+    <link rel="stylesheet" href="styles/project-detail.css">
+</head>
+<body>
+    <a class="skip" href="#main">本文へ移動</a>
+    <header class="site-header"><nav class="nav wrap" aria-label="ページナビゲーション"><a class="back-link" href="index.html">← 制作物一覧</a><a class="brand" href="index.html">Yoyogi<span>Pinball</span></a></nav></header>
+
+    <main id="main" class="wrap">
+        <section class="hero">
+            <div class="hero-copy">
+                <p class="status">ソース公開 / 無料</p>
+                <h1>oshi-hookvoice</h1>
+                <div class="hero-description"><p>Claude CodeやCodexの通知音を推しのシステムボイスにするスキルです。</p><p>鳴らす音を割り当てフォームで選択すると、設定はAIが行います。</p></div>
+                <div class="actions"><a class="button button-primary" href="https://github.com/YoyogiPinball/oshi-hookvoice">GitHubを見る ↗</a><a class="button" href="https://github.com/YoyogiPinball/oshi-hookvoice#使い方">使い方を見る ↗</a></div>
+                <dl class="facts"><dt>種類</dt><dd>Agent Skill / Webフォーム</dd><dt>対応</dt><dd>Claude Code / Codex CLI</dd><dt>技術</dt><dd>HTML / JavaScript / Bash / hooks</dd></dl>
+            </div>
+            <figure class="hero-shot"><a class="frame zoom-button" href="images/oshi-hookvoice/form.png" data-image="images/oshi-hookvoice/form.png" aria-label="割り当てフォームを拡大"><img src="images/oshi-hookvoice/form.png" alt="oshi-hookvoiceの割り当てフォーム"></a><figcaption class="image-note">割り当てフォーム（音声ファイルはダミー）<span class="hint">画像を選択すると拡大できます</span></figcaption></figure>
+        </section>
+
+        <section class="section" aria-labelledby="screens-title">
+            <h2 id="screens-title">画面</h2>
+            <div class="gallery">
+                <figure class="shot"><a class="frame zoom-button" href="images/oshi-hookvoice/events.png" data-image="images/oshi-hookvoice/events.png" aria-label="イベント選択を拡大"><img src="images/oshi-hookvoice/events.png" alt="イベントごとに音を選択する画面"></a><figcaption><strong>イベント選択</strong><p>応答完了や承認待ちなど、イベントごとに鳴らす音を選択できます。</p></figcaption></figure>
+                <figure class="shot"><a class="frame zoom-button" href="images/oshi-hookvoice/output.png" data-image="images/oshi-hookvoice/output.png" aria-label="AIに渡す回答を拡大"><img src="images/oshi-hookvoice/output.png" alt="AIに渡す回答の画面"></a><figcaption><strong>AIに渡す回答</strong><p>コピーしてClaude CodeかCodexに貼り付けます。</p></figcaption></figure>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="features-title">
+            <h2 id="features-title">できること</h2>
+            <ul class="feature-list">
+                <li><strong>10種類のイベント</strong><div><p>応答完了、承認待ち、コミット完了、セッション開始などで音を鳴らせます。</p><p>一覧にないイベントも追加できます。</p></div></li>
+                <li><strong>ランダム再生</strong><div><p>1つのイベントに2つ以上の音を選択すると、鳴るたびにランダムで1つ鳴ります。</p></div></li>
+                <li><strong>応答ごとに1回</strong><div><p>応答完了、ブロック、エラー、承認待ちは、応答の終わり方に応じてどれか1つのみ鳴ります。</p></div></li>
+                <li><strong>設定はAIが担当</strong><div><p>hookの設定と再生スクリプトの配置は、回答を受け取ったAIが環境に合わせて行います。</p></div></li>
+                <li><strong>自作hookとの連携</strong><div><p>危険なコマンドを止める自作のhookからも、ブロックの音を鳴らせます。</p></div></li>
+            </ul>
+            <aside class="note"><h3>音声ファイルは同梱していません</h3><p>システムボイスは各自で購入・用意してください。</p><p>割り当てフォームで選択したファイルはブラウザ内で読み込み、外部へは送信しません。</p><p>一部のイベントはCodexでは鳴りません。</p><p>動作確認はWindows 11 ＋ WSL2（Ubuntu）で行っています。</p></aside>
+        </section>
+    </main>
+
+    <footer class="wrap"><a href="index.html">← 制作物一覧</a><a href="kakeibo.html">次の制作物：Slack 家計簿 →</a></footer>
+    <dialog class="image-dialog" id="image-dialog" aria-label="スクリーンショット拡大表示"><div class="dialog-head"><button class="dialog-close" type="button" aria-label="拡大表示を閉じる">閉じる</button></div><img id="dialog-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></dialog>
+    <script src="scripts/image-dialog.js"></script>
+    <script src="scripts/keep-kana.js" defer></script>
+</body>
+</html>
