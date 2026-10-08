@@ -16,7 +16,7 @@
             <div class="hero-copy">
                 <p class="status">無料で公開中 / ゲスト利用可能</p>
                 <h1>推しスケ</h1>
-                <div class="hero-description"><p>配信スケジュール画像からAIが予定を読み取り、日・週・月ごとに表示します。</p><p>登録した予定はGoogleカレンダーやiOSのカレンダーからも購読できます。</p></div>
+                <div class="hero-description"><p>配信スケジュール画像からAIが予定を読み取り、日・週・月ごとに表示します。</p><p>Googleでログインすると、登録した予定をGoogleカレンダーやiOSのカレンダーからも購読できます。</p></div>
                 <div class="actions"><a class="button button-primary" href="https://oshi-sche-webapp.vercel.app/">今すぐ使う（無料）↗</a><a class="button" href="https://oshi-sche-webapp.vercel.app/demo">デモを見る ↗</a></div>
                 <dl class="facts"><dt>種類</dt><dd>Webアプリ / PWA</dd><dt>利用方法</dt><dd>ゲストまたはGoogleアカウント</dd><dt>技術</dt><dd>Next.js 16 / Tailwind CSS v4 / Gemini 2.5 Flash / Auth.js v5 / Upstash Redis / Vercel</dd></dl>
             </div>
@@ -37,12 +37,12 @@
         <section class="section" aria-labelledby="features-title">
             <h2 id="features-title">できること</h2>
             <ul class="feature-list">
-                <li><strong>画像をAIで解析</strong><div><p>配信タイトル、日付、開始時刻を画像から読み取ります。</p><p>解析結果を利用者が確認してから購読用カレンダーへ登録します。</p></div></li>
+                <li><strong>画像をAIで解析</strong><div><p>配信タイトル、日付、開始時刻を画像から読み取ります。</p><p>解析結果を利用者が確認してから予定へ登録します。</p></div></li>
                 <li><strong>日・週・月表示</strong><div><p>今日の予定から月全体まで、確認したい範囲に切り替えて表示できます。</p></div></li>
                 <li><strong>推し名簿</strong><div><p>推しを所属ごとに整理できます。</p><p>設定した推しカラーは予定にも表示されるため、一覧から見つけやすくなります。</p></div></li>
-                <li><strong>iCal購読</strong><div><p>特定のカレンダーサービスに依存せず、Googleカレンダー、Appleカレンダー、Outlookなどから予定を購読できます。</p></div></li>
+                <li><strong>iCal購読</strong><div><p>Googleでログインすると、購読用のURLを発行できます。</p><p>特定のカレンダーサービスに依存せず、Googleカレンダー、Appleカレンダー、Outlookなどから予定を購読できます。</p></div></li>
                 <li><strong>ゲストモード</strong><div><p>ログインせずに実際のアプリを試せます。</p><p>ゲストの予定は利用中の端末内へ保存します。</p></div></li>
-                <li><strong>無料枠とBYOK</strong><div><p>無料枠では週10枚まで解析が可能。</p><p>自分のGemini APIキーを登録すれば、推しスケ側の枚数制限を受けずに解析できます。</p></div></li>
+                <li><strong>無料枠とBYOK</strong><div><p>無料枠の条件は<a href="https://oshi-sche-webapp.vercel.app/about">「推しスケとは？」↗</a>に記載しています。</p><p>自分のGemini APIキーを登録すれば、推しスケ側の枚数制限を受けずに解析できます。</p></div></li>
             </ul>
             <aside class="note"><h3>APIキーとログイン情報は別管理</h3><p>BYOK用のGemini APIキーだけをlocalStorageへ保存します。</p><p>ログイン状態はAuth.jsのセッションJWTとしてhttpOnly Cookieで管理し、localStorageには置きません。</p><p>Googleへ要求する権限は本人確認・メールアドレス・表示名だけで、アクセストークンとリフレッシュトークンは保存していません。</p></aside>
         </section>
