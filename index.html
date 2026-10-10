@@ -27,6 +27,9 @@
             --fs-sub:14px;    /* ラベル・技術名・キャプション。これ未満は使わない */
             --fs-h-sub:18px;  /* 本文より一段大きい小見出し */
             --lh-body:1.75;   /* 本文の行間。DADS の本文用で最も広い値 */
+            /* 動きの値は Arc Library (MIT, Copyright (c) 2026 Elia Kuratli) の registry/motion-tokens.ts から。許諾表示の全文は styles/project-detail.css の先頭 */
+            --motion-fast:160ms;
+            --ease-standard:cubic-bezier(.22,1,.36,1);
         }
         * { box-sizing:border-box; }
         html { scroll-behavior:smooth; scroll-padding-top:72px; }
@@ -63,7 +66,7 @@
         .profile dl { display:grid; grid-template-columns:4.5em minmax(0,1fr); gap:10px 12px; margin:0; font-size:var(--fs-sub); line-height:1.7; }
         .profile dt { color:var(--sub); }
         .profile dd { margin:0; }
-        .profile dd a { display:inline-block; margin-right:12px; text-underline-offset:4px; }
+        .profile dd a { display:inline-block; margin-right:12px; text-underline-offset:4px; transition:color var(--motion-fast) var(--ease-standard); }
         .profile dd a:hover { color:var(--accent-dark); }
 
         .section-title { margin:0 0 16px; padding-bottom:10px; border-bottom:2px solid var(--ink); font-size:var(--fs-h-sub); }
@@ -72,15 +75,26 @@
         .cards { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:28px 24px; }
         .cards--small { grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); }
         .card { display:flex; flex-direction:column; gap:10px; min-width:0; text-decoration:none; }
-        .card-img { aspect-ratio:16/10; overflow:hidden; border:1px solid var(--line); background:var(--sand); }
+        .card-img { aspect-ratio:16/10; overflow:hidden; border:1px solid var(--line); background:var(--sand); transition:border-color var(--motion-fast) var(--ease-standard); }
         .card-img img { height:100%; object-fit:cover; object-position:top; }
         .cards--small .card-img { aspect-ratio:4/3; }
         .cards--small .card-img img { object-fit:contain; background:var(--white); }
-        .card h3 { margin:0; font-size:var(--fs-body); line-height:1.5; }
+        .card h3 { margin:0; font-size:var(--fs-body); line-height:1.5; transition:color var(--motion-fast) var(--ease-standard); }
         .card p, .card .desc { margin:0; color:var(--sub); font-size:var(--fs-body); line-height:var(--lh-body); }
         .card .tech { margin-top:2px; font-size:var(--fs-sub); line-height:1.6; }
         .card:hover h3 { color:var(--accent-dark); text-decoration:underline; text-underline-offset:4px; }
         .card:hover .card-img { border-color:#a99888; }
+        /* マウスのある端末でだけ動かす。タッチ端末では hover が押した後も残るため */
+        @media (hover:hover) and (pointer:fine) {
+            .profile dd a .ext-arrow { display:inline-block; transition:transform var(--motion-fast) var(--ease-standard); }
+            .profile dd a:hover .ext-arrow { transform:translate(1px,-1px); }
+            .cards .card { transition:transform var(--motion-fast) var(--ease-standard); }
+            .cards .card:hover { transform:translateY(-2px); }
+        }
+        /* 押している間の反応。タップ時の既定ハイライトを消しているので、色と枠で即時に返す */
+        :is(.card, .profile dd a):active { color:var(--ink); border-color:var(--accent-dark); background-color:var(--sand); transition-property:transform; }
+        .card:active h3 { color:var(--ink); transition:none; }
+        .card:active .card-img { border-color:var(--accent-dark); transition:none; }
 
         footer { margin-top:48px; padding:20px 0 32px; border-top:1px solid var(--line); color:var(--sub); font-size:var(--fs-sub); }
         :focus-visible { outline:3px solid var(--accent-dark); outline-offset:4px; }
@@ -92,7 +106,10 @@
             .wrap { width:calc(100% - 32px); }
             main { padding-top:28px; gap:32px; }
         }
-        @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+        @media (prefers-reduced-motion:reduce) {
+            html { scroll-behavior:auto; }
+            :is(.card, .card h3, .card-img, .profile dd a, .ext-arrow) { transition:none !important; transform:none !important; }
+        }
     </style>
 </head>
 <body>
@@ -114,10 +131,10 @@
                 <dl>
                     <dt>名前</dt><dd>YoyogiPinball</dd>
                     <dt>主な領域</dt><dd>Webアプリ / Chrome拡張機能</dd>
-                    <dt>コード</dt><dd><a href="https://github.com/YoyogiPinball">GitHub ↗</a></dd>
-                    <dt>発信</dt><dd><a href="https://zenn.dev/elettrocannone">Zenn ↗</a><a href="https://note.com/elettrocannone">note ↗</a><a href="https://x.com/Yoyogi_Pinball">X ↗</a></dd>
-                    <dt>連絡先</dt><dd><a href="https://docs.google.com/forms/d/e/1FAIpQLSc5_w_dLCIEvyE7xUxhwADu7VvCNUVRgpdDb4W5DjD-qGGImw/viewform">お問い合わせフォーム ↗</a><a href="mailto:k1kurosawa@gmail.com">メール</a></dd>
-                    <dt>欲しいもの</dt><dd><a href="https://www.amazon.co.jp/hz/wishlist/ls/2H3OEAHLND5Y8">Amazon ↗</a></dd>
+                    <dt>コード</dt><dd><a href="https://github.com/YoyogiPinball">GitHub <span class="ext-arrow">↗</span></a></dd>
+                    <dt>発信</dt><dd><a href="https://zenn.dev/elettrocannone">Zenn <span class="ext-arrow">↗</span></a><a href="https://note.com/elettrocannone">note <span class="ext-arrow">↗</span></a><a href="https://x.com/Yoyogi_Pinball">X <span class="ext-arrow">↗</span></a></dd>
+                    <dt>連絡先</dt><dd><a href="https://docs.google.com/forms/d/e/1FAIpQLSc5_w_dLCIEvyE7xUxhwADu7VvCNUVRgpdDb4W5DjD-qGGImw/viewform">お問い合わせフォーム <span class="ext-arrow">↗</span></a><a href="mailto:k1kurosawa@gmail.com">メール</a></dd>
+                    <dt>欲しいもの</dt><dd><a href="https://www.amazon.co.jp/hz/wishlist/ls/2H3OEAHLND5Y8">Amazon <span class="ext-arrow">↗</span></a></dd>
                 </dl>
             </aside>
         </section>
