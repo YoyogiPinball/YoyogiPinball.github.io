@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="推しが告知した締切や開催日を、ファンのGoogleカレンダーへ届けるWebサイト「念推し」の構想と検証の記録。">
+    <title>念推し — YoyogiPinball</title>
+    <link rel="stylesheet" href="styles/project-detail.css">
+</head>
+<body>
+    <a class="skip" href="#main">本文へ移動</a>
+    <header class="site-header"><nav class="nav wrap" aria-label="ページナビゲーション"><a class="back-link" href="index.html">← 制作物一覧</a><a class="brand" href="index.html">Yoyogi<span>Pinball</span></a></nav></header>
+
+    <main id="main" class="wrap">
+        <section class="hero">
+            <div class="hero-copy">
+                <p class="status status--dev">開発中 / 構想とデモまで</p>
+                <h1>念推し</h1>
+                <div class="hero-description"><p>推しが告知した締切や開催日を、ファンのGoogleカレンダーへ届けるWebサイトの構想です。</p><p>推しは告知の内容からリンクを作り、配信の概要欄に貼ります。</p><p>ファンはそのリンクを開き、ボタンを押すだけで予定を追加できます。</p><p>グッズの予約締切や入金期限を聞き逃して、買い損ねるのを防ぐのが目的です。</p></div>
+                <div class="actions"><a class="button button-primary" href="https://github.com/YoyogiPinball/nen-oshi">GitHubを見る ↗</a></div>
+                <dl class="facts"><dt>種類</dt><dd>Webサイト（静的）</dd><dt>技術</dt><dd>React / Vite / GitHub Pages / Calf（MIT）のフォーク</dd></dl>
+            </div>
+            <figure class="hero-shot"><a class="frame zoom-button" href="images/nen-oshi/receive.png" data-image="images/nen-oshi/receive.png" aria-label="念推しの受け取り画面を拡大"><img src="images/nen-oshi/receive.png" alt="念推しの受け取り画面。告知のタイトル、締切までの日数、予定ごとのGoogleカレンダー追加ボタンが並ぶ"></a><figcaption class="image-note"><p>ファンがリンクを開いたときの画面（デモ）。</p><p>予定ごとに、Googleカレンダーへの追加ボタンが並びます。</p><span class="hint">画像を選択すると拡大できます</span></figcaption></figure>
+        </section>
+
+        <section class="section" aria-labelledby="screens-title">
+            <h2 id="screens-title">画面（デモ）</h2>
+            <div class="gallery">
+                <figure class="shot"><a class="frame zoom-button" href="images/nen-oshi/create.png" data-image="images/nen-oshi/create.png" aria-label="作成画面を拡大"><img src="images/nen-oshi/create.png" alt="念推しの作成画面。告知のタイトルと、種類つきの日付を複数入力する"></a><figcaption><strong>作成画面</strong><p>受付開始、記念配信、締切のように、1つの告知に日付をいくつでも入れられます。</p></figcaption></figure>
+                <figure class="shot"><a class="frame zoom-button" href="images/nen-oshi/link.png" data-image="images/nen-oshi/link.png" aria-label="リンクの発行画面を拡大"><img src="images/nen-oshi/link.png" alt="念推しのリンク発行画面。予定の中身を詰め込んだ長いURLが表示される"></a><figcaption><strong>リンクの発行</strong><p>予定の中身はリンクに詰め込みます。</p><p>サーバーに保存しない代わりに、URLは長くなります。</p></figcaption></figure>
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="features-title">
+            <h2 id="features-title">考えていること</h2>
+            <ul class="feature-list">
+                <li><strong>予定をサーバーに保存しない</strong><div><p>予定の中身はURLの<code>#</code>以降に入れます。</p><p><code>#</code>以降はブラウザがサーバーへ送らないので、公開先のアクセスログにも残りません。</p></div></li>
+                <li><strong>日付を1本のリンクにまとめる</strong><div><p>グッズなら受付開始と締切、ライブなら申込から当落、入金締切、本番まで。</p><p>日付がいくつもある告知を、1本のリンクで配ります。</p></div></li>
+                <li><strong>追加先はGoogleカレンダーに絞る</strong><div><p>iPadとAndroidの実機で、YouTube、X、LINEのアプリから開いて追加できるかを確かめました。</p><p>iOSの標準カレンダーは、Safari以外から開くとサーバー無しでは追加できませんでした。</p><p>そこで、どのアプリから開いても追加できたGoogleカレンダーに絞りました。</p></div></li>
+                <li><strong>LINEで共有されたリンクにも対応</strong><div><p>LINEのアプリ内で開くと、予定がGoogleカレンダーへ渡りません。</p><p>リンクに「外部ブラウザで開く」指定を付けて回避します。</p></div></li>
+                <li><strong>通知はファンのカレンダーに任せる</strong><div><p>通知を出すのは、ファン自身のGoogleカレンダーです。</p><p>念推しのサイトが止まっていても、通知は届きます。</p></div></li>
+            </ul>
+            <aside class="note"><h3>開発を保留しています</h3><p>予定をサーバーに保存しないので、配るURLは約460文字になります。</p><p>配ったあとに予定を直すこともできません。</p><p>URLを短くし、あとから直せるようにするには、予定を保存する場所が要ります。</p><p>そうすると、人気の推しが紹介したときのアクセス集中に備える必要があり、費用も読みにくくなります。</p><p>使いやすさと運営の負担の釣り合いが取れる方針が決まるまで、構想とデモの段階で止めています。</p></aside>
+        </section>
+    </main>
+
+    <footer class="wrap"><a href="index.html">← 制作物一覧</a><a href="oshi-sche-webapp.html">次の制作物：推しスケ Web版 →</a></footer>
+    <dialog class="image-dialog" id="image-dialog" aria-label="スクリーンショット拡大表示"><div class="dialog-head"><button class="dialog-close" type="button" aria-label="拡大表示を閉じる">閉じる</button></div><img id="dialog-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></dialog>
+    <script src="scripts/image-dialog.js"></script>
+    <script src="scripts/keep-kana.js" defer></script>
+</body>
+</html>
